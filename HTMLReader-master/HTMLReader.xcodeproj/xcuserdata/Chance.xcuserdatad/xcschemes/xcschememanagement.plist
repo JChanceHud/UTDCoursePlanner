@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Benchmarker.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Entity Fetcher.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>HTMLReader OS X.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>HTMLReader iOS Static Library.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>HTMLReader iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1C6C1F4B1A179BF600236076</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1C88293A18369DD70051653C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1C88294F18369DD70051653C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1C9A2A061836FEAE0059FE17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1C9C3EB8176BC53800E982C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1C9C3EC9176BC53900E982C9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1CD5250818DC83E6003F46A3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
