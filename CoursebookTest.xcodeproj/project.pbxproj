@@ -18,7 +18,6 @@
 		4C15B1D01A7FFF5100D15DFE /* HTMLReader.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1A11A7FFF5100D15DFE /* HTMLReader.podspec */; };
 		4C15B1D11A7FFF5100D15DFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1A51A7FFF5100D15DFE /* LICENSE */; };
 		4C15B1DC1A7FFF5100D15DFE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1B41A7FFF5100D15DFE /* Info.plist */; };
-		4C15B1DD1A7FFF5100D15DFE /* Tests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1B51A7FFF5100D15DFE /* Tests.xcconfig */; };
 		4C15B1E01A7FFF5100D15DFE /* html5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BA1A7FFF5100D15DFE /* html5.html */; };
 		4C15B1E11A7FFF5100D15DFE /* query-selector.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BB1A7FFF5100D15DFE /* query-selector.html */; };
 		4C15B1E21A7FFF5100D15DFE /* query-selector.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BC1A7FFF5100D15DFE /* query-selector.plist */; };
@@ -527,7 +526,6 @@
 				4C15B1BE1A7FFF5100D15DFE /* .travis.yml in Resources */,
 				4C15B1CF1A7FFF5100D15DFE /* Info.plist in Resources */,
 				4C15B1611A7FFEAF00D15DFE /* MainMenu.xib in Resources */,
-				4C15B1DD1A7FFF5100D15DFE /* Tests.xcconfig in Resources */,
 				4C15B1E11A7FFF5100D15DFE /* query-selector.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -740,6 +738,7 @@
 				4C15B1721A7FFEAF00D15DFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C15B1731A7FFEAF00D15DFE /* Build configuration list for PBXNativeTarget "CoursebookTestTests" */ = {
 			isa = XCConfigurationList;
@@ -748,6 +747,7 @@
 				4C15B1751A7FFEAF00D15DFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

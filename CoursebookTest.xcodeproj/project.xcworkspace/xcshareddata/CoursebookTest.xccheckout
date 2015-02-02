@@ -10,22 +10,26 @@
 	<string>CoursebookTest</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>269FE31720F54428FBFEB30325B26C6FDB0FA1B8</key>
+		<string>https://github.com/JChanceHud/UTDCoursePlanner.git</string>
 		<key>2A07B721F480A30B76445AB313D496E551D7C0D3</key>
 		<string>github.com:JChanceHud/JCHDev.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CoursebookTest/CoursebookTest.xcodeproj</string>
+	<string>CoursebookTest.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>269FE31720F54428FBFEB30325B26C6FDB0FA1B8</key>
+		<string>../..</string>
 		<key>2A07B721F480A30B76445AB313D496E551D7C0D3</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:JChanceHud/JCHDev.git</string>
+	<string>https://github.com/JChanceHud/UTDCoursePlanner.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2A07B721F480A30B76445AB313D496E551D7C0D3</string>
+	<string>269FE31720F54428FBFEB30325B26C6FDB0FA1B8</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -34,7 +38,15 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>2A07B721F480A30B76445AB313D496E551D7C0D3</string>
 			<key>IDESourceControlWCCName</key>
-			<string>JCHDev</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>269FE31720F54428FBFEB30325B26C6FDB0FA1B8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UTDCoursePlanner</string>
 		</dict>
 	</array>
 </dict>
