@@ -1,0 +1,755 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C15B15A1A7FFEAF00D15DFE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15B1591A7FFEAF00D15DFE /* AppDelegate.m */; };
+		4C15B15C1A7FFEAF00D15DFE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15B15B1A7FFEAF00D15DFE /* main.m */; };
+		4C15B15E1A7FFEAF00D15DFE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B15D1A7FFEAF00D15DFE /* Images.xcassets */; };
+		4C15B1611A7FFEAF00D15DFE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B15F1A7FFEAF00D15DFE /* MainMenu.xib */; };
+		4C15B16D1A7FFEAF00D15DFE /* CoursebookTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15B16C1A7FFEAF00D15DFE /* CoursebookTestTests.m */; };
+		4C15B1BD1A7FFF5100D15DFE /* .gitmodules in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1771A7FFF5100D15DFE /* .gitmodules */; };
+		4C15B1BE1A7FFF5100D15DFE /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1781A7FFF5100D15DFE /* .travis.yml */; };
+		4C15B1CF1A7FFF5100D15DFE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1A01A7FFF5100D15DFE /* Info.plist */; };
+		4C15B1D01A7FFF5100D15DFE /* HTMLReader.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1A11A7FFF5100D15DFE /* HTMLReader.podspec */; };
+		4C15B1D11A7FFF5100D15DFE /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1A51A7FFF5100D15DFE /* LICENSE */; };
+		4C15B1DC1A7FFF5100D15DFE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1B41A7FFF5100D15DFE /* Info.plist */; };
+		4C15B1DD1A7FFF5100D15DFE /* Tests.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1B51A7FFF5100D15DFE /* Tests.xcconfig */; };
+		4C15B1E01A7FFF5100D15DFE /* html5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BA1A7FFF5100D15DFE /* html5.html */; };
+		4C15B1E11A7FFF5100D15DFE /* query-selector.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BB1A7FFF5100D15DFE /* query-selector.html */; };
+		4C15B1E21A7FFF5100D15DFE /* query-selector.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C15B1BC1A7FFF5100D15DFE /* query-selector.plist */; };
+		4C15B1FC1A7FFFA400D15DFE /* HTMLReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C15B1EF1A7FFF5100D15DFE /* HTMLReader.framework */; };
+		4C15B1FF1A80001900D15DFE /* CBScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C15B1FE1A80001900D15DFE /* CBScraper.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C15B1671A7FFEAF00D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B14B1A7FFEAF00D15DFE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C15B1521A7FFEAF00D15DFE;
+			remoteInfo = CoursebookTest;
+		};
+		4C15B1EA1A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C6C1F4C1A179BF600236076;
+			remoteInfo = "HTMLReader iOS";
+		};
+		4C15B1EC1A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C9C3ECA176BC53900E982C9;
+			remoteInfo = "Tests on iOS";
+		};
+		4C15B1EE1A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C88293B18369DD70051653C;
+			remoteInfo = "HTMLReader OS X";
+		};
+		4C15B1F01A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C88295018369DD70051653C;
+			remoteInfo = "Tests on OS X";
+		};
+		4C15B1F21A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CD5250918DC83E6003F46A3;
+			remoteInfo = Benchmarker;
+		};
+		4C15B1F41A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C9A2A071836FEAE0059FE17;
+			remoteInfo = "Entity Fetcher";
+		};
+		4C15B1F61A7FFF5100D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C9C3EB9176BC53900E982C9;
+			remoteInfo = "HTMLReader iOS Static Library";
+		};
+		4C15B1FA1A7FFF9E00D15DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C88293A18369DD70051653C;
+			remoteInfo = "HTMLReader OS X";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C15B1531A7FFEAF00D15DFE /* CoursebookTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoursebookTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C15B1571A7FFEAF00D15DFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C15B1581A7FFEAF00D15DFE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4C15B1591A7FFEAF00D15DFE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4C15B15B1A7FFEAF00D15DFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4C15B15D1A7FFEAF00D15DFE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4C15B1601A7FFEAF00D15DFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4C15B1661A7FFEAF00D15DFE /* CoursebookTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoursebookTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C15B16B1A7FFEAF00D15DFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C15B16C1A7FFEAF00D15DFE /* CoursebookTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoursebookTestTests.m; sourceTree = "<group>"; };
+		4C15B1771A7FFF5100D15DFE /* .gitmodules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		4C15B1781A7FFF5100D15DFE /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		4C15B17A1A7FFF5100D15DFE /* HTMLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLComment.h; sourceTree = "<group>"; };
+		4C15B17B1A7FFF5100D15DFE /* HTMLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLComment.m; sourceTree = "<group>"; };
+		4C15B17C1A7FFF5100D15DFE /* HTMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLDocument.h; sourceTree = "<group>"; };
+		4C15B17D1A7FFF5100D15DFE /* HTMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLDocument.m; sourceTree = "<group>"; };
+		4C15B17E1A7FFF5100D15DFE /* HTMLDocumentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLDocumentType.h; sourceTree = "<group>"; };
+		4C15B17F1A7FFF5100D15DFE /* HTMLDocumentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLDocumentType.m; sourceTree = "<group>"; };
+		4C15B1801A7FFF5100D15DFE /* HTMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLElement.h; sourceTree = "<group>"; };
+		4C15B1811A7FFF5100D15DFE /* HTMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLElement.m; sourceTree = "<group>"; };
+		4C15B1821A7FFF5100D15DFE /* HTMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLEntities.h; sourceTree = "<group>"; };
+		4C15B1831A7FFF5100D15DFE /* HTMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLEntities.m; sourceTree = "<group>"; };
+		4C15B1841A7FFF5100D15DFE /* HTMLNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNamespace.h; sourceTree = "<group>"; };
+		4C15B1851A7FFF5100D15DFE /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		4C15B1861A7FFF5100D15DFE /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		4C15B1871A7FFF5100D15DFE /* HTMLOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLOrderedDictionary.h; sourceTree = "<group>"; };
+		4C15B1881A7FFF5100D15DFE /* HTMLOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLOrderedDictionary.m; sourceTree = "<group>"; };
+		4C15B1891A7FFF5100D15DFE /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		4C15B18A1A7FFF5100D15DFE /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		4C15B18B1A7FFF5100D15DFE /* HTMLPreprocessedInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLPreprocessedInputStream.h; sourceTree = "<group>"; };
+		4C15B18C1A7FFF5100D15DFE /* HTMLPreprocessedInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLPreprocessedInputStream.m; sourceTree = "<group>"; };
+		4C15B18D1A7FFF5100D15DFE /* HTMLQuirksMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLQuirksMode.h; sourceTree = "<group>"; };
+		4C15B18E1A7FFF5100D15DFE /* HTMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLReader.h; sourceTree = "<group>"; };
+		4C15B18F1A7FFF5100D15DFE /* HTMLSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLSelector.h; sourceTree = "<group>"; };
+		4C15B1901A7FFF5100D15DFE /* HTMLSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLSelector.m; sourceTree = "<group>"; };
+		4C15B1911A7FFF5100D15DFE /* HTMLSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLSerialization.h; sourceTree = "<group>"; };
+		4C15B1921A7FFF5100D15DFE /* HTMLSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLSerialization.m; sourceTree = "<group>"; };
+		4C15B1931A7FFF5100D15DFE /* HTMLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLString.h; sourceTree = "<group>"; };
+		4C15B1941A7FFF5100D15DFE /* HTMLString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLString.m; sourceTree = "<group>"; };
+		4C15B1951A7FFF5100D15DFE /* HTMLSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLSupport.h; sourceTree = "<group>"; };
+		4C15B1961A7FFF5100D15DFE /* HTMLTextNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLTextNode.h; sourceTree = "<group>"; };
+		4C15B1971A7FFF5100D15DFE /* HTMLTextNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTextNode.m; sourceTree = "<group>"; };
+		4C15B1981A7FFF5100D15DFE /* HTMLTokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLTokenizer.h; sourceTree = "<group>"; };
+		4C15B1991A7FFF5100D15DFE /* HTMLTokenizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTokenizer.m; sourceTree = "<group>"; };
+		4C15B19A1A7FFF5100D15DFE /* HTMLTokenizerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLTokenizerState.h; sourceTree = "<group>"; };
+		4C15B19B1A7FFF5100D15DFE /* HTMLTreeEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLTreeEnumerator.h; sourceTree = "<group>"; };
+		4C15B19C1A7FFF5100D15DFE /* HTMLTreeEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTreeEnumerator.m; sourceTree = "<group>"; };
+		4C15B19D1A7FFF5100D15DFE /* NSString+HTMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTMLEntities.h"; sourceTree = "<group>"; };
+		4C15B19E1A7FFF5100D15DFE /* NSString+HTMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTMLEntities.m"; sourceTree = "<group>"; };
+		4C15B1A01A7FFF5100D15DFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C15B1A11A7FFF5100D15DFE /* HTMLReader.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HTMLReader.podspec; sourceTree = "<group>"; };
+		4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = HTMLReader.xcodeproj; sourceTree = "<group>"; };
+		4C15B1A51A7FFF5100D15DFE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4C15B1A61A7FFF5100D15DFE /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		4C15B1A71A7FFF5100D15DFE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4C15B1AA1A7FFF5100D15DFE /* HTMLDictionaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLDictionaryTests.m; sourceTree = "<group>"; };
+		4C15B1AB1A7FFF5100D15DFE /* HTMLEscapingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLEscapingTest.m; sourceTree = "<group>"; };
+		4C15B1AC1A7FFF5100D15DFE /* HTMLNodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNodeTests.m; sourceTree = "<group>"; };
+		4C15B1AD1A7FFF5100D15DFE /* HTMLSelectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLSelectorTests.m; sourceTree = "<group>"; };
+		4C15B1AE1A7FFF5100D15DFE /* HTMLSerializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLSerializerTests.m; sourceTree = "<group>"; };
+		4C15B1AF1A7FFF5100D15DFE /* HTMLTestUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLTestUtilities.h; sourceTree = "<group>"; };
+		4C15B1B01A7FFF5100D15DFE /* HTMLTestUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTestUtilities.m; sourceTree = "<group>"; };
+		4C15B1B11A7FFF5100D15DFE /* HTMLTokenizerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTokenizerTests.m; sourceTree = "<group>"; };
+		4C15B1B21A7FFF5100D15DFE /* HTMLTreeConstructionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTreeConstructionTests.m; sourceTree = "<group>"; };
+		4C15B1B31A7FFF5100D15DFE /* HTMLTreeEnumeratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLTreeEnumeratorTests.m; sourceTree = "<group>"; };
+		4C15B1B41A7FFF5100D15DFE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C15B1B51A7FFF5100D15DFE /* Tests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Tests.xcconfig; sourceTree = "<group>"; };
+		4C15B1B71A7FFF5100D15DFE /* Benchmarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Benchmarker.m; sourceTree = "<group>"; };
+		4C15B1B81A7FFF5100D15DFE /* EntityFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityFetcher.m; sourceTree = "<group>"; };
+		4C15B1BA1A7FFF5100D15DFE /* html5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = html5.html; sourceTree = "<group>"; };
+		4C15B1BB1A7FFF5100D15DFE /* query-selector.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "query-selector.html"; sourceTree = "<group>"; };
+		4C15B1BC1A7FFF5100D15DFE /* query-selector.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "query-selector.plist"; sourceTree = "<group>"; };
+		4C15B1FD1A80001900D15DFE /* CBScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBScraper.h; sourceTree = "<group>"; };
+		4C15B1FE1A80001900D15DFE /* CBScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBScraper.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C15B1501A7FFEAF00D15DFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C15B1FC1A7FFFA400D15DFE /* HTMLReader.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C15B1631A7FFEAF00D15DFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C15B14A1A7FFEAF00D15DFE = {
+			isa = PBXGroup;
+			children = (
+				4C15B1761A7FFF5100D15DFE /* HTMLReader-master */,
+				4C15B1551A7FFEAF00D15DFE /* CoursebookTest */,
+				4C15B1691A7FFEAF00D15DFE /* CoursebookTestTests */,
+				4C15B1541A7FFEAF00D15DFE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C15B1541A7FFEAF00D15DFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1531A7FFEAF00D15DFE /* CoursebookTest.app */,
+				4C15B1661A7FFEAF00D15DFE /* CoursebookTestTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C15B1551A7FFEAF00D15DFE /* CoursebookTest */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1581A7FFEAF00D15DFE /* AppDelegate.h */,
+				4C15B1591A7FFEAF00D15DFE /* AppDelegate.m */,
+				4C15B1FD1A80001900D15DFE /* CBScraper.h */,
+				4C15B1FE1A80001900D15DFE /* CBScraper.m */,
+				4C15B15D1A7FFEAF00D15DFE /* Images.xcassets */,
+				4C15B15F1A7FFEAF00D15DFE /* MainMenu.xib */,
+				4C15B1561A7FFEAF00D15DFE /* Supporting Files */,
+			);
+			path = CoursebookTest;
+			sourceTree = "<group>";
+		};
+		4C15B1561A7FFEAF00D15DFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1571A7FFEAF00D15DFE /* Info.plist */,
+				4C15B15B1A7FFEAF00D15DFE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C15B1691A7FFEAF00D15DFE /* CoursebookTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B16C1A7FFEAF00D15DFE /* CoursebookTestTests.m */,
+				4C15B16A1A7FFEAF00D15DFE /* Supporting Files */,
+			);
+			path = CoursebookTestTests;
+			sourceTree = "<group>";
+		};
+		4C15B16A1A7FFEAF00D15DFE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B16B1A7FFEAF00D15DFE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C15B1761A7FFF5100D15DFE /* HTMLReader-master */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1771A7FFF5100D15DFE /* .gitmodules */,
+				4C15B1781A7FFF5100D15DFE /* .travis.yml */,
+				4C15B1791A7FFF5100D15DFE /* Code */,
+				4C15B19F1A7FFF5100D15DFE /* Framework */,
+				4C15B1A11A7FFF5100D15DFE /* HTMLReader.podspec */,
+				4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */,
+				4C15B1A51A7FFF5100D15DFE /* LICENSE */,
+				4C15B1A61A7FFF5100D15DFE /* Prefix.pch */,
+				4C15B1A71A7FFF5100D15DFE /* README.md */,
+				4C15B1A81A7FFF5100D15DFE /* Tests */,
+				4C15B1B61A7FFF5100D15DFE /* Utilities */,
+			);
+			path = "HTMLReader-master";
+			sourceTree = "<group>";
+		};
+		4C15B1791A7FFF5100D15DFE /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B17A1A7FFF5100D15DFE /* HTMLComment.h */,
+				4C15B17B1A7FFF5100D15DFE /* HTMLComment.m */,
+				4C15B17C1A7FFF5100D15DFE /* HTMLDocument.h */,
+				4C15B17D1A7FFF5100D15DFE /* HTMLDocument.m */,
+				4C15B17E1A7FFF5100D15DFE /* HTMLDocumentType.h */,
+				4C15B17F1A7FFF5100D15DFE /* HTMLDocumentType.m */,
+				4C15B1801A7FFF5100D15DFE /* HTMLElement.h */,
+				4C15B1811A7FFF5100D15DFE /* HTMLElement.m */,
+				4C15B1821A7FFF5100D15DFE /* HTMLEntities.h */,
+				4C15B1831A7FFF5100D15DFE /* HTMLEntities.m */,
+				4C15B1841A7FFF5100D15DFE /* HTMLNamespace.h */,
+				4C15B1851A7FFF5100D15DFE /* HTMLNode.h */,
+				4C15B1861A7FFF5100D15DFE /* HTMLNode.m */,
+				4C15B1871A7FFF5100D15DFE /* HTMLOrderedDictionary.h */,
+				4C15B1881A7FFF5100D15DFE /* HTMLOrderedDictionary.m */,
+				4C15B1891A7FFF5100D15DFE /* HTMLParser.h */,
+				4C15B18A1A7FFF5100D15DFE /* HTMLParser.m */,
+				4C15B18B1A7FFF5100D15DFE /* HTMLPreprocessedInputStream.h */,
+				4C15B18C1A7FFF5100D15DFE /* HTMLPreprocessedInputStream.m */,
+				4C15B18D1A7FFF5100D15DFE /* HTMLQuirksMode.h */,
+				4C15B18E1A7FFF5100D15DFE /* HTMLReader.h */,
+				4C15B18F1A7FFF5100D15DFE /* HTMLSelector.h */,
+				4C15B1901A7FFF5100D15DFE /* HTMLSelector.m */,
+				4C15B1911A7FFF5100D15DFE /* HTMLSerialization.h */,
+				4C15B1921A7FFF5100D15DFE /* HTMLSerialization.m */,
+				4C15B1931A7FFF5100D15DFE /* HTMLString.h */,
+				4C15B1941A7FFF5100D15DFE /* HTMLString.m */,
+				4C15B1951A7FFF5100D15DFE /* HTMLSupport.h */,
+				4C15B1961A7FFF5100D15DFE /* HTMLTextNode.h */,
+				4C15B1971A7FFF5100D15DFE /* HTMLTextNode.m */,
+				4C15B1981A7FFF5100D15DFE /* HTMLTokenizer.h */,
+				4C15B1991A7FFF5100D15DFE /* HTMLTokenizer.m */,
+				4C15B19A1A7FFF5100D15DFE /* HTMLTokenizerState.h */,
+				4C15B19B1A7FFF5100D15DFE /* HTMLTreeEnumerator.h */,
+				4C15B19C1A7FFF5100D15DFE /* HTMLTreeEnumerator.m */,
+				4C15B19D1A7FFF5100D15DFE /* NSString+HTMLEntities.h */,
+				4C15B19E1A7FFF5100D15DFE /* NSString+HTMLEntities.m */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		4C15B19F1A7FFF5100D15DFE /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1A01A7FFF5100D15DFE /* Info.plist */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
+		4C15B1A31A7FFF5100D15DFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1EB1A7FFF5100D15DFE /* HTMLReader.framework */,
+				4C15B1ED1A7FFF5100D15DFE /* Tests on iOS.xctest */,
+				4C15B1EF1A7FFF5100D15DFE /* HTMLReader.framework */,
+				4C15B1F11A7FFF5100D15DFE /* Tests on OS X.xctest */,
+				4C15B1F31A7FFF5100D15DFE /* Benchmarker */,
+				4C15B1F51A7FFF5100D15DFE /* Entity Fetcher */,
+				4C15B1F71A7FFF5100D15DFE /* libHTMLReader.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C15B1A81A7FFF5100D15DFE /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1A91A7FFF5100D15DFE /* html5lib */,
+				4C15B1AA1A7FFF5100D15DFE /* HTMLDictionaryTests.m */,
+				4C15B1AB1A7FFF5100D15DFE /* HTMLEscapingTest.m */,
+				4C15B1AC1A7FFF5100D15DFE /* HTMLNodeTests.m */,
+				4C15B1AD1A7FFF5100D15DFE /* HTMLSelectorTests.m */,
+				4C15B1AE1A7FFF5100D15DFE /* HTMLSerializerTests.m */,
+				4C15B1AF1A7FFF5100D15DFE /* HTMLTestUtilities.h */,
+				4C15B1B01A7FFF5100D15DFE /* HTMLTestUtilities.m */,
+				4C15B1B11A7FFF5100D15DFE /* HTMLTokenizerTests.m */,
+				4C15B1B21A7FFF5100D15DFE /* HTMLTreeConstructionTests.m */,
+				4C15B1B31A7FFF5100D15DFE /* HTMLTreeEnumeratorTests.m */,
+				4C15B1B41A7FFF5100D15DFE /* Info.plist */,
+				4C15B1B51A7FFF5100D15DFE /* Tests.xcconfig */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4C15B1A91A7FFF5100D15DFE /* html5lib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = html5lib;
+			sourceTree = "<group>";
+		};
+		4C15B1B61A7FFF5100D15DFE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1B71A7FFF5100D15DFE /* Benchmarker.m */,
+				4C15B1B81A7FFF5100D15DFE /* EntityFetcher.m */,
+				4C15B1B91A7FFF5100D15DFE /* Fixtures */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		4C15B1B91A7FFF5100D15DFE /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				4C15B1BA1A7FFF5100D15DFE /* html5.html */,
+				4C15B1BB1A7FFF5100D15DFE /* query-selector.html */,
+				4C15B1BC1A7FFF5100D15DFE /* query-selector.plist */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C15B1521A7FFEAF00D15DFE /* CoursebookTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C15B1701A7FFEAF00D15DFE /* Build configuration list for PBXNativeTarget "CoursebookTest" */;
+			buildPhases = (
+				4C15B14F1A7FFEAF00D15DFE /* Sources */,
+				4C15B1501A7FFEAF00D15DFE /* Frameworks */,
+				4C15B1511A7FFEAF00D15DFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C15B1FB1A7FFF9E00D15DFE /* PBXTargetDependency */,
+			);
+			name = CoursebookTest;
+			productName = CoursebookTest;
+			productReference = 4C15B1531A7FFEAF00D15DFE /* CoursebookTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C15B1651A7FFEAF00D15DFE /* CoursebookTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C15B1731A7FFEAF00D15DFE /* Build configuration list for PBXNativeTarget "CoursebookTestTests" */;
+			buildPhases = (
+				4C15B1621A7FFEAF00D15DFE /* Sources */,
+				4C15B1631A7FFEAF00D15DFE /* Frameworks */,
+				4C15B1641A7FFEAF00D15DFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C15B1681A7FFEAF00D15DFE /* PBXTargetDependency */,
+			);
+			name = CoursebookTestTests;
+			productName = CoursebookTestTests;
+			productReference = 4C15B1661A7FFEAF00D15DFE /* CoursebookTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C15B14B1A7FFEAF00D15DFE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Chance Hudson";
+				TargetAttributes = {
+					4C15B1521A7FFEAF00D15DFE = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					4C15B1651A7FFEAF00D15DFE = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 4C15B1521A7FFEAF00D15DFE;
+					};
+				};
+			};
+			buildConfigurationList = 4C15B14E1A7FFEAF00D15DFE /* Build configuration list for PBXProject "CoursebookTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C15B14A1A7FFEAF00D15DFE;
+			productRefGroup = 4C15B1541A7FFEAF00D15DFE /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4C15B1A31A7FFF5100D15DFE /* Products */;
+					ProjectRef = 4C15B1A21A7FFF5100D15DFE /* HTMLReader.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4C15B1521A7FFEAF00D15DFE /* CoursebookTest */,
+				4C15B1651A7FFEAF00D15DFE /* CoursebookTestTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4C15B1EB1A7FFF5100D15DFE /* HTMLReader.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HTMLReader.framework;
+			remoteRef = 4C15B1EA1A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1ED1A7FFF5100D15DFE /* Tests on iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Tests on iOS.xctest";
+			remoteRef = 4C15B1EC1A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1EF1A7FFF5100D15DFE /* HTMLReader.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HTMLReader.framework;
+			remoteRef = 4C15B1EE1A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1F11A7FFF5100D15DFE /* Tests on OS X.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Tests on OS X.xctest";
+			remoteRef = 4C15B1F01A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1F31A7FFF5100D15DFE /* Benchmarker */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Benchmarker;
+			remoteRef = 4C15B1F21A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1F51A7FFF5100D15DFE /* Entity Fetcher */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "Entity Fetcher";
+			remoteRef = 4C15B1F41A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4C15B1F71A7FFF5100D15DFE /* libHTMLReader.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHTMLReader.a;
+			remoteRef = 4C15B1F61A7FFF5100D15DFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C15B1511A7FFEAF00D15DFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C15B1DC1A7FFF5100D15DFE /* Info.plist in Resources */,
+				4C15B1E01A7FFF5100D15DFE /* html5.html in Resources */,
+				4C15B1E21A7FFF5100D15DFE /* query-selector.plist in Resources */,
+				4C15B1D01A7FFF5100D15DFE /* HTMLReader.podspec in Resources */,
+				4C15B1BD1A7FFF5100D15DFE /* .gitmodules in Resources */,
+				4C15B15E1A7FFEAF00D15DFE /* Images.xcassets in Resources */,
+				4C15B1D11A7FFF5100D15DFE /* LICENSE in Resources */,
+				4C15B1BE1A7FFF5100D15DFE /* .travis.yml in Resources */,
+				4C15B1CF1A7FFF5100D15DFE /* Info.plist in Resources */,
+				4C15B1611A7FFEAF00D15DFE /* MainMenu.xib in Resources */,
+				4C15B1DD1A7FFF5100D15DFE /* Tests.xcconfig in Resources */,
+				4C15B1E11A7FFF5100D15DFE /* query-selector.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C15B1641A7FFEAF00D15DFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C15B14F1A7FFEAF00D15DFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C15B15C1A7FFEAF00D15DFE /* main.m in Sources */,
+				4C15B1FF1A80001900D15DFE /* CBScraper.m in Sources */,
+				4C15B15A1A7FFEAF00D15DFE /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C15B1621A7FFEAF00D15DFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C15B16D1A7FFEAF00D15DFE /* CoursebookTestTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C15B1681A7FFEAF00D15DFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C15B1521A7FFEAF00D15DFE /* CoursebookTest */;
+			targetProxy = 4C15B1671A7FFEAF00D15DFE /* PBXContainerItemProxy */;
+		};
+		4C15B1FB1A7FFF9E00D15DFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "HTMLReader OS X";
+			targetProxy = 4C15B1FA1A7FFF9E00D15DFE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4C15B15F1A7FFEAF00D15DFE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C15B1601A7FFEAF00D15DFE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C15B16E1A7FFEAF00D15DFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4C15B16F1A7FFEAF00D15DFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4C15B1711A7FFEAF00D15DFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CoursebookTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C15B1721A7FFEAF00D15DFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = CoursebookTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4C15B1741A7FFEAF00D15DFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoursebookTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoursebookTest.app/Contents/MacOS/CoursebookTest";
+			};
+			name = Debug;
+		};
+		4C15B1751A7FFEAF00D15DFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CoursebookTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoursebookTest.app/Contents/MacOS/CoursebookTest";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C15B14E1A7FFEAF00D15DFE /* Build configuration list for PBXProject "CoursebookTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C15B16E1A7FFEAF00D15DFE /* Debug */,
+				4C15B16F1A7FFEAF00D15DFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C15B1701A7FFEAF00D15DFE /* Build configuration list for PBXNativeTarget "CoursebookTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C15B1711A7FFEAF00D15DFE /* Debug */,
+				4C15B1721A7FFEAF00D15DFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4C15B1731A7FFEAF00D15DFE /* Build configuration list for PBXNativeTarget "CoursebookTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C15B1741A7FFEAF00D15DFE /* Debug */,
+				4C15B1751A7FFEAF00D15DFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C15B14B1A7FFEAF00D15DFE /* Project object */;
+}
