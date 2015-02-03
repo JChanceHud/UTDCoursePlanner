@@ -11,18 +11,24 @@ while($_POST['course' . $c] != NULL){
 }
 
 $courses = array(); //this will be an array of arrays
-$noClassesFoundArr = array();
+$classErrorArr = array();
 for($x = 1; $x < $c; $x++){
 	$a = search($_POST['course' . $x]);
-	if(!isset($_POST['closed']))
+	if(count($a) <= 0 && count($classErrorArr) < $x){
+		array_push($classErrorArr, "Unable to find listed course");
+	}
+	if(!isset($_POST['closed'])){
 		$a = removeClosedCourses($a);
+		if(count($a) <= 0 && count($classErrorArr) < $x)
+			array_push($classErrorArr, "All instances of the listed course are full");
+	}
 	$a = removeClassesBeforeOrAfter($_POST['early'], $_POST['late'], $a);
+	if(count($a) <= 0 && count($classErrorArr) < $x)
+		array_push($classErrorArr, "Unable to find class matching time parameters");
 	if(count($a) > 0){
 		array_push($courses, $a);
-		array_push($noClassesFoundArr, 0);
+		array_push($classErrorArr, "");
 	}
-	else
-		array_push($noClassesFoundArr, 1);
 }
 $schedule = generateSchedule($courses);
 
@@ -43,8 +49,9 @@ function addInput(divName){
 	}
 	else {
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML = "Class " + (counter + 1) + " <div></div><input type='text' name='course"+(counter+1)+"'><br /><br />";
-		document.getElementById(divName).appendChild(newdiv);
+		newdiv.innerHTML = "<br />Class " + (counter + 1) + ": <input type='text' name='course"+(counter+1)+"'><br />";
+		newdiv.id = divName + (counter+1);
+		document.getElementById(divName + counter).appendChild(newdiv);
 		counter++;
 	}
 }
@@ -58,23 +65,20 @@ function addInput(divName){
 <form action="index.php" method="POST">
 <?php
 if($c == 1){
-echo '<div id="dynamicInput">
-Class 1:<div></div>
+echo '<div id="dynamicInput1">
+Class 1:
 <input type="text" name="course1" value=""><div id="course1"></div>
-<br>
 </div>';
 }
 else
-for($x = 1; $x < $c; $x++){
-echo '<div id="dynamicInput">
-	Class '.$x.': <div id="course'.$x.'" style="color:red">';
-if($noClassesFoundArr[$x-1] == 1) echo "Was not able to find a course";
-echo '
-<input type="text" name="course'.$x.'" value="'.$_POST['course' . $x].'">
-</div>
-<br>
-</div>';
-}
+	for($x = 1; $x < $c; $x++){
+		if($x != 1) echo '<br />';
+		echo '<div id="dynamicInput'.$x.'">
+			Class '.$x.': <input type="text" name="course'.$x.'" value="'.$_POST['course' . $x].'"><font style="color:red"> ';
+		echo $classErrorArr[$x-1];
+		echo '</font>
+			</div>';
+	}
 ?>
 <br />
 <input type="checkbox" name="closed" value="include" <?php echo isset($_POST['closed'])?'checked':''?>> Include closed classes  <br /><br />
