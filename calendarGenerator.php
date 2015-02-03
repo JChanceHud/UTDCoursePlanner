@@ -29,10 +29,9 @@ function generateCalendar($courseArr){
     		if($c !== 0){
     			$returnStr .= '
     			<td class=" has-events" rowspan="2">
-
-                	<div class="row-fluid lecture" style="width: 99%; height: 100%;">
-
-
+                	<div class="row-fluid lecture" style="width: 99%; height: 100%;';
+                    if(!$c->classIsOpen) $returnStr .= ' background-color:red;';
+                    $returnStr .= '">
                     	<span class="title">'.$c->classTitle.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->classRoom.'</span>
                 	</div>
             	</td>';
