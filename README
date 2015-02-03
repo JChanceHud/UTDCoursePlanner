@@ -4,6 +4,7 @@ Currently works decently - has support for custom time limitations
 
 TODO:
 
+Improve the accuracy of the size of each class element on the calendar
 Improve the way that the schedule is created
 Add JS support for showing multiple schedules without reloading the page
 Add support for more custom time limitations
