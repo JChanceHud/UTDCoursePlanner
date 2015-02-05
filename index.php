@@ -6,7 +6,7 @@ include_once('courseScraper.php');
 include_once('calendarGenerator.php');
 
 $c = 1;
-while($_POST['course' . $c] != NULL){
+while(isset($_POST['course' . $c])){
 	$c++;
 }
 
