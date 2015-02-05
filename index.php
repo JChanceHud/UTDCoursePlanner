@@ -62,6 +62,7 @@ function addInput(divName){
 <h2>Course planner!</h2>
 
 <p>Enter the classes you would like to take in the form and then press submit. The calendar below will update.</p>
+<p>Example: CS2336</p>
 <form action="index.php" method="POST">
 <?php
 if($c == 1){

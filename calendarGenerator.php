@@ -21,7 +21,7 @@ function generateCalendar($courseArr){
     $hour = 8;
 	$min = 0;
 	$rowsBeingUsed = array(-1,-1,-1,-1,-1); //represents values for whether the current row is in use (if class is happening)
-	$currentClass = array(0,0,0,0,0);
+	$currentClass = array(NULL,NULL,NULL,NULL,NULL);
     while($hour < 20){
     	$returnStr .= '
     		<tr>
@@ -46,7 +46,7 @@ function generateCalendar($courseArr){
                 	</div>
             	</td>';
 			}
-			else if($rowsBeingUsed[$x] == 0 && $currentClass[$x] != 0 && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
+			else if($rowsBeingUsed[$x] == 0 && isset($currentClass[$x]) && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
 				//draw half a box
 				$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -25%; width: 99%; height: 70%;';
 				if(!$currentClass[$x]->classIsOpen) $returnStr .= ' background-color:red;';
@@ -54,7 +54,7 @@ function generateCalendar($courseArr){
 			}
     		else if($rowsBeingUsed[$x] == -1){
 				$returnStr .= '<td class=" no-events" rowspan="1"></td>';
-				$currentClass[$x] = 0;
+				$currentClass[$x] = NULL;
 			}
     	}
     	$returnStr .= '</tr>';
