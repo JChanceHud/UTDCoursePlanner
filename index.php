@@ -59,7 +59,7 @@ function addInput(divName){
 </head>
 <body>
 
-<h2>Course planner!TESTTEST</h2>
+<h2>Course planner!</h2>
 
 <p>Enter the classes you would like to take in the form and then press submit. The calendar below will update.</p>
 <form action="index.php" method="POST">

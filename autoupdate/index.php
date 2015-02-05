@@ -12,9 +12,10 @@ $file = new ZipArchive;
 if($file->open("tmp.zip") === TRUE){
 	$file->extractTo('.');
 	$file->close();
+	echo "Successfully received and extracted new data....\n\n";
 }
 else
-	echo "Failed to open zip";
+	echo "Failed to open zip\n\n";
 
 $files = scandir($dirName);
 $source = $dirName."/";
@@ -26,24 +27,24 @@ foreach ($files as $file) {
 	// If we copied this successfully, mark it for deletion
 	copy($source.$file, $destination.$file);
 }
-
-echo "Cleaning up";
+echo "Files successfully copied\n\n";
 unlink("tmp.zip");
 rrmdir($dirName);
 
+echo "Finished cleaning up. Update successful";
 
 function rrmdir($dir) {
-	   if (is_dir($dir)) {
-		        $objects = scandir($dir);
-				     foreach ($objects as $object) {
-						        if ($object != "." && $object != "..") {
-									         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
-											        }
-								     }
-				     reset($objects);
-				     rmdir($dir);
-					    }
-	    }
+	if (is_dir($dir)) {
+		$objects = scandir($dir);
+		foreach ($objects as $object) {
+			if ($object != "." && $object != "..") {
+				if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+			}
+		}
+		reset($objects);
+		rmdir($dir);
+	}
+}
 
 
 ?>
