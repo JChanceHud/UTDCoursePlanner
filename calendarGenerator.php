@@ -22,21 +22,31 @@ function generateCalendar($courseArr){
     $min = 0;
     while($hour < 20){
     	$returnStr .= '
-    	<tr>
-    		<td>'.($hour<10?"0":'').$hour.":".($min==0?"0":'').$min.'</td>';
-    	for($x = 0; $x < 5; $x++){
+    		<tr>
+			<td>'.($hour<10?"0":'').$hour.":".($min==0?"0":'').$min.'</td>';
+		$rowsBeingUsed = array(-1,-1,-1,-1,-1); //represents values for whether the current row is in use (if class is happening)
+		for($x = 0; $x < 5; $x++){
+			if($rowsBeingUsed[$x] >= 0) $rowsBeingUsed[$x] -= 1; //update the class happening variable
+
+			//$x represents the current day of the week
     		$c = doesClassStartAtTime($x, $hour, $min, $courseArr);
-    		if($c !== 0){
+			if($c !== 0){
+				$rowsNeeded = calculateNumberOfRowsForClass($c, $x);
+				$rowsBeingUsed[$x] = $rowsNeeded;
     			$returnStr .= '
-    			<td class=" has-events" rowspan="2">
+					<td class=" has-events" rowspan="'. ($rowsNeeded-1) .'">
                 	<div class="row-fluid lecture" style="width: 99%; height: 100%;';
-                    if(!$c->classIsOpen) $returnStr .= ' background-color:red;';
+                    if(!$c->classIsOpen) $returnStr .= ' background-color:red;'; //change color for closed classes
                     $returnStr .= '">
                     	<span class="title">'.$c->classTitle.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->classRoom.'</span>
                 	</div>
             	</td>';
-    		}
-    		else if(isClassHappening($x, $hour, $min, $courseArr) === false){
+			}
+			else if($rowsBeingUsed[$x] === 0){
+				//draw half a box
+    			$returnStr .= '<td class=" no-events" rowspan="1"><div class="row-fluid lecture" style="width: 99%; height: 50%;"></div></td>';
+			}
+    		else if($rowsBeingUsed[$x] === -1){
     			$returnStr .= '<td class=" no-events" rowspan="1"></td>';
 		}
 
@@ -54,6 +64,7 @@ function generateCalendar($courseArr){
 	return $returnStr;
 }
 
+//no longer being used
 function isClassHappening($day, $hour, $min, $courseArr){
 	foreach($courseArr as $c){
 		$timeslots = $c->classTimes;
@@ -76,6 +87,12 @@ function doesClassStartAtTime($day, $hour, $min, $courseArr){
 		}
     }
     return 0;
+}
+
+function calculateNumberOfRowsForClass($class, $day){
+	$timeslot = $class->getTimeslotForDay($day);
+	$totalClassTime = $timeslot->endTime->toInteger() - $timeslot->startTime->toInteger();
+	return ceil($totalClassTime / 50); //50 is 30 mins after converted to integer
 }
 
 ?>

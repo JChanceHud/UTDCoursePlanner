@@ -3,3 +3,6 @@
 #vim
 *.swp
 *.swo
+
+#file used for commit message
+commit

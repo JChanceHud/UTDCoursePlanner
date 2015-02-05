@@ -11,6 +11,13 @@ class time {
 		$this->min = $m;
 	}
 
+	//converts the current stored time to an integer value that can be easily compared against other times
+	//the integer value returned is lossy - it cannot be converted back into an exact time
+	function toInteger(){
+		$m = ($this->min*100)/60;
+		return intval($this->hour . (($m==0)?"0":'') . $m);
+	}
+
 	function p(){
 		echo $this->hour.":".$this->min." ";
 	}

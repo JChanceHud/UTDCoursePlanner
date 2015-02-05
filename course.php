@@ -45,6 +45,14 @@ class course {
 		return false;
 	}
 
+	//returns the first timeslot that falls on a given day - or false if no timeslot on that day
+	//$day is an integer value as per the timeslot class
+	function getTimeslotForDay($day){
+		foreach($this->classTimes as $t)
+			if($t->day == $day) return $t;
+		return false;
+	}
+
 	function parseTimeslots($str){
 		//parse the time first
 		$base = strlen($str)-1;
