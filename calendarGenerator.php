@@ -19,22 +19,26 @@ function generateCalendar($courseArr){
     </thead>
     <tbody>';
     $hour = 8;
-    $min = 0;
+	$min = 0;
+	$rowsBeingUsed = array(-1,-1,-1,-1,-1); //represents values for whether the current row is in use (if class is happening)
+	$currentClass = array(0,0,0,0,0);
     while($hour < 20){
     	$returnStr .= '
     		<tr>
-			<td>'.($hour<10?"0":'').$hour.":".($min==0?"0":'').$min.'</td>';
-		$rowsBeingUsed = array(-1,-1,-1,-1,-1); //represents values for whether the current row is in use (if class is happening)
+			<td>'.($hour<10?"0":'').$hour.":".($min==0?"0":'').$min.'</td>'; //generate leading time for the rows
 		for($x = 0; $x < 5; $x++){
 			if($rowsBeingUsed[$x] >= 0) $rowsBeingUsed[$x] -= 1; //update the class happening variable
 
 			//$x represents the current day of the week
-    		$c = doesClassStartAtTime($x, $hour, $min, $courseArr);
+			$c = doesClassStartAtTime($x, $hour, $min, $courseArr);
 			if($c !== 0){
+				$currentClass[$x] = $c;
 				$rowsNeeded = calculateNumberOfRowsForClass($c, $x);
+				if(doesClassNeedHalfRowEnding($c, $x))
+					$rowsNeeded -= 1;
 				$rowsBeingUsed[$x] = $rowsNeeded;
     			$returnStr .= '
-					<td class=" has-events" rowspan="'. ($rowsNeeded-1) .'">
+					<td class=" has-events" rowspan="'. ($rowsNeeded) .'">
                 	<div class="row-fluid lecture" style="width: 99%; height: 100%;';
                     if(!$c->classIsOpen) $returnStr .= ' background-color:red;'; //change color for closed classes
                     $returnStr .= '">
@@ -42,14 +46,14 @@ function generateCalendar($courseArr){
                 	</div>
             	</td>';
 			}
-			else if($rowsBeingUsed[$x] === 0){
+			else if($rowsBeingUsed[$x] == 0 && $currentClass[$x] != 0 && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
 				//draw half a box
-    			$returnStr .= '<td class=" no-events" rowspan="1"><div class="row-fluid lecture" style="width: 99%; height: 50%;"></div></td>';
+    			$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -25%; width: 99%; height: 70%;"></div></td>';
 			}
-    		else if($rowsBeingUsed[$x] === -1){
-    			$returnStr .= '<td class=" no-events" rowspan="1"></td>';
-		}
-
+    		else if($rowsBeingUsed[$x] == -1){
+				$returnStr .= '<td class=" no-events" rowspan="1"></td>';
+				$currentClass[$x] = 0;
+			}
     	}
     	$returnStr .= '</tr>';
     	$min += 30;
@@ -67,26 +71,28 @@ function generateCalendar($courseArr){
 //no longer being used
 function isClassHappening($day, $hour, $min, $courseArr){
 	foreach($courseArr as $c){
-		$timeslots = $c->classTimes;
-		foreach($timeslots as $t){
-			if($t->doesTimeConflict($day, new time($hour, $min)) === true)
-				return true;
-		}
+		$time = $c->getTimeslotForDay($day);
+		if($time == false) continue;
+		if($time->doesTimeConflict($day, new time($hour, $min)) === true)
+			return true;
 	}
 	return false;
 }
 
 function doesClassStartAtTime($day, $hour, $min, $courseArr){
 	foreach($courseArr as $c){
-		$times = $c->classTimes;
-		foreach($times as $t){
-			if($t->day == $day && $t->startTime->hour === $hour && 
-			   (abs($t->startTime->min - $min) < 16)){
-				return $c;
-			}
-		}
+		$time = $c->getTimeslotForDay($day);
+		if($time == false) continue;
+		if($time->startTime->hour === $hour && (abs($time->startTime->min - $min) < 16))
+			return $c;
     }
     return 0;
+}
+
+//determines if the current class will need a half row at the end of the timeblock on the calendar
+function doesClassNeedHalfRowEnding($class, $day){
+	$t = $class->getTimeslotForDay($day)->endTime->toInteger();
+	return $t % 50 != 0;
 }
 
 function calculateNumberOfRowsForClass($class, $day){
