@@ -1,9 +1,8 @@
-<html>
 UTDCoursePlanner 1.0
 
 Currently works decently - has support for custom time limitations
 
-Go to <a href="utdcourseplanner.ddns.net">utdcourseplanner.ddns.net</a> to see the latest working version. (site is autoupdated)
+Go to http://utdcourseplanner.ddns.net to see the latest working version. (site is autoupdated)
 
 TODO:
 
@@ -13,4 +12,3 @@ Add JS support for showing multiple schedules without reloading the page
 Add support for more custom time limitations
 UI improvements
 RateMyProf integration - far off
-</html>
