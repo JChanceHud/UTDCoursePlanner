@@ -48,7 +48,9 @@ function generateCalendar($courseArr){
 			}
 			else if($rowsBeingUsed[$x] == 0 && $currentClass[$x] != 0 && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
 				//draw half a box
-    			$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -25%; width: 99%; height: 70%;"></div></td>';
+				$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -25%; width: 99%; height: 70%;';
+				if(!$currentClass[$x]->classIsOpen) $returnStr .= ' background-color:red;';
+				$returnStr .= '"></div></td>';
 			}
     		else if($rowsBeingUsed[$x] == -1){
 				$returnStr .= '<td class=" no-events" rowspan="1"></td>';
