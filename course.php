@@ -13,6 +13,7 @@ class course {
 	public $classInstructor = "";
 	public $classTimes; //array of timeslots
 	public $classRoom = ""; //class room location
+	public $classDoesNotHaveTime = false;
 	
 	function __construct($classArray){
 		$this->classTerm = $classArray[0];
@@ -45,8 +46,6 @@ class course {
 	}
 
 	function parseTimeslots($str){
-		if($str === "Online Class")
-			$this->classIsOpen = false;
 		//parse the time first
 		$base = strlen($str)-1;
 		while(substr($str, $base, 1) !== "-")
@@ -66,6 +65,9 @@ class course {
 		if(strpos($str, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime));
 		if(strpos($str, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
 		if(strpos($str, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
+		if(count($timeslots) == 0){
+			$this->classDoesNotHaveTime = true;
+		}
 		return $timeslots;
 	}
 
