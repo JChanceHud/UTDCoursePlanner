@@ -1,3 +1,4 @@
+<html>
 UTDCoursePlanner 1.0
 
 Currently works decently - has support for custom time limitations
@@ -12,3 +13,4 @@ Add JS support for showing multiple schedules without reloading the page
 Add support for more custom time limitations
 UI improvements
 RateMyProf integration - far off
+</html>
