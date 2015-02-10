@@ -51,7 +51,7 @@ function generateCalendar($courseArr, $id){
 				$returnStr .= '"></div></td>';*/
 			//}
     		else if($rowsBeingUsed[$x] == -1){
-				$returnStr .= '<td class=" no-events" rowspan="1"></td>';
+				$returnStr .= '<td class=" no-events" rowspan="1"><span style=\'width:0px;\'></span></td>'; //add the span to show empty spaces on all browsers
 				$currentClass[$x] = NULL;
 			}
     	}
