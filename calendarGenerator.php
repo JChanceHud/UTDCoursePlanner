@@ -38,10 +38,7 @@ function generateCalendar($courseArr, $id){
 				//	$rowsNeeded -= 1;
 				$rowsBeingUsed[$x] = $rowsNeeded;
     			$returnStr .= '
-					<td class=" has-events" rowspan="'. ($rowsNeeded) .'" onclick="openNewTab(\''.$c->getClassURL().'\')">
-                	<!--<div class="row-fluid lecture" style="width: 99%; height: 100%;';
-                    if(!$c->classIsOpen) $returnStr .= ' background-color:red;'; //change color for closed classes
-                    $returnStr .= '">-->
+					<td class=" has-events" rowspan="'. ($rowsNeeded) .'" onclick="openNewTab(\''.$c->getClassURL().'\')"' .(($c->classIsOpen)?"":'style="background-color:red;"'). '>
                     	<span class="title">'.$c->classSection . " | " . $c->classRoom	.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->getClasstime().'</span>
                 	<!--</div>-->
             	</td>';
