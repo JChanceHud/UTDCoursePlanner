@@ -7,7 +7,7 @@ include_once('calendarGenerator.php');
 include_once('courseScheduler.php');
 
 $c = 1;
-while(isset($_POST['course' . $c])){
+while(isset($_POST['course' . $c]) && strlen($_POST['course' . $c]) > 0){
 	$c++;
 }
 

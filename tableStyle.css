@@ -7,7 +7,7 @@ table.calendar > thead > tr > th {
 }
 
 table.calendar > tbody > tr > td {
-    height: 30px;
+    height: 20px;
 	border-bottom: 1px dotted silver;
 }
 
