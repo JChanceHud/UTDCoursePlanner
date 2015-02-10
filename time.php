@@ -22,3 +22,5 @@ class time {
 		echo $this->hour.":".$this->min." ";
 	}
 }
+
+?>

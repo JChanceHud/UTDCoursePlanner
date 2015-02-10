@@ -4,6 +4,7 @@
 
 include_once('courseScraper.php');
 include_once('calendarGenerator.php');
+include_once('courseScheduler.php');
 
 $c = 1;
 while(isset($_POST['course' . $c])){
@@ -14,7 +15,7 @@ $courses = array(); //this will be an array of arrays
 $classErrorArr = array();
 for($x = 1; $x < $c; $x++){
 	$a = search($_POST['course' . $x]);
-	if(count($a) <= 0 && count($classErrorArr) < $x){
+	if(count($a) <= 0 && count($classErrorArr) < $x){ //if we didn't find a class and don't already have an error for this class, then post a new one
 		array_push($classErrorArr, "Unable to find listed course");
 	}
 	if(!isset($_POST['closed'])){
@@ -23,6 +24,8 @@ for($x = 1; $x < $c; $x++){
 			array_push($classErrorArr, "All instances of the listed course are full");
 	}
 	$a = removeClassesBeforeOrAfter($_POST['early'], $_POST['late'], $a);
+	$a = removeOnlineClasses($a);
+
 	if(count($a) <= 0 && count($classErrorArr) < $x)
 		array_push($classErrorArr, "Unable to find class matching time parameters");
 	if(count($a) > 0){
@@ -30,8 +33,9 @@ for($x = 1; $x < $c; $x++){
 		array_push($classErrorArr, "");
 	}
 }
-$schedule = generateSchedule($courses);
 
+$scheduler = new scheduler($courses);
+$schedule = $scheduler->getSchedule(1);
 
 
 //if($c == 1) //then there was no input last time
@@ -39,7 +43,7 @@ $schedule = generateSchedule($courses);
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="tableStyle.css">
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 var counter = <?php echo $c-1==0?1:$c-1 ?>;
 var limit = 6;
@@ -55,6 +59,19 @@ function addInput(divName){
 		counter++;
 	}
 }
+var totalSchedules = <?php echo count($scheduler->getAllCombinations()); ?>;
+$(document).ready(function(){
+	for(var i = 1; i < totalSchedules; i++){
+		console.log("test" + i);
+		$('#table' + i).hide();
+	}
+	$("#currentSchedule").change(function(){
+		for(var i = 0; i < totalSchedules; i++){
+			$("#table" + i).hide();
+		}
+		$("#table" + $("#currentSchedule").val()).show();
+	});
+});
 </script>
 </head>
 <body>
@@ -110,10 +127,28 @@ for($x = 15; $x < 22; $x++){
 <input type="button" value="Add another course" onClick="addInput('dynamicInput');">
 <input type="submit" value="Submit">
 </form>
+<br />
 
 <?php
+if(count($scheduler->getAllCombinations()) == 0) echo "<!--";
+?>
+	Found a total of <?php echo count($scheduler->getAllCombinations())?> possible schedules. Currently displaying combination 
+<select id="currentSchedule">
+<?php
+for($x = 0; $x < count($scheduler->getAllCombinations()); $x++)
+	echo '<option value="' . ($x) . '">'. ($x+1) .'</option>"';
+?>
+</select><br /><br />
+<?php
+if(count($scheduler->getAllCombinations()) == 0) echo "-->";
+?>
 
-echo generateCalendar($schedule);
+<?php
+$combos = $scheduler->getAllCombinations();
+for($x = 0; $x < count($combos); $x++){
+	echo generateCalendar($combos[$x], $x);
+}
+if(count($combos) == 0) echo generateCalendar(array(), 0);
 
 ?>
 

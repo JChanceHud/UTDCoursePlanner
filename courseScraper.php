@@ -71,10 +71,15 @@ function removeClosedCourses($courseArr){
 function removeClassesBeforeOrAfter($early, $late, $courses){
 	$newArr = array();
 	foreach($courses as $c){
+		$conlicts = false;
 		foreach($c->classTimes as $t){
-			if($t->startTime->hour >= $early && $t->endTime->hour < $late)
-				array_push($newArr, $c);
+			if($t->startTime->hour < $early && $t->endTime->hour >= $late){
+				$conflicts = true;
+				break;
+			}
 		}
+		if(!$conflicts)
+			array_push($newArr, $c);
 	}
 	return $newArr;
 }
@@ -104,6 +109,27 @@ function generateSchedule($courses){
 	for($x = 0; $x < $classCount; $x++){
 		$c = $courses[$x];
 		array_push($final, $c[$currentCourses[$x]]);
+	}
+	return $final;
+}
+
+function removeOnlineClasses($courses){
+	$final = array();
+	foreach($courses as $c)
+		if(!$c->classDoesNotHaveTime)
+			array_push($final, $c);
+	return $final;
+}
+
+//no longer used - marked for removal
+function removeDuplicates($courses){
+	$courseNumbers = array();
+	$final = array();
+	foreach($courses as $c){
+		if(!in_array($c->classNumber, $courseNumbers)){
+			array_push($courseNumbers, $c->classNumber);
+			array_push($final, $c);
+		}
 	}
 	return $final;
 }

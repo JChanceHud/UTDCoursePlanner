@@ -8,17 +8,17 @@ class course {
 	public $classTerm = ""; //the semester
 	public $classIsOpen = false; //if the class is open for registration
 	public $classSection = ""; //i.e. cs 2336.003
-	public $classNumber = ""; //unique class number
+	public $classNumber; //unique class number
 	public $classTitle = "";
 	public $classInstructor = "";
 	public $classTimes; //array of timeslots
 	public $classRoom = ""; //class room location
-	public $classDoesNotHaveTime = false;
+	public $classDoesNotHaveTime = FALSE;
 	
 	function __construct($classArray){
 		$this->classTerm = $classArray[0];
 		$this->classIsOpen = $classArray[1]=="Open";
-		$this->classNumber = $classArray[2];
+		$this->classNumber = intval($classArray[2]);
 		$this->classSection = $classArray[3];
 		$this->classTitle = $classArray[4];
 		$this->classInstructor = $classArray[5];
@@ -56,8 +56,13 @@ class course {
 	function parseTimeslots($str){
 		//parse the time first
 		$base = strlen($str)-1;
-		while(substr($str, $base, 1) !== "-")
+		while(substr($str, $base, 1) !== "-"){
 			$base--;
+			if($base < 0){
+				$this->classDoesNotHaveTime = TRUE;
+				return array();
+			}
+		}
 		++$base; //add 1 more to get rid of the dash
 		$endTime = $this->parseTime(substr($str, $base, strlen($str)-$base)); //get the ending time
 
@@ -74,7 +79,7 @@ class course {
 		if(strpos($str, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
 		if(strpos($str, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
 		if(count($timeslots) == 0){
-			$this->classDoesNotHaveTime = true;
+			$this->classDoesNotHaveTime = TRUE;
 		}
 		return $timeslots;
 	}
