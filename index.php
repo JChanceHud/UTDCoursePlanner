@@ -43,6 +43,7 @@ $schedule = $scheduler->getSchedule(1);
 <html>
 <head>
 <title>Course Planner</title>
+<meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="tableStyle.css">
 <link rel="stylesheet" type="text/css" href="design/stylesheet.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -201,7 +202,7 @@ if(count($combos) == 0) echo generateCalendar(array(), 0);
 
 <div class="footer">
 <div class="footertext">
-Don't look at me!
+Current version: 1.1 | Copyright © 2015 Chance Hudson <br /> <a href="https://github.com/JChanceHud/UTDCoursePlanner">This site is open source!</a>
 </div>
 </div>
 
