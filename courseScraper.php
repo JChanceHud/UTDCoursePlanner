@@ -73,7 +73,7 @@ function removeClassesBeforeOrAfter($early, $late, $courses){
 	foreach($courses as $c){
 		$conflicts = FALSE;
 		foreach($c->classTimes as $t){
-			if($t->startTime->hour < $early && $t->endTime->hour >= $late){
+			if($t->startTime->hour < $early || $t->endTime->hour >= $late){
 				$conflicts = TRUE;
 				break;
 			}
