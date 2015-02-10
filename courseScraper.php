@@ -71,14 +71,14 @@ function removeClosedCourses($courseArr){
 function removeClassesBeforeOrAfter($early, $late, $courses){
 	$newArr = array();
 	foreach($courses as $c){
-		$conlicts = false;
+		$conflicts = FALSE;
 		foreach($c->classTimes as $t){
 			if($t->startTime->hour < $early && $t->endTime->hour >= $late){
-				$conflicts = true;
+				$conflicts = TRUE;
 				break;
 			}
 		}
-		if(!$conflicts)
+		if($conflicts === FALSE)
 			array_push($newArr, $c);
 	}
 	return $newArr;
