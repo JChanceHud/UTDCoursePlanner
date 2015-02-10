@@ -34,24 +34,25 @@ function generateCalendar($courseArr, $id){
 			if($c !== 0){
 				$currentClass[$x] = $c;
 				$rowsNeeded = calculateNumberOfRowsForClass($c, $x);
-				if(doesClassNeedHalfRowEnding($c, $x))
-					$rowsNeeded -= 1;
+				//if(doesClassNeedHalfRowEnding($c, $x))
+				//	$rowsNeeded -= 1;
 				$rowsBeingUsed[$x] = $rowsNeeded;
     			$returnStr .= '
-					<td class=" has-events" rowspan="'. ($rowsNeeded) .'">
-                	<div class="row-fluid lecture" style="width: 99%; height: 100%;';
+					<td class=" has-events" rowspan="'. ($rowsNeeded) .'" onclick="openNewTab(\''.$c->getClassURL().'\')">
+                	<!--<div class="row-fluid lecture" style="width: 99%; height: 100%;';
                     if(!$c->classIsOpen) $returnStr .= ' background-color:red;'; //change color for closed classes
-                    $returnStr .= '">
-                    	<span class="title">'.$c->classTitle.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->classRoom.'</span>
-                	</div>
+                    $returnStr .= '">-->
+                    	<span class="title">'.$c->classSection . " | " . $c->classRoom	.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->getClasstime().'</span>
+                	<!--</div>-->
             	</td>';
 			}
-			else if($rowsBeingUsed[$x] == 0 && isset($currentClass[$x]) && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
+			//else if($rowsBeingUsed[$x] == 0 && isset($currentClass[$x]) && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
 				//draw half a box
+				/*
 				$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -30%; width: 99%; height: 70%;';
 				if(!$currentClass[$x]->classIsOpen) $returnStr .= ' background-color:red;';
-				$returnStr .= '"></div></td>';
-			}
+				$returnStr .= '"></div></td>';*/
+			//}
     		else if($rowsBeingUsed[$x] == -1){
 				$returnStr .= '<td class=" no-events" rowspan="1"></td>';
 				$currentClass[$x] = NULL;

@@ -52,6 +52,11 @@ class course {
 			if($t->day == $day) return $t;
 		return false;
 	}
+	
+	function getClasstime(){
+		$timeslot = $this->classTimes[0];
+		return $timeslot->startTime->getString() . " - " . $timeslot->endTime->getString(); 
+	}
 
 	function parseTimeslots($str){
 		//parse the time first

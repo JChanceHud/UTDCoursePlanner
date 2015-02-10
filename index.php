@@ -42,7 +42,9 @@ $schedule = $scheduler->getSchedule(1);
 ?>
 <html>
 <head>
+<title>Course Planner</title>
 <link rel="stylesheet" type="text/css" href="tableStyle.css">
+<link rel="stylesheet" type="text/css" href="design/stylesheet.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 var counter = <?php echo $c-1==0?1:$c-1 ?>;
@@ -72,14 +74,43 @@ $(document).ready(function(){
 		$("#table" + $("#currentSchedule").val()).show();
 	});
 });
+
+function openNewTab(url){
+	var win = window.open(url, '_blank');
+}
 </script>
 </head>
 <body>
+<div class="header">
+<div class="header-content">
+<a id="logo" href="http://utdallas.edu">UT Dallas</a>
+<h2 style="float:right; display:inline-block; text-align:center; padding-top:26px;">Course Scheduler!</h2>
+</div>
+</div>
 
-<h2>Course planner!</h2>
 
-<p>Enter the classes you would like to take in the form and then press submit. The calendar below will update.</p>
-<p>Example: CS2336</p>
+
+
+<div class="center-clear">
+<!-- -->
+<div class="colmask">
+<div class="edge-inline-box">
+<div class="colhead">
+<div class="colheadinternal">
+Information
+</div>
+</div>
+<div class="colinternal">
+Enter the classes you would like to take in the form and then press submit. 
+<br /><br />
+The calendar below will update.
+<br /><br />
+Sample input: CS2336
+</div>
+</div>
+<div class="center-inline-box">
+<div class="colhead"><div class="colheadinternal">Classes</div></div>
+<div class="colinternal">
 <form action="index.php" method="POST">
 <?php
 if($c == 1){
@@ -99,8 +130,15 @@ else
 	}
 ?>
 <br />
+<input type="button" value="Add another course" onClick="addInput('dynamicInput');">
+<input type="submit" value="Submit">
+</div>
+</div>
+<div class="edge-inline-box">
+<div class="colhead"><div class="colheadinternal">settings</div></div>
+<div class="colinternal">
 <input type="checkbox" name="closed" value="include" <?php echo isset($_POST['closed'])?'checked':''?>> Include closed classes  <br /><br />
-Don't allow classes before: 
+Class starts after: 
 <select name="early">
 <?php
 echo '<option value="1">-</option>';
@@ -112,7 +150,8 @@ for($x = 6; $x < 12; $x++){
 }	
 ?>
 </select>
-or after:  
+<br />
+Class ends before:  
 <select name="late"> 
 <?php
 echo '<option value="23">-</option>';
@@ -124,14 +163,13 @@ for($x = 15; $x < 22; $x++){
 }	
 ?>
 </select>
-<input type="button" value="Add another course" onClick="addInput('dynamicInput');">
-<input type="submit" value="Submit">
 </form>
 <br />
-
+<br />
 <?php
 if(count($scheduler->getAllCombinations()) == 0) echo "<!--";
 ?>
+<div id="combo" style="position:absolute; bottom:0">
 	Found a total of <?php echo count($scheduler->getAllCombinations())?> possible schedules. Currently displaying combination 
 <select id="currentSchedule">
 <?php
@@ -142,7 +180,15 @@ for($x = 0; $x < count($scheduler->getAllCombinations()); $x++)
 <?php
 if(count($scheduler->getAllCombinations()) == 0) echo "-->";
 ?>
+</div>
+</div> <!-- ending colinternal -->
+</div> <!-- ending edge-inline-block -->
+</div> <!-- ending colmas -->
+</div> <!--ending center div-->
 
+<div class="center">
+
+<!--output the calendar-->
 <?php
 $combos = $scheduler->getAllCombinations();
 for($x = 0; $x < count($combos); $x++){
@@ -151,6 +197,13 @@ for($x = 0; $x < count($combos); $x++){
 if(count($combos) == 0) echo generateCalendar(array(), 0);
 
 ?>
+</div>
+
+<div class="footer">
+<div class="footertext">
+Don't look at me!
+</div>
+</div>
 
 </body>
 

@@ -18,8 +18,8 @@ class time {
 		return intval($this->hour . (($m==0)?"0":'') . $m);
 	}
 
-	function p(){
-		echo $this->hour.":".$this->min." ";
+	function getString(){
+		return $this->hour.":". (($this->min==0)?"0":"") . $this->min;
 	}
 }
 

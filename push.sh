@@ -1,3 +1,3 @@
 #! /bin/bash
 
-sudo cp ./* /Library/WebServer/Documents/
+sudo cp -r ./* /Library/WebServer/Documents/
