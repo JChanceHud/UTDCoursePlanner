@@ -17,6 +17,7 @@ a {
 	font-family:DINPro, Verdana, Geneva, sans-serif;
 	color: green;
 	text-decoration: none;
+	font-weight: bold;
 }
 
 body, html{height: 100%;}

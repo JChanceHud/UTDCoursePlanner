@@ -270,11 +270,13 @@ for($x = 15; $x < 22; $x++){
 if(count($scheduler->getAllCombinations()) == 0) echo "<!--";
 ?>
 <div id="combo" style="position:absolute; bottom:0">
-	Found a total of <?php echo count($scheduler->getAllCombinations())?> possible schedules. Currently displaying combination 
+	Found a total of <?php echo count($scheduler->getAllCombinations());?> possible schedules. <?php if(count($scheduler->getAllCombinations()) > 100) echo "Limiting number of displayed schedules to 100."; ?> Currently displaying combination 
 <select id="currentSchedule">
 <?php
-for($x = 0; $x < count($scheduler->getAllCombinations()); $x++)
+for($x = 0; $x < count($scheduler->getAllCombinations()); $x++){
+	if($x >= 100) break;
 	echo '<option value="' . ($x) . '">'. ($x+1) .'</option>"';
+	}
 ?>
 </select><br /><br />
 <?php

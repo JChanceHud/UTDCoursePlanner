@@ -31,25 +31,15 @@ function generateCalendar($courseArr, $id){
 
 			//$x represents the current day of the week
 			$c = doesClassStartAtTime($x, $hour, $min, $courseArr);
-			if($c !== 0){
+			if($c){
 				$currentClass[$x] = $c;
 				$rowsNeeded = calculateNumberOfRowsForClass($c, $x);
-				//if(doesClassNeedHalfRowEnding($c, $x))
-				//	$rowsNeeded -= 1;
-				$rowsBeingUsed[$x] = $rowsNeeded;
+				$rowsBeingUsed[$x] = $rowsNeeded-1; //take into account the current iteration
     			$returnStr .= '
 					<td class=" has-events" rowspan="'. ($rowsNeeded) .'" onclick="openNewTab(\''.$c->getClassURL().'\')"' .(($c->classIsOpen)?"":'style="background-color:red;"'). '>
                     	<span class="title">'.$c->classSection . " | " . $c->classRoom	.'</span> <span class="lecturer"><a href="' . $c->getClassURL() . '" target="_blank">'.$c->classInstructor.'</a></span> <span class="location">'.$c->getClasstime().'</span>
-                	<!--</div>-->
             	</td>';
 			}
-			//else if($rowsBeingUsed[$x] == 0 && isset($currentClass[$x]) && doesClassNeedHalfRowEnding($currentClass[$x], $x)){
-				//draw half a box
-				/*
-				$returnStr .= '<td class=" has-events" rowspan="1"><div class="row-fluid lecture" style="position: relative; top: -30%; width: 99%; height: 70%;';
-				if(!$currentClass[$x]->classIsOpen) $returnStr .= ' background-color:red;';
-				$returnStr .= '"></div></td>';*/
-			//}
     		else if($rowsBeingUsed[$x] == -1){
 				$returnStr .= '<td class=" no-events" rowspan="1"><span style=\'width:0px;\'></span></td>'; //add the span to show empty spaces on all browsers
 				$currentClass[$x] = NULL;
