@@ -5,6 +5,7 @@
 include_once('timeslot.php');
 
 class course {
+	public $classID = ""; //full class id cs2336.001.15s
 	public $classTerm = ""; //the semester
 	public $classIsOpen = false; //if the class is open for registration
 	public $classSection = ""; //i.e. cs 2336.003
@@ -16,6 +17,17 @@ class course {
 	public $classDoesNotHaveTime = FALSE;
 	
 	function __construct($classArray){
+		$this->classID = $classArray[0];
+		$this->classSection = $classArray[1].$classArray[2].'.'.$classArray[3];
+		$this->classTerm = $classArray[4];
+		$this->classNumber = $classArray[5];
+		$this->classTitle = $classArray[6];
+		$this->classIsOpen = $classArray[7];
+		$this->classInstructor = $classArray[8];
+		$this->classTimes = $this->getTimeslots($classArray[9], $classArray[10]);
+		$this->classRoom = $classArray[11];
+		$this->classDoesNotHaveTime = $classArray[12];
+		/*
 		$this->classTerm = $classArray[0];
 		$this->classIsOpen = $classArray[1]=="Open";
 		$this->classNumber = intval($classArray[2]);
@@ -25,6 +37,7 @@ class course {
 		//get class days and time
 		$this->classTimes = $this->parseTimeslots($classArray[6]);
 		$this->classRoom = $classArray[7];
+		*/
 	}
 	
 	function getClassURL(){
@@ -56,6 +69,31 @@ class course {
 	function getClasstime(){
 		$timeslot = $this->classTimes[0];
 		return $timeslot->startTime->getString() . " - " . $timeslot->endTime->getString(); 
+	}
+
+	function getTimeslots($daystring, $timestring){
+		if(strlen($daystring) < 1 || strlen($timestring) < 1)
+			return array();
+		$timestring = str_replace(" ", "", $timestring);
+		$base = strlen($timestring)-1;
+		while(substr($timestring, $base, 1) !== "-"){
+			$base--;
+			if($base < 0){
+				return array();
+			}
+		}
+		++$base; //add 1 more to get rid of the dash
+		$endTime = $this->parseTime(substr($timestring, $base, strlen($timestring)-$base)); //get the ending time
+
+		$oldBase = $base-1;
+		$startTime = $this->parseTime(substr($timestring, 0, $oldBase)); //get the ending time
+		$timeslots = array();
+		if(strpos($daystring, "Mon") !== false) array_push($timeslots, new timeslot(0, $startTime, $endTime));
+		if(strpos($daystring, "Tues") !== false) array_push($timeslots, new timeslot(1, $startTime, $endTime));
+		if(strpos($daystring, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime));
+		if(strpos($daystring, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
+		if(strpos($daystring, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
+		return $timeslots;
 	}
 
 	function parseTimeslots($str){

@@ -38,6 +38,7 @@ try {
 		$conn->exec($query);
 	}
 		echo "Finished updating database";
+		unlink($filepath);
     }
 catch(PDOException $e)
     {
@@ -51,29 +52,29 @@ function gs($string){
 }
 
 function getExcelDoc($filepath){
-	//first get cookies from the course planner
 	set_time_limit(0);
-	/*
-	$courseURL = "http://coursebook.utdallas.edu/";
-	$ch = curl_init($courseURL);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	// get headers too with this line
-	curl_setopt($ch, CURLOPT_HEADER, 1);
-	curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
-	$result = curl_exec($ch);
-	*/
+	
+	$response = exec('..\phantomjs.exe test.js'); //for windows
+	echo $response;
 	$dataURL = "https://coursebook.utdallas.edu/reportmonkey/coursebook";
 	$fp = fopen ($filepath, 'w+');
+	//$fpp = fopen ("error.txt", 'w+');
 	$curl_handle=curl_init();
 	curl_setopt($curl_handle, CURLOPT_URL, $dataURL);
 	curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($curl_handle, CURLOPT_FILE, $fp); 
 	curl_setopt($curl_handle, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($curl_handle, CURLOPT_COOKIE, "PTGSESSID=51ijgrck7a7vktlvaannvtql96; __utmt=1; __utma=25620399.354926190.1423632839.1423632839.1423632839.1; __utmb=25620399.1.10.1423632839; __utmc=25620399; __utmz=25620399.1423632839.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)");
+	curl_setopt($curl_handle, CURLOPT_COOKIE, $response);
+	curl_setopt($curl_handle, CURLOPT_VERBOSE, true);
+	//curl_setopt($curl_handle, CURLOPT_STDERR, $fpp);
+	curl_setopt($curl_handle, CURLOPT_SSL_VERIFYPEER, false);
 	//curl_setopt($curl_handle, CURLOPT_COOKIEFILE, "cookies.txt");
 	$data = curl_exec($curl_handle);
 	$error = curl_error($curl_handle);
 	curl_close($curl_handle);
+	fclose($fp);
+	//fclose($fpp);
+	echo $data;
 }
 
 function loadExcelFile($file){

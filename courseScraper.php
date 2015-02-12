@@ -4,11 +4,15 @@
 //
 
 include_once('course.php');
+//include_once('password.php');
 
 //performs a search with a string argument
 //returns an array of course objects
 
 function search($searchStr){
+	return database_search($searchStr);
+
+
 	$returnArr = array();
 
 	$searchResults = file_get_contents('http://coursebook.utdallas.edu/search/'.$searchStr);
@@ -28,6 +32,25 @@ function search($searchStr){
 		array_push($returnArr, $course);
 	}
 	return $returnArr;
+}
+
+function database_search($searchStr, $connection){
+	$searchStr = trim($searchStr);
+	$searchStr = str_replace(' ', '', $searchStr);
+	$returnArr = array();
+	$prefix = substr($searchStr, 0, strlen($searchStr)-4);
+	$course = substr($searchStr, strlen($searchStr)-4);
+	
+    $query = "SELECT * FROM courses WHERE prefix='$prefix' AND course='$course'";
+    $result = $connection->query($query);
+    $arr = $result->fetchAll();
+    //$arr is an array of rows
+    $returnArr = array();
+    foreach($arr as $r){
+    	$course = new course($r);
+    	array_push($returnArr, $course);
+    }
+    return $returnArr;
 }
 
 function getStringsArrayFromNode($node){

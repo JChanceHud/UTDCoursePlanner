@@ -1,0 +1,1 @@
+curl -L -b `phantomjs loadCookie.js` "http://coursebook.utdallas.edu/reportmonkey/coursebook" > file.xlsx

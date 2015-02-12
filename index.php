@@ -5,6 +5,9 @@
 include_once('courseScraper.php');
 include_once('calendarGenerator.php');
 include_once('courseScheduler.php');
+include_once('databaseConnection.php');
+
+$connection = new databaseConnection();
 
 $c = 1;
 while(isset($_POST['course' . $c]) && strlen($_POST['course' . $c]) > 0){
@@ -14,7 +17,7 @@ while(isset($_POST['course' . $c]) && strlen($_POST['course' . $c]) > 0){
 $courses = array(); //this will be an array of arrays
 $classErrorArr = array();
 for($x = 1; $x < $c; $x++){
-	$a = search($_POST['course' . $x]);
+	$a = database_search($_POST['course' . $x], $connection);
 	if(count($a) <= 0 && count($classErrorArr) < $x){ //if we didn't find a class and don't already have an error for this class, then post a new one
 		array_push($classErrorArr, "Unable to find listed course");
 	}
@@ -209,3 +212,7 @@ Current version: 1.1 | Copyright © 2015 Chance Hudson <br /> <a href="https://g
 </body>
 
 </html>
+
+<?php
+$connection->close();
+?>
