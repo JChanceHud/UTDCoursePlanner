@@ -139,6 +139,17 @@ var showSchedule = 0;
 		echo "showSchedule = " . $_POST['showSchedule'] . ";";
 ?>
 
+var timeLimitEarly = 0;
+var timeLimitLate = 23;
+
+<?php
+	if(isset($_POST['early']))
+		echo "timeLimitEarly = " . $_POST['early'] . ";";
+	if(isset($_POST['late']))
+	   echo "timeLimitLate = " . $_POST['late'] . ";";
+?>
+
+
 $(document).ready(function(){
 	for(var i = 1; i < totalSchedules; i++){
 		console.log("test" + i);
@@ -151,7 +162,7 @@ $(document).ready(function(){
 		$("#table" + $("#currentSchedule").val()).show();
 		//update the permalink
 		showSchedule = $("#currentSchedule").val();
-		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(":checked") + "&showSchedule=" + showSchedule, function(data){
+		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(":checked") + "&showSchedule=" + showSchedule + "&late=" + timeLimitLate + "&early=" + timeLimitEarly, function(data){
 			console.log("found");
 			$("#permalink").html("PERMALINK");
 			$("#permalink").attr("href", data);

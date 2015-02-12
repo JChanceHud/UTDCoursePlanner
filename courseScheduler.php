@@ -90,7 +90,7 @@ class scheduler {
 				array_push($currentCombo, $cc[$currentCourses[$x]]);
 			}
 			$currentSum = $this->sumClasses($currentCombo);
-			if(!in_array($currentSum, $comboSums)){
+			if(!in_array($currentSum, $comboSums) && count($currentCombo) == $classCount){
 				array_push($comboSums, $currentSum);
 				array_push($allCombinations, $currentCombo);
 			}

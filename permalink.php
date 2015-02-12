@@ -21,6 +21,12 @@ if(isset($_GET['allowClosed']) && $_GET['allowClosed'] == "true"){
 if(isset($_GET['showSchedule'])){
 	echo "<input type='hidden' name='showSchedule' value='".$_GET['showSchedule']."'>";
 }
+if(isset($_GET['early'])){
+	echo "<input type='hidden' name='early' value='".$_GET['early']."'>";
+}
+if(isset($_GET['late'])){
+	echo "<input type='hidden' name='late' value='".$_GET['late']."'>";
+}
 ?>
 </form>
 <script language="JavaScript">

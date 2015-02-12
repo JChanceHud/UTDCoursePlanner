@@ -62,7 +62,7 @@ class course {
 	//$day is an integer value as per the timeslot class
 	function getTimeslotForDay($day){
 		foreach($this->classTimes as $t)
-			if($t->day == $day) return $t;
+			if($t->day === $day) return $t;
 		return false;
 	}
 	

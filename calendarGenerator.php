@@ -82,7 +82,7 @@ function isClassHappening($day, $hour, $min, $courseArr){
 function doesClassStartAtTime($day, $hour, $min, $courseArr){
 	foreach($courseArr as $c){
 		$time = $c->getTimeslotForDay($day);
-		if($time == false) continue;
+		if($time === false) continue;
 		if($time->startTime->hour === $hour && (abs($time->startTime->min - $min) < 16))
 			return $c;
     }

@@ -23,10 +23,10 @@ class timeslot {
 		$start2 = intval($this->startTime->hour . ($this->startTime->min==0?"0":'') . $this->startTime->min);
 		$end2 = intval($this->endTime->hour . ($this->endTime->min==0?"0":'') . $this->endTime->min);
 
-		if($start1 < $end2 && $end1 > $end2) return true;
-		if($start1 < $start2 && $end1 > $start2) return true;
-		if($start2 < $end1 && $end2 > $end1) return true;
-		if($start2 < $start1 && $end2 > $start1) return true;
+		if($start1 <= $end2 && $end1 >= $end2) return true;
+		if($start1 <= $start2 && $end1 >= $start2) return true;
+		if($start2 <= $end1 && $end2 >= $end1) return true;
+		if($start2 <= $start1 && $end2 >= $start1) return true;
 		return false;
 	}
 
