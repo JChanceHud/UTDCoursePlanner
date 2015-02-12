@@ -2,7 +2,6 @@
 //index.php
 //
 
-include_once('courseScraper.php');
 include_once('calendarGenerator.php');
 include_once('courseScheduler.php');
 include_once('databaseConnection.php');
@@ -42,6 +41,60 @@ $schedule = $scheduler->getSchedule(1);
 
 
 //if($c == 1) //then there was no input last time
+
+function database_search($searchStr, $connection){
+	$searchStr = trim($searchStr);
+	$searchStr = str_replace(' ', '', $searchStr);
+	$returnArr = array();
+	$prefix = substr($searchStr, 0, strlen($searchStr)-4);
+	$course = substr($searchStr, strlen($searchStr)-4);
+	
+    $query = "SELECT * FROM courses WHERE prefix='$prefix' AND course='$course'";
+    $result = $connection->query($query);
+    $arr = $result->fetchAll();
+    //$arr is an array of rows
+    $returnArr = array();
+    foreach($arr as $r){
+    	$course = new course($r);
+    	array_push($returnArr, $course);
+    }
+    return $returnArr;
+}
+
+//pass an array of courses - removes the courses that are closed for registration
+function removeClosedCourses($courseArr){
+	$newArr = array();
+	foreach($courseArr as $c){
+		if($c->classIsOpen) array_push($newArr, $c);
+	}
+	return $newArr;
+}
+
+//removes classes that start before $early, or end after $late
+function removeClassesBeforeOrAfter($early, $late, $courses){
+	$newArr = array();
+	foreach($courses as $c){
+		$conflicts = FALSE;
+		foreach($c->classTimes as $t){
+			if($t->startTime->hour < $early || $t->endTime->hour >= $late){
+				$conflicts = TRUE;
+				break;
+			}
+		}
+		if($conflicts === FALSE)
+			array_push($newArr, $c);
+	}
+	return $newArr;
+}
+
+function removeOnlineClasses($courses){
+	$final = array();
+	foreach($courses as $c)
+		if(!$c->classDoesNotHaveTime)
+			array_push($final, $c);
+	return $final;
+}
+
 ?>
 <html>
 <head>
