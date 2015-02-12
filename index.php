@@ -121,6 +121,7 @@ function addInput(divName){
 	}
 }
 var totalSchedules = <?php echo count($scheduler->getAllCombinations()); ?>;
+if(totalSchedules > 100) totalSchedules = 100;
 var classes = <?php
 	//generate permalink
 	$courseString = "'";
@@ -152,7 +153,6 @@ var timeLimitLate = 23;
 
 $(document).ready(function(){
 	for(var i = 1; i < totalSchedules; i++){
-		console.log("test" + i);
 		$('#table' + i).hide();
 	}
 	$("#currentSchedule").change(function(){
@@ -171,6 +171,15 @@ $(document).ready(function(){
 	$("#currentSchedule").val(showSchedule);
 	$("#currentSchedule").change();
 });
+
+function showAllSchedules(count){
+	if(count >= totalSchedules)
+		return;
+	$("#currentSchedule").val(count);
+	$("#currentSchedule").change();
+	count++;
+	setTimeout(function(){ showAllSchedules(count); }, 100);
+}
 
 function openNewTab(url){
 	var win = window.open(url, '_blank');
@@ -279,6 +288,8 @@ for($x = 0; $x < count($scheduler->getAllCombinations()); $x++){
 	}
 ?>
 </select><br /><br />
+<button onClick="showAllSchedules(0)" type="button">Show all</button>
+<br /><br />
 <?php
 if(count($scheduler->getAllCombinations()) == 0) echo "-->";
 ?>
@@ -294,6 +305,7 @@ if(count($scheduler->getAllCombinations()) == 0) echo "-->";
 <?php
 $combos = $scheduler->getAllCombinations();
 for($x = 0; $x < count($combos); $x++){
+	if($x >= 100) break;
 	echo generateCalendar($combos[$x], $x);
 }
 if(count($combos) == 0) echo generateCalendar(array(), 0);
