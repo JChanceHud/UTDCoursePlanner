@@ -22,7 +22,7 @@ function generateCalendar($courseArr, $id){
 	$min = 0;
 	$rowsBeingUsed = array(-1,-1,-1,-1,-1); //represents values for whether the current row is in use (if class is happening)
 	$currentClass = array(NULL,NULL,NULL,NULL,NULL);
-    while($hour < 20){
+    while($hour < 22){
     	$returnStr .= '
     		<tr>
 			<td>'.($hour<10?"0":'').$hour.":".($min==0?"0":'').$min.'</td>'; //generate leading time for the rows

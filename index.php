@@ -25,7 +25,7 @@ for($x = 1; $x < $c; $x++){
 		if(count($a) <= 0 && count($classErrorArr) < $x)
 			array_push($classErrorArr, "All instances of the listed course are full");
 	}
-	$a = removeClassesBeforeOrAfter($_POST['early'], $_POST['late'], $a);
+	$a = removeClassesBeforeOrAfter(isset($_POST['early'])?$_POST['early']:0, isset($_POST['late'])?$_POST['late']:23, $a);
 	$a = removeOnlineClasses($a);
 
 	if(count($a) <= 0 && count($classErrorArr) < $x)
@@ -141,7 +141,7 @@ function openNewTab(url){
 <div class="header">
 <div class="header-content">
 <a id="logo" href="http://utdallas.edu">UT Dallas</a>
-<h2 style="float:right; display:inline-block; text-align:center; padding-top:26px;">Course Scheduler!</h2>
+<h2 style="float:right; display:inline-block; text-align:center; padding-top:26px;">Course Scheduler</h2>
 </div>
 </div>
 
@@ -267,5 +267,6 @@ Current version: 1.1 | Copyright © 2015 Chance Hudson <br /> <a href="https://g
 </html>
 
 <?php
+//close the database connection
 $connection->close();
 ?>
