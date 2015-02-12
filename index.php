@@ -2,6 +2,8 @@
 //index.php
 //
 
+include_once('settings.php');
+
 include_once('calendarGenerator.php');
 include_once('courseScheduler.php');
 include_once('databaseConnection.php');
@@ -108,7 +110,7 @@ var counter = <?php echo $c-1==0?1:$c-1 ?>;
 var limit = 6;
 function addInput(divName){
 	if (counter == limit)  {
-		alert("There is a limit of " + counter + " classes because I'm lazy");
+		alert("There is a limit of " + counter + " classes");
 	}
 	else {
 		var newdiv = document.createElement('div');
@@ -119,6 +121,24 @@ function addInput(divName){
 	}
 }
 var totalSchedules = <?php echo count($scheduler->getAllCombinations()); ?>;
+var classes = <?php
+	//generate permalink
+	$courseString = "'";
+	for($x = 1; $x < $c; $x++){
+		$courseString = $courseString.$_POST['course' . $x] . ":";
+	}
+	if(strlen($courseString) > 1)
+		$courseString = substr($courseString, 0, strlen($courseString)-1); //strip the last colon
+	$courseString .= "';";
+	echo $courseString;
+?>
+
+var showSchedule = 0;
+<?php
+	if(isset($_POST['showSchedule']) && strlen($_POST['showSchedule']) > 0)
+		echo "showSchedule = " . $_POST['showSchedule'] . ";";
+?>
+
 $(document).ready(function(){
 	for(var i = 1; i < totalSchedules; i++){
 		console.log("test" + i);
@@ -129,7 +149,16 @@ $(document).ready(function(){
 			$("#table" + i).hide();
 		}
 		$("#table" + $("#currentSchedule").val()).show();
+		//update the permalink
+		showSchedule = $("#currentSchedule").val();
+		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(":checked") + "&showSchedule=" + showSchedule, function(data){
+			console.log("found");
+			$("#permalink").html("PERMALINK");
+			$("#permalink").attr("href", data);
+		});
 	});
+	$("#currentSchedule").val(showSchedule);
+	$("#currentSchedule").change();
 });
 
 function openNewTab(url){
@@ -163,6 +192,9 @@ Enter the classes you would like to take in the form and then press submit.
 The calendar below will update.
 <br /><br />
 Sample input: CS2336
+<br /><br /><br />
+<!-- <input type="text" id="permalink"> -->
+<a id="permalink" href=""></a>
 </div>
 </div>
 <div class="center-inline-box">
@@ -194,7 +226,7 @@ else
 <div class="edge-inline-box">
 <div class="colhead"><div class="colheadinternal">settings</div></div>
 <div class="colinternal">
-<input type="checkbox" name="closed" value="include" <?php echo isset($_POST['closed'])?'checked':''?>> Include closed classes  <br /><br />
+<input type="checkbox" id="allowClosed" name="closed" value="1" <?php echo isset($_POST['closed'])?'checked':''?>> Include closed classes  <br /><br />
 Class starts after: 
 <select name="early">
 <?php

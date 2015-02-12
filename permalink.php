@@ -15,6 +15,12 @@ $classes = explode(":",$_GET['classes']);
 for($x = 0; $x < count($classes); $x++){
 	echo "<input type='hidden' name='course". ($x+1) ."' value='".htmlentities($classes[$x])."'>";
 }
+if(isset($_GET['allowClosed']) && $_GET['allowClosed'] == "true"){
+	echo "<input type='hidden' name='closed' value='allow'>";	
+}
+if(isset($_GET['showSchedule'])){
+	echo "<input type='hidden' name='showSchedule' value='".$_GET['showSchedule']."'>";
+}
 ?>
 </form>
 <script language="JavaScript">

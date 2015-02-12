@@ -13,6 +13,12 @@ h2 {
 	color:white;
 }
 
+a {
+	font-family:DINPro, Verdana, Geneva, sans-serif;
+	color: green;
+	text-decoration: none;
+}
+
 body, html{height: 100%;}
 body {
 	margin:0px;
