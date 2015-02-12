@@ -39,6 +39,14 @@ for($x = 1; $x < $c; $x++){
 }
 
 $scheduler = new scheduler($courses);
+$w = array(0, 0, 0, 0);
+if(isset($_POST['timeBetweenClasses'])){
+	$w[0] = $w[1] = 1.0;
+}
+if(isset($_POST['dayClasstime'])){
+	$w[3] = $w[4] = $_POST['dayClasstime'];
+}
+$scheduler->sort($w[0], $w[1], $w[2], $w[3]);
 $schedule = $scheduler->getSchedule(1);
 
 
@@ -97,6 +105,12 @@ function removeOnlineClasses($courses){
 	return $final;
 }
 
+function setJSValue($varName, $value){
+	if(isset($value)){
+		echo $varName . " = " . $value . ";";
+	}
+}
+
 ?>
 <html>
 <head>
@@ -120,8 +134,6 @@ function addInput(divName){
 		counter++;
 	}
 }
-var totalSchedules = <?php echo count($scheduler->getAllCombinations()); ?>;
-if(totalSchedules > 100) totalSchedules = 100;
 var classes = <?php
 	//generate permalink
 	$courseString = "'";
@@ -134,24 +146,38 @@ var classes = <?php
 	echo $courseString;
 ?>
 
-var showSchedule = 0;
-<?php
-	if(isset($_POST['showSchedule']) && strlen($_POST['showSchedule']) > 0)
-		echo "showSchedule = " . $_POST['showSchedule'] . ";";
-?>
-
 var timeLimitEarly = 0;
 var timeLimitLate = 23;
+var showSchedule = 0;
+var totalSchedules = 0;
+var realTotalSchedules = 0; //not limited to 100
+var allowClosedClasses = 0;
+var timeBetweenClasses = 0;
+var dayClasstime = 0;
 
 <?php
-	if(isset($_POST['early']))
-		echo "timeLimitEarly = " . $_POST['early'] . ";";
-	if(isset($_POST['late']))
-	   echo "timeLimitLate = " . $_POST['late'] . ";";
+	setJSValue("timeLimitEarly", $_POST['early']);
+	setJSValue("timeLimitLate", $_POST['late']);
+	setJSValue("showSchedule", $_POST['showSchedule']);
+	setJSValue("totalSchedules", count($scheduler->getAllCombinations()));
+	setJSValue("allowClosedClasses", $_POST['closed']);
+	setJSValue("timeBetweenClasses", $_POST['timeBetweenClasses']);
+	setJSValue("dayClasstime", $_POST['dayClasstime']);
 ?>
 
+realTotalSchedules = totalSchedules;
+if(totalSchedules > 100) totalSchedules = 100;
 
 $(document).ready(function(){
+	$("#allowClosed").prop("checked", allowClosedClasses!=0);
+	$("#early").val(timeLimitEarly);
+	$("#late").val(timeLimitLate);
+	$("#timeBetweenClasses").prop("checked", timeBetweenClasses!=0)
+	var $radios = $('input:radio[name=dayClasstime]');
+	$radios.filter('[value='+dayClasstime+']').prop('checked', true);
+
+	if(totalSchedules != 0) showScheduleSelector();
+
 	for(var i = 1; i < totalSchedules; i++){
 		$('#table' + i).hide();
 	}
@@ -162,8 +188,7 @@ $(document).ready(function(){
 		$("#table" + $("#currentSchedule").val()).show();
 		//update the permalink
 		showSchedule = $("#currentSchedule").val();
-		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(":checked") + "&showSchedule=" + showSchedule + "&late=" + timeLimitLate + "&early=" + timeLimitEarly, function(data){
-			console.log("found");
+		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(':checked') + "&showSchedule=" + showSchedule + "&late=" + timeLimitLate + "&early=" + timeLimitEarly, function(data){
 			$("#permalink").html("PERMALINK");
 			$("#permalink").attr("href", data);
 		});
@@ -171,6 +196,15 @@ $(document).ready(function(){
 	$("#currentSchedule").val(showSchedule);
 	$("#currentSchedule").change();
 });
+
+function showScheduleSelector(){
+	str = "Found a total of " + realTotalSchedules + " possible schedules. " + ((totalSchedules!=realTotalSchedules)? "Limiting number of displayed schedules to 100.":"") + " Currently displaying combination";
+	$("#combo").prepend(str);
+	console.log(totalSchedules);
+	for(var x = 0; x < totalSchedules; x++){
+		$('#currentSchedule').append("<option value="+x+">"+ (x+1) +"</option>"); 
+	}
+}
 
 function showAllSchedules(count){
 	if(count >= totalSchedules)
@@ -193,9 +227,7 @@ function openNewTab(url){
 <h2 style="float:right; display:inline-block; text-align:center; padding-top:26px;">Course Scheduler</h2>
 </div>
 </div>
-
-
-
+<!--    -->
 
 <div class="center-clear">
 <!-- -->
@@ -215,6 +247,16 @@ Sample input: CS2336
 <br /><br /><br />
 <!-- <input type="text" id="permalink"> -->
 <a id="permalink" href=""></a>
+
+
+<div id="combo" style="position:absolute; bottom:0"> 
+<select id="currentSchedule">
+</select><br /><br />
+<button onClick="showAllSchedules(0)" type="button">Show all</button>
+<br /><br />
+</div>
+
+
 </div>
 </div>
 <div class="center-inline-box">
@@ -246,54 +288,35 @@ else
 <div class="edge-inline-box">
 <div class="colhead"><div class="colheadinternal">settings</div></div>
 <div class="colinternal">
-<input type="checkbox" id="allowClosed" name="closed" value="1" <?php echo isset($_POST['closed'])?'checked':''?>> Include closed classes  <br /><br />
+<input type="checkbox" id="allowClosed" name="closed" value="1"> Include closed classes  <br /><br />
 Class starts after: 
-<select name="early">
-<?php
-echo '<option value="1">-</option>';
-for($x = 6; $x < 12; $x++){
-	if($_POST['early'] == $x)
-		echo '<option value="'.$x.'" selected="selected">'.$x.' AM</option>';
-	else
-		echo '<option value="'.$x.'">'.$x.' AM</option>';
-}	
-?>
+<select name="early" id="early">
+	<option value="0">-</option>
+	<option value="6">6 AM</option>
+	<option value="7">7 AM</option>
+	<option value="8">8 AM</option>
+	<option value="9">9 AM</option>
+	<option value="10">10 AM</option>
+	<option value="11">11 AM</option>
 </select>
 <br />
 Class ends before:  
-<select name="late"> 
-<?php
-echo '<option value="23">-</option>';
-for($x = 15; $x < 22; $x++){
-	if($_POST['late'] == $x)
-		echo '<option value="'.$x.'" selected="selected">'.($x-12).' PM</option>';
-	else
-		echo '<option value="'.$x.'">'. ($x-12) .' PM</option>';
-}	
-?>
-</select>
-</form>
-<br />
-<br />
-<?php
-if(count($scheduler->getAllCombinations()) == 0) echo "<!--";
-?>
-<div id="combo" style="position:absolute; bottom:0">
-	Found a total of <?php echo count($scheduler->getAllCombinations());?> possible schedules. <?php if(count($scheduler->getAllCombinations()) > 100) echo "Limiting number of displayed schedules to 100."; ?> Currently displaying combination 
-<select id="currentSchedule">
-<?php
-for($x = 0; $x < count($scheduler->getAllCombinations()); $x++){
-	if($x >= 100) break;
-	echo '<option value="' . ($x) . '">'. ($x+1) .'</option>"';
-	}
-?>
+<select name="late" id="late">
+	<option value="23">-</option>
+	<option value="15">3 PM</option>
+	<option value="16">4 PM</option>
+	<option value="17">5 PM</option>
+	<option value="18">6 PM</option>
+	<option value="19">7 PM</option>
+	<option value="20">8 PM</option>
+	<option value="21">9 PM</option>
 </select><br /><br />
-<button onClick="showAllSchedules(0)" type="button">Show all</button>
-<br /><br />
-<?php
-if(count($scheduler->getAllCombinations()) == 0) echo "-->";
-?>
-</div>
+<input type="checkbox" id="timeBetweenClasses" name="timeBetweenClasses" value="1"> Minimize time between classes  <br /><br />
+Class distribution<br />
+<input type="radio" id="days" name="dayClasstime" value="0"> Do not weight  <br />
+<input type="radio" id="days" name="dayClasstime" value="1"> Minimize class per day (more days of class)  <br />
+<input type="radio" id="days" name="dayClasstime" value="-1"> Maximize class per day (fewer days of class)  <br />
+</form>
 </div> <!-- ending colinternal -->
 </div> <!-- ending edge-inline-block -->
 </div> <!-- ending colmas -->
@@ -306,7 +329,7 @@ if(count($scheduler->getAllCombinations()) == 0) echo "-->";
 $combos = $scheduler->getAllCombinations();
 for($x = 0; $x < count($combos); $x++){
 	if($x >= 100) break;
-	echo generateCalendar($combos[$x], $x);
+	echo generateCalendar($combos[$x]->courses, $x);
 }
 if(count($combos) == 0) echo generateCalendar(array(), 0);
 

@@ -30,6 +30,14 @@ class timeslot {
 		return false;
 	}
 
+	//returns true if $timeslot is after $this
+	function isTimeslotAfter($timeslot){
+		if($timeslot->day !== $this->day) return FALSE;
+		if($timeslot->startTime->toInteger() > $this->endTime->toInteger())
+			return TRUE;
+		return FALSE;
+	}
+
 	//returns true if $t(time) in $d(day) is contained within this timeslot
 	function doesTimeConflict($d, $t){
 		if($d != $this->day) return false;
