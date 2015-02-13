@@ -1,6 +1,7 @@
 <?php
 //index.php
 //
+error_reporting(0);
 
 include_once('settings.php');
 
@@ -106,7 +107,7 @@ function removeOnlineClasses($courses){
 }
 
 function setJSValue($varName, $value){
-	if(isset($value)){
+	if(isset($value) && $value != null && strlen($value) > 0){
 		echo $varName . " = " . $value . ";";
 	}
 }
@@ -156,9 +157,9 @@ var timeBetweenClasses = 0;
 var dayClasstime = 0;
 
 <?php
-	setJSValue("timeLimitEarly", $_POST['early']);
-	setJSValue("timeLimitLate", $_POST['late']);
-	setJSValue("showSchedule", $_POST['showSchedule']);
+	setJSValue("timeLimitEarly", isset($_POST['early'])?$_POST['early']:null);
+	setJSValue("timeLimitLate", isset($_POST['early'])?$_POST['late']:null);
+	setJSValue("showSchedule", isset($_POST['showSchedule'])?$_POST['showSchedule']:null);
 	setJSValue("totalSchedules", count($scheduler->getAllCombinations()));
 	setJSValue("allowClosedClasses", $_POST['closed']);
 	setJSValue("timeBetweenClasses", $_POST['timeBetweenClasses']);
@@ -169,6 +170,7 @@ realTotalSchedules = totalSchedules;
 if(totalSchedules > 100) totalSchedules = 100;
 
 $(document).ready(function(){
+	$("#combo").hide();
 	$("#allowClosed").prop("checked", allowClosedClasses!=0);
 	$("#early").val(timeLimitEarly);
 	$("#late").val(timeLimitLate);
@@ -188,10 +190,10 @@ $(document).ready(function(){
 		$("#table" + $("#currentSchedule").val()).show();
 		//update the permalink
 		showSchedule = $("#currentSchedule").val();
-		$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(':checked') + "&showSchedule=" + showSchedule + "&late=" + timeLimitLate + "&early=" + timeLimitEarly, function(data){
+		/*$.get("generatePermalink.php?classes=" + classes + "&allowClosed=" + $("#allowClosed").is(':checked') + "&showSchedule=" + showSchedule + "&late=" + timeLimitLate + "&early=" + timeLimitEarly, function(data){
 			$("#permalink").html("PERMALINK");
 			$("#permalink").attr("href", data);
-		});
+		});*/
 	});
 	$("#currentSchedule").val(showSchedule);
 	$("#currentSchedule").change();
@@ -204,6 +206,7 @@ function showScheduleSelector(){
 	for(var x = 0; x < totalSchedules; x++){
 		$('#currentSchedule').append("<option value="+x+">"+ (x+1) +"</option>"); 
 	}
+	$("#combo").show();
 }
 
 function showAllSchedules(count){
@@ -249,7 +252,7 @@ Sample input: CS2336
 <a id="permalink" href=""></a>
 
 
-<div id="combo" style="position:absolute; bottom:0"> 
+<div id="combo" style="position:absolute; bottom:0;"> 
 <select id="currentSchedule">
 </select><br /><br />
 <button onClick="showAllSchedules(0)" type="button">Show all</button>
@@ -338,7 +341,7 @@ if(count($combos) == 0) echo generateCalendar(array(), 0);
 
 <div class="footer">
 <div class="footertext">
-Current version: 1.1 | Copyright © 2015 Chance Hudson <br /> <a href="https://github.com/JChanceHud/UTDCoursePlanner">This site is open source!</a>
+Current version: 1.2.1 | Copyright © 2015 Chance Hudson <br /> <a href="https://github.com/JChanceHud/UTDCoursePlanner">This site is open source!</a>
 </div>
 </div>
 
