@@ -82,6 +82,7 @@ class scheduler {
 			$sum = $this->sumClasses($courseArr);
 			if($this->comboIsValid($courseArr) && !in_array($sum, $sums)){
 				$s = new schedule($courseArr);
+				//update sorting values to get max values
 				$this->updateSortingValues($s);
 				array_push($schedules, $s);
 				array_push($sums, $sum);
@@ -150,6 +151,8 @@ class schedule{
 	}
 
 	function calculateWeight($s, $w1, $w2, $w3, $w4){
+		//calcualte weights by converting each value to a range between 0-1000
+		//use values in $s as the max values
 		$this->weightedValue = (
 		                        (($this->totalTimeBetweenClasses * 1000)/$s->totalTimeBetweenClasses)*$w1 + 
 		                        (($this->averageTimeBetweenClasses * 1000)/$s->averageTimeBetweenClasses)*$w2 +
@@ -230,8 +233,13 @@ class schedule{
 }
 
 function get_max(&$var, $val1, $val2){
-		$var = ($val1 > $val2) ? $val1 : $val2;
-	}
+	$var = ($val1 > $val2) ? $val1 : $val2;
+}
+
+
+//Comparison functions for sorting
+//
+//
 
 function compareSchedules($a, $b){
 	if($a->weightedValue == $b->weightedValue)

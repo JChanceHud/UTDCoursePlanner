@@ -27,17 +27,6 @@ class course {
 		$this->classTimes = $this->getTimeslots($classArray[9], $classArray[10]);
 		$this->classRoom = $classArray[11];
 		$this->classDoesNotHaveTime = $classArray[12];
-		/*
-		$this->classTerm = $classArray[0];
-		$this->classIsOpen = $classArray[1]=="Open";
-		$this->classNumber = intval($classArray[2]);
-		$this->classSection = $classArray[3];
-		$this->classTitle = $classArray[4];
-		$this->classInstructor = $classArray[5];
-		//get class days and time
-		$this->classTimes = $this->parseTimeslots($classArray[6]);
-		$this->classRoom = $classArray[7];
-		*/
 	}
 	
 	function getClassURL(){
@@ -93,37 +82,6 @@ class course {
 		if(strpos($daystring, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime));
 		if(strpos($daystring, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
 		if(strpos($daystring, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
-		return $timeslots;
-	}
-
-	function parseTimeslots($str){
-		//parse the time first
-		$base = strlen($str)-1;
-		while(substr($str, $base, 1) !== "-"){
-			$base--;
-			if($base < 0){
-				$this->classDoesNotHaveTime = TRUE;
-				return array();
-			}
-		}
-		++$base; //add 1 more to get rid of the dash
-		$endTime = $this->parseTime(substr($str, $base, strlen($str)-$base)); //get the ending time
-
-		$oldBase = $base-1;	
-		$base -= 7;
-		while(is_numeric(substr($str, $base, 1)) || $base < 0)
-			$base--;
-		++$base; //add 1 more to get rid of the dash
-		$startTime = $this->parseTime(substr($str, $base, $oldBase-$base)); //get the ending time
-		$timeslots = array();
-		if(strpos($str, "Mon") !== false) array_push($timeslots, new timeslot(0, $startTime, $endTime));
-		if(strpos($str, "Tues") !== false) array_push($timeslots, new timeslot(1, $startTime, $endTime));
-		if(strpos($str, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime));
-		if(strpos($str, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
-		if(strpos($str, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
-		if(count($timeslots) == 0){
-			$this->classDoesNotHaveTime = TRUE;
-		}
 		return $timeslots;
 	}
 

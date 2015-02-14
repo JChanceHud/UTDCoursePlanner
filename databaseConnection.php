@@ -1,5 +1,6 @@
 <?php
 //databaseConnection.php
+//keeps the connection open for lots of queries
 //
 
 include_once('course.php');
@@ -25,6 +26,7 @@ class databaseConnection {
 	    }
 	}
 
+	//wrapper function
 	function query($query){
 		return $this->connection->query($query);
 	}

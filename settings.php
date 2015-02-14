@@ -1,5 +1,5 @@
 <?php
 
-$baseURL = "localhost/";
+$baseURL = "utdcourseplanner.ddns.net/";
 
 ?>
