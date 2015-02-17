@@ -18,10 +18,10 @@ class timeslot {
 	//checks if this timeslot conflicts with another timeslot
 	function doesTimeslotConflict($t){
 		if($t->day != $this->day) return false;
-		$start1 = intval($t->startTime->hour . ($t->startTime->min==0?"0":'') . $t->startTime->min);
-		$end1 = intval($t->endTime->hour . ($t->endTime->min==0?"0":'') . $t->endTime->min);
-		$start2 = intval($this->startTime->hour . ($this->startTime->min==0?"0":'') . $this->startTime->min);
-		$end2 = intval($this->endTime->hour . ($this->endTime->min==0?"0":'') . $this->endTime->min);
+		$start1 = $t->startTime->toInteger();
+		$start2 = $this->startTime->toInteger();
+		$end1 = $t->endTime->toInteger();
+		$end2 = $this->endTime->toInteger();
 
 		if($start1 <= $end2 && $end1 >= $end2) return true;
 		if($start1 <= $start2 && $end1 >= $start2) return true;

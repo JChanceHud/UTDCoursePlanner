@@ -6,7 +6,7 @@
 include_once('timeslot.php');
 
 function generateCalendar($courseArr, $id){
-	$returnStr = '<table id="table'. $id .'" class="calendar table table-bordered">
+	$returnStr = '<table id="table'. $id .'" class="calendar">
     <thead>
         <tr>
             <th>&nbsp;</th>
