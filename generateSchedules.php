@@ -10,15 +10,14 @@ include_once('databaseConnection.php');
 
 $connection = new databaseConnection();
 
-$c = 1;
-while(isset($_POST['course' . $c]) && strlen($_POST['course' . $c]) > 0){
-	$c++;
-}
+if(!isset($_GET['classes']))
+	exit();
+$enteredClasses = explode(":", $_GET['classes']);
 
 $courses = array(); //this will be an array of arrays
 $classErrorArr = array();
-for($x = 1; $x < $c; $x++){
-	$a = database_search($_POST['course' . $x], $connection);
+for($x = 0; $x < count($enteredClasses); $x++){
+	$a = database_search($enteredClasses[$x], $connection);
 	if(count($a) <= 0 && count($classErrorArr) < $x){ //if we didn't find a class and don't already have an error for this class, then post a new one
 		array_push($classErrorArr, "Unable to find listed course");
 	}
@@ -62,7 +61,6 @@ $totalCount = count($combos);
 echo '<input type="hidden" id="scheduleCount" value="'.$totalCount.'" />';
 
 $connection->close();
-//if($c == 1) //then there was no input last time
 
 //helper functions
 

@@ -34,6 +34,28 @@ body {
 	font-family:DINPro, Verdana, Geneva, sans-serif;
 }
 
+.classInput {
+	outline: 0;
+	background: white;
+	border:1px solid silver;
+	border-radius: 3px;
+	width: 200px;
+	height: 25px;
+}
+
+.classSpan {
+	outline: 0;
+	background: #08C;
+	padding: 4px;
+	border:1px solid silver;
+	border-radius: 3px;
+	color: white;
+}
+
+.class {
+	padding:8px;
+}
+
 .header {
 	width:100%;
 	height:124px;
@@ -85,7 +107,7 @@ body {
 	margin:0;
 	float:left;
 	width: 300px;
-	min-height:300px;
+	min-height:330px;
 	background: white;
 	vertical-align:top;
 	padding:0;
@@ -97,7 +119,7 @@ body {
 	margin:0 4px auto;
 	float:left;
 	width: 350px;
-	min-height: 300px;
+	min-height: 330px;
 	background: white;
 	vertical-align: top;
 	padding:0;

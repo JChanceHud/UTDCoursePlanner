@@ -1,21 +1,20 @@
-UTDCoursePlanner 1.2.1
+UTDCoursePlanner 1.2.2
 
 Go to http://utdcourseplanner.ddns.net to see the latest working version. (site is autoupdated)
 
 Permalink to sample schedule: 
-http://utdcourseplanner.ddns.net/index.php?classes=cs3354:cs4337:ecs3390:se4348:cs3305&allowClosed=true&timeBetweenClasses=true&dayClasstime=0&late=23&early=8
+http://utdcourseplanner.ddns.net/index.php?classes=ECS3390:SE3345:CS4337:CS4348:CS3305&allowClosed=true&timeBetweenClasses=true&dayClasstime=1&late=18&early=7
 
-UTDCoursePlanner 1.2.1 completed
+UTDCoursePlanner 1.2.2 completed
 
 Major additions include:
-Weighting system in schedule creation algorithm - designs best kind of schedule
-Rewrote index.php to get rid of most of the PHP in the HTML and move to JS
+Full AJAX - no more page reloads
+Revised display for adding courses
+Restored permalink support
 
 TODO:
 
-Rewrite permalink system
 Add support for more custom time limitations
-Remove need for page reloads - use AJAX completely
 RateMyProf integration
 
 
