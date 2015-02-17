@@ -3,7 +3,7 @@ UTDCoursePlanner 1.2.1
 Go to http://utdcourseplanner.ddns.net to see the latest working version. (site is autoupdated)
 
 Permalink to sample schedule: 
-http://utdcourseplanner.ddns.net/permalink.php?classes=cs3354:cs4337:ecs3390:se4348:cs3305&allowClosed=true&showSchedule=0&early=8&late=23
+http://utdcourseplanner.ddns.net/index.php?classes=cs3354:cs4337:ecs3390:se4348:cs3305&allowClosed=true&timeBetweenClasses=true&dayClasstime=0&late=23&early=8
 
 UTDCoursePlanner 1.2.1 completed
 
