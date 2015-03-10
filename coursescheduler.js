@@ -119,7 +119,8 @@ function updateSchedules(data){
 	var scheduleCount = $("#scheduleCount").val(); //get number of schedules
 
 	//update schedule selector
-	var roundedCount = scheduleCount>100?100:scheduleCount;
+	var maxSchedules = 25;
+	var roundedCount = scheduleCount>maxSchedules?maxSchedules:scheduleCount;
 	str = "Found a total of " + scheduleCount + " possible schedules. " + ((scheduleCount!=roundedCount)? "Limiting number of displayed schedules to 100.":"") + " Currently displaying combination";
 	$("#comboText").html(str);
 	$("#currentSchedule").empty();
