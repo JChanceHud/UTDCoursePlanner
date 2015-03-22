@@ -227,7 +227,6 @@ function displaySchedule(scheduleNum) {
 		return false;
 	}
 	resetCalendar();
-	console.log("starting");
 	var courses = currentSchedules[scheduleNum];
 	console.log(courses);
 	for (var x = 0; x < courses.length; x++) { //iterate through each class in schedule
@@ -276,7 +275,7 @@ function getTimeString(time, separator) {
 
 function getTimeInt(time) { //pass an object with properties hour and min
 	var scaledMin = (time.min * 100) / 60;
-	return parseInt(((time.hour > 9)?"":"0") + time.hour + ((scaledMin > 9)?"":"0") + time.min);
+	return parseInt(((time.hour > 9)?"":"0") + time.hour + ((scaledMin > 9)?"":"0") + scaledMin);
 }
 
 function getClassLength(classTime) { //pass object from json
