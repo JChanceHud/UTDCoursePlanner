@@ -111,7 +111,7 @@ function changeSchedule(val){
 }
 
 function updateSchedules(data){
-	$("#calendar").html(data);
+	//$("#calendar").html(data);
 	currentSchedules = JSON.parse(data);
 	var scheduleCount = currentSchedules.combos.length;
 	displaySchedule(0);
