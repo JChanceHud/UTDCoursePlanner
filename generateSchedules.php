@@ -9,6 +9,8 @@ include_once('databaseConnection.php');
 
 $connection = new databaseConnection();
 
+beginTimeMeasurement();
+
 if(!isset($_GET['classes']))
 	exit();
 $enteredClasses = explode(":", $_GET['classes']);
@@ -60,7 +62,6 @@ foreach ($courses as $classArr) {
 $finalArr["courses"] = $allCourses;
 
 $courseNums = array();
-$maxScheduleCount = 600;
 
 foreach ($combos as $obj) {
 	//strip unnecessary data
@@ -68,12 +69,11 @@ foreach ($combos as $obj) {
 	foreach($obj->courses as $c) {
 		array_push($courseNumArr, getIndexFromClassNumber($c->classNumber, $allCourses));
 	}
-	//if (count($courseNums) >= $maxScheduleCount)
-	//	break;
 	array_push($courseNums, $courseNumArr);
 }
 
 $finalArr["combos"] = $courseNums;
+$finalArr["generationTime"] = finishTimeMeasurement();
 
 echo json_encode($finalArr);
 
@@ -141,6 +141,24 @@ function removeOnlineClasses($courses){
 		if(!$c->classDoesNotHaveTime)
 			array_push($final, $c);
 	return $final;
+}
+
+function beginTimeMeasurement() {
+	global $start;
+	$time = microtime();
+	$time = explode(' ', $time);
+	$time = $time[1] + $time[0];
+	$start = $time;
+}
+
+function finishTimeMeasurement() {
+	global $start;
+	$time = microtime();
+	$time = explode(' ', $time);
+	$time = $time[1] + $time[0];
+	$finish = $time;
+	$total_time = round(($finish - $start), 4);
+	return $total_time;
 }
 
 ?>

@@ -19,6 +19,7 @@ function getNewSchedules(){
 }
 
 $(document).ready(function(){
+	resetCalendar();
 	loadGetParameters();
 	$("#currentSchedule").change(function(){
 		displaySchedule($("#currentSchedule").val());
@@ -114,7 +115,7 @@ function updateSchedules(data){
 //	$("#calendar").html(data);
 	currentSchedules = JSON.parse(data);
 	var scheduleCount = currentSchedules.combos.length;
-	displaySchedule(0);
+	$("#scheduleLoadTime").html("Generated " + scheduleCount + " schedule" + (scheduleCount>1?"s":"") + " in " + currentSchedules.generationTime + " seconds.");
 
 	//update schedule selector
 	str = "Found a total of " + scheduleCount + " possible schedules. " + " Currently displaying combination";
