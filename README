@@ -1,16 +1,15 @@
-UTDCoursePlanner 1.2.2
+UTDCoursePlanner 1.2.3
 
 Go to http://utdcourseplanner.ddns.net to see the latest working version. (site is autoupdated)
 
 Permalink to sample schedule: 
 http://utdcourseplanner.ddns.net/index.php?classes=ECS3390:SE3345:CS4337:CS4348:CS3305&allowClosed=true&timeBetweenClasses=true&dayClasstime=1&late=18&early=7
 
-UTDCoursePlanner 1.2.2 completed
+UTDCoursePlanner 1.2.3 completed
 
 Major additions include:
-Full AJAX - no more page reloads
-Revised display for adding courses
-Restored permalink support
+Offloaded calendar generation to client side and use JSON to transmit minimal class information
+	Greatly improves schedule loadtimes
 
 TODO:
 
