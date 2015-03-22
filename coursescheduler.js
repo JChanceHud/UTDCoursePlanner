@@ -93,7 +93,7 @@ function getPermalink(){
 }
 
 function showAllSchedules(count){
-	if(count >= $(".calendar").length)
+	if(count >= currentSchedules.length)
 		return;
 	$("#currentSchedule").val(count);
 	$("#currentSchedule").change();
