@@ -1,5 +1,7 @@
 var $_GET = {};
 var classes = [];
+var baseURL = "76.185.199.59";
+var currentSchedules;
 
 function getClassesString(){
 	var r = "";
@@ -18,13 +20,8 @@ function getNewSchedules(){
 
 $(document).ready(function(){
 	loadGetParameters();
-
 	$("#currentSchedule").change(function(){
-		$(".calendar").each(function(c){
-			//iterate through each calendar and set hidden
-			$(this).hide();
-		});
-		$("#table" + $("#currentSchedule").val()).show();
+		displaySchedule($("#currentSchedule").val());
 	});
 	
 	//handle form being submitted
@@ -85,14 +82,13 @@ function checkLoaded(target, testCount){
 }
 
 function getPermalink(){
-	var domain = "utdcourseplanner.ddns.net";
 	var courseString = "classes="+getClassesString();
 	var allowClosed = "&allowClosed=" + $("#allowClosed").prop("checked");
 	var timeBetweenClasses = "&timeBetweenClasses=" + $("#timeBetweenClasses").prop("checked");
 	var dayClasstime = "&dayClasstime=" + $('input[name=dayClasstime]:checked').val();
 	var late = "&late=" + $('#late').val();
 	var early = "&early=" + $('#early').val();
-	var permalink = "http://"+domain+"/index.php?" + courseString + allowClosed + timeBetweenClasses + dayClasstime + late + early;
+	var permalink = "http://"+baseURL+"/index.php?" + courseString + allowClosed + timeBetweenClasses + dayClasstime + late + early;
 	return permalink;
 }
 
@@ -115,22 +111,20 @@ function changeSchedule(val){
 }
 
 function updateSchedules(data){
-	$("#calendar").html(data); //replace the calednar div contents
-	var scheduleCount = $("#scheduleCount").val(); //get number of schedules
+	currentSchedules = JSON.parse(data);
+	var scheduleCount = currentSchedules.length;
+	displaySchedule(0);
 
 	//update schedule selector
-	var maxSchedules = 25;
-	var roundedCount = scheduleCount>maxSchedules?maxSchedules:scheduleCount;
-	str = "Found a total of " + scheduleCount + " possible schedules. " + ((scheduleCount!=roundedCount)? "Limiting number of displayed schedules to 100.":"") + " Currently displaying combination";
+	str = "Found a total of " + scheduleCount + " possible schedules. " + " Currently displaying combination";
 	$("#comboText").html(str);
 	$("#currentSchedule").empty();
-	for(var x = 0; x < roundedCount; x++){
+	for(var x = 0; x < currentSchedules.length; x++){
 		$('#currentSchedule').append("<option value="+x+">"+ (x+1) +"</option>"); 
 	}
 	$('#currentSchedule').val(0);
 	$('#currentSchedule').change();
 	$("#combo").show();
-	
 
 	//update permalink
 	$("#permalink").html("PERMALINK");
@@ -138,6 +132,7 @@ function updateSchedules(data){
 	//window.history.pushState("","",getPermalink());
 	$("#loading").hide();
 }
+
 
 function loadGetParameters(){
 	document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
@@ -170,7 +165,13 @@ function searchForClass(searchTerm, getNew){
 		searchTerm = $("#classInput").val();
 	var search = $.get("getClassInfo.php?class=" + searchTerm);
 	search.done(function(data){
-		var j = JSON.parse(data);
+		var j;
+		try {
+			j = JSON.parse(data);
+		} catch (e) {
+			alert(e);
+			return;
+		}
 		if(j[1] > 0) {//class was found
 			var a = addClass(j[0], j[1], j[2]);
 			if(getNew === undefined)
@@ -214,4 +215,81 @@ function removeClass(className){
 	var index = classes.indexOf(className);
 	classes.splice(index, 1);
 	getNewSchedules();
+}
+
+
+// calendar functions
+//----------------------------------------------------------------------------------------
+
+
+function displaySchedule(scheduleNum) {
+	if (currentSchedules === undefined || scheduleNum > currentSchedules.length) {
+		return false;
+	}
+	resetCalendar();
+	console.log("starting");
+	var courses = currentSchedules[scheduleNum];
+	console.log(courses);
+	for (var x = 0; x < courses.length; x++) { //iterate through each class in schedule
+		for (var y = 0; y < courses[x].classTimes.length; y++) { //iterate through the classtimes for given class
+			var classTD = $(document.createElement('td'));
+			classTD.attr("class", "has-events");
+			classTD.attr("rowspan", getClassLength(courses[x].classTimes[y]));
+			classTD.attr("onclick", "openNewTab('http://coursebook.utdallas.edu/" + courses[x].classID + "')");
+			classTD.attr("style", (courses[x].classIsOpen == 1)?"":"background-color:red;");
+			
+			var topLine = '<span class="title">' + courses[x].classSection + " | " + courses[x].classRoom + '</span>';
+			var middleLine = '<span class="lecturer"><a href="http://coursebook.utdallas.edu/' + courses[x].classID + '" target="_blank" data-ytta-id="-">' + courses[x].classInstructor + "</a></span>"; 
+			var bottomLine = '<span class="time">' + getTimeString(courses[x].classTimes[y].startTime, ":") + " - " + getTimeString(courses[x].classTimes[y].endTime, ":") + '</span>';
+
+			classTD.append(topLine);
+			classTD.append(middleLine);
+			classTD.append(bottomLine);
+
+			var t = {hour:courses[x].classTimes[y].startTime.hour, min:courses[x].classTimes[y].startTime.min, day:courses[x].classTimes[y].day};
+			$("#" + getTimeString(t)).children().eq(t.day+1).replaceWith(classTD);
+
+			//adjust following rows
+			for(var z = 0; z < getClassLength(courses[x].classTimes[y]) - 1; z++){
+				t = addMinsToTime(t, 30);
+				$("#" + getTimeString(t)).children().eq(t.day+1).replaceWith('<div class="dummy"></div>');
+			}
+		}
+	}
+	$("#mainTableBody").find(".dummy").remove();
+}
+
+function addMinsToTime(time, mins) {
+	time.min += mins;
+	if (time.min >= 60) {
+		time.hour += time.min / 60;
+		time.min -= 60*(time.min / 60);
+	}
+	return time;
+}
+
+function getTimeString(time, separator) {
+	if (separator === undefined)
+		separator = "";
+	return ((time.hour > 9)?"":"0") + time.hour + separator + ((time.min > 9)?"":"0") + time.min;
+}
+
+function getTimeInt(time) { //pass an object with properties hour and min
+	var scaledMin = (time.min * 100) / 60;
+	return parseInt(((time.hour > 9)?"":"0") + time.hour + ((scaledMin > 9)?"":"0") + time.min);
+}
+
+function getClassLength(classTime) { //pass object from json
+	//returns the number of rows the class occupies
+	return Math.ceil((getTimeInt(classTime.endTime) - getTimeInt(classTime.startTime)) / 50);
+}
+
+function resetCalendar() {
+	//emptyTD is now good to go
+	var times = $("#mainTableBody").children();
+	$("#mainTableBody").find("td").not('#time').remove();
+	$("#mainTableBody").find(".dummy").remove();
+
+	for(var x = 0; x < 5; x++)
+		$("#mainTableBody").children().append('<td class="no-events" rowspan="1"><span style="width:0px;"></span></td>');
 }

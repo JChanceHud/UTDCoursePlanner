@@ -110,8 +110,245 @@ Class distribution<br />
 <div id="calendar" class="center">
 
 <!--output the calendar-->
-<!--
--->
+
+<table id="calendar" class="calendar" style="display: table;">
+    <thead>
+        <tr id="">
+            <th>&nbsp;</th>
+            <th width="20%">Monday</th>
+            <th width="20%">Tuesday</th>
+            <th width="20%">Wednesday</th>
+            <th width="20%">Thursday</th>
+            <th width="20%">Friday</th>
+        </tr>
+    </thead>
+    <tbody id="mainTableBody">
+    		<tr id="0800">
+    			<td id="time">08:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="0830">
+    			<td id="time">08:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="0900">
+				<td id="time">09:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="0930">
+				<td id="time">09:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1000">
+				<td id="time">10:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1030">
+				<td id="time">10:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1100">
+				<td id="time">11:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1130">
+				<td id="time">11:30</td>
+				<td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1200">
+				<td id="time">12:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1230">
+				<td id="time">12:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1300">
+				<td id="time">13:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1330">
+				<td id="time">13:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1400">
+				<td id="time">14:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1430">
+				<td id="time">14:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1500">
+				<td id="time">15:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1530">
+				<td id="time">15:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1600">
+				<td id="time">16:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1630">
+				<td id="time">16:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1700">
+				<td id="time">17:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1730">
+				<td id="time">17:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1800">
+				<td id="time">18:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1830">
+				<td id="time">18:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1900">
+				<td id="time">19:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="1930">
+				<td id="time">19:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="2000">
+				<td id="time">20:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="2030">
+				<td id="time">20:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="2100">
+				<td id="time">21:00</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    		<tr id="2130">
+				<td id="time">21:30</td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+                <td class="no-events" rowspan="1"><span style="width:0px;"></span></td>
+            </tr>
+    </tbody>
+</table>
 
 </div>
 

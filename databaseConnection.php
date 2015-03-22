@@ -7,13 +7,14 @@ include_once('course.php');
 
 class databaseConnection {
 	public $connection = null;
+	//private $servername = "utdcourseplanner.ddns.net";
+	private $servername = "76.185.199.59";
 
 	function __construct(){
-		$servername = "utdcourseplanner.ddns.net";
 		$username = "chance";
 		include_once("password.php");
 		try {
-		    $this->connection = new PDO("mysql:host=$servername;dbname=courselist", $username, $password, array(
+		    $this->connection = new PDO("mysql:host=$this->servername;dbname=courselist", $username, $password, array(
 	    		//PDO::ATTR_PERSISTENT => true
 			));
 		    // set the PDO error mode to exception

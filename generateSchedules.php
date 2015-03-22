@@ -50,15 +50,15 @@ $schedule = $scheduler->getSchedule(1);
 
 
 $combos = $scheduler->getAllCombinations();
-for($x = 0; $x < count($combos); $x++){
-	if($x >= 100) break;
-	echo generateCalendar($combos[$x]->courses, $x);
-}
-if(count($combos) == 0) echo generateCalendar(array(), 0);
 
-//echo total combinations as hidden elements that the javascript can extract data from
-$totalCount = count($combos);
-echo '<input type="hidden" id="scheduleCount" value="'.$totalCount.'" />';
+$finalArr = array();
+
+foreach ($combos as $obj) {
+	//strip unnecessary data
+	array_push($finalArr, $obj->courses);
+}
+
+echo json_encode($finalArr);
 
 $connection->close();
 
