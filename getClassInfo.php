@@ -5,7 +5,6 @@
 //
 
 include_once('settings.php');
-include_once('calendarGenerator.php');
 include_once('courseScheduler.php');
 include_once('databaseConnection.php');
 
