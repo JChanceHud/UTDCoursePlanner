@@ -101,7 +101,7 @@ Class distribution<br />
 <input type="radio" id="days" name="dayClasstime" value="1" onChange="getNewSchedules()"> Minimize class per day (more days of class)  <br />
 <input type="radio" id="days" name="dayClasstime" value="-1" onChange="getNewSchedules()"> Maximize class per day (fewer days of class)  <br />
 </form>
-<div id="loading" style="position:absolute; bottom:0;">
+<div id="loading" style="font-weight:bold; position:absolute; bottom:0;">
 <p>Loading....</p>
 </div>
 </div> <!-- ending colinternal -->
