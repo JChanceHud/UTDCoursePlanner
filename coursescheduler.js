@@ -262,14 +262,6 @@ function displaySchedule(scheduleNum) {
 	$("#mainTableBody").find(".dummy").remove();
 }
 
-function getCourseForClassNumber(number) {
-	for(var x = 0; x < currentSchedules.courses.length; x++) {
-		if (currentSchedules.courses[x].classNumber == number)
-			return currentSchedules.courses[x];
-	}
-	return false;
-}
-
 function addMinsToTime(time, mins) {
 	time.min += mins;
 	if (time.min >= 60) {
