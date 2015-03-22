@@ -60,14 +60,19 @@ foreach ($courses as $classArr) {
 $finalArr["courses"] = $allCourses;
 
 $courseNums = array();
+$maxScheduleCount = 600;
+
 foreach ($combos as $obj) {
 	//strip unnecessary data
 	$courseNumArr = array();
 	foreach($obj->courses as $c) {
 		array_push($courseNumArr, $c->classNumber);
 	}
+	if (count($courseNums) >= $maxScheduleCount)
+		break;
 	array_push($courseNums, $courseNumArr);
 }
+
 $finalArr["combos"] = $courseNums;
 
 echo json_encode($finalArr);
