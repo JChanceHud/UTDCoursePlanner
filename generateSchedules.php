@@ -66,10 +66,10 @@ foreach ($combos as $obj) {
 	//strip unnecessary data
 	$courseNumArr = array();
 	foreach($obj->courses as $c) {
-		array_push($courseNumArr, $c->classNumber);
+		array_push($courseNumArr, getIndexFromClassNumber($c->classNumber, $allCourses));
 	}
-	if (count($courseNums) >= $maxScheduleCount)
-		break;
+	//if (count($courseNums) >= $maxScheduleCount)
+	//	break;
 	array_push($courseNums, $courseNumArr);
 }
 
@@ -80,6 +80,15 @@ echo json_encode($finalArr);
 $connection->close();
 
 //helper functions
+//
+
+function getIndexFromClassNumber ($classNumber, $courseArr) {
+	for ($x = 0; $x < count($courseArr); $x++) {
+		if ($classNumber == $courseArr[$x]->classNumber)
+			return $x;
+	}
+	return -1;
+}
 
 function database_search($searchStr, $connection){
 	$searchStr = trim($searchStr);

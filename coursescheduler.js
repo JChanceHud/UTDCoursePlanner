@@ -231,7 +231,7 @@ function displaySchedule(scheduleNum) {
 	var courseNumbers = currentSchedules.combos[scheduleNum];
 	var courses = [];
 	for(var x = 0; x < courseNumbers.length; x++) {
-		courses[x] = getCourseForClassNumber(courseNumbers[x]);
+		courses[x] = currentSchedules.courses[courseNumbers[x]];
 	}
 	for (x = 0; x < courses.length; x++) { //iterate through each class in schedule
 		for (var y = 0; y < courses[x].classTimes.length; y++) { //iterate through the classtimes for given class
