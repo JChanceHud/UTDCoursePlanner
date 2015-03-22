@@ -51,11 +51,24 @@ $schedule = $scheduler->getSchedule(1);
 $combos = $scheduler->getAllCombinations();
 
 $finalArr = array();
+$allCourses = array();
+foreach ($courses as $classArr) {
+	foreach($classArr as $class) {
+		array_push($allCourses, $class);
+	}
+}
+$finalArr["courses"] = $allCourses;
 
+$courseNums = array();
 foreach ($combos as $obj) {
 	//strip unnecessary data
-	array_push($finalArr, $obj->courses);
+	$courseNumArr = array();
+	foreach($obj->courses as $c) {
+		array_push($courseNumArr, $c->classNumber);
+	}
+	array_push($courseNums, $courseNumArr);
 }
+$finalArr["combos"] = $courseNums;
 
 echo json_encode($finalArr);
 

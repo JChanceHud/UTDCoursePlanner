@@ -93,7 +93,7 @@ function getPermalink(){
 }
 
 function showAllSchedules(count){
-	if(count >= currentSchedules.length)
+	if(count >= currentSchedules.combos.length)
 		return;
 	$("#currentSchedule").val(count);
 	$("#currentSchedule").change();
@@ -111,15 +111,16 @@ function changeSchedule(val){
 }
 
 function updateSchedules(data){
+	$("#calendar").html(data);
 	currentSchedules = JSON.parse(data);
-	var scheduleCount = currentSchedules.length;
+	var scheduleCount = currentSchedules.combos.length;
 	displaySchedule(0);
 
 	//update schedule selector
 	str = "Found a total of " + scheduleCount + " possible schedules. " + " Currently displaying combination";
 	$("#comboText").html(str);
 	$("#currentSchedule").empty();
-	for(var x = 0; x < currentSchedules.length; x++){
+	for(var x = 0; x < scheduleCount; x++){
 		$('#currentSchedule').append("<option value="+x+">"+ (x+1) +"</option>"); 
 	}
 	$('#currentSchedule').val(0);
@@ -223,13 +224,16 @@ function removeClass(className){
 
 
 function displaySchedule(scheduleNum) {
-	if (currentSchedules === undefined || scheduleNum > currentSchedules.length) {
+	if (currentSchedules === undefined || scheduleNum >= currentSchedules.combos.length) {
 		return false;
 	}
 	resetCalendar();
-	var courses = currentSchedules[scheduleNum];
-	console.log(courses);
-	for (var x = 0; x < courses.length; x++) { //iterate through each class in schedule
+	var courseNumbers = currentSchedules.combos[scheduleNum];
+	var courses = [];
+	for(var x = 0; x < courseNumbers.length; x++) {
+		courses[x] = getCourseForClassNumber(courseNumbers[x]);
+	}
+	for (x = 0; x < courses.length; x++) { //iterate through each class in schedule
 		for (var y = 0; y < courses[x].classTimes.length; y++) { //iterate through the classtimes for given class
 			var classTD = $(document.createElement('td'));
 			classTD.attr("class", "has-events");
@@ -256,6 +260,14 @@ function displaySchedule(scheduleNum) {
 		}
 	}
 	$("#mainTableBody").find(".dummy").remove();
+}
+
+function getCourseForClassNumber(number) {
+	for(var x = 0; x < currentSchedules.courses.length; x++) {
+		if (currentSchedules.courses[x].classNumber == number)
+			return currentSchedules.courses[x];
+	}
+	return false;
 }
 
 function addMinsToTime(time, mins) {
