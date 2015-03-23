@@ -37,6 +37,26 @@ $(document).ready(function(){
 
 	setupClassInput();
 	setFieldValues();
+	$( "#classInput" ).autocomplete({
+		source:function( request, response ) {
+			//request.term //current search value
+			$.ajax({
+				url: "getAutoCompleteResults.php?term="+request.term,
+				dataType:"json",
+				success: function(data) {
+					response(data);
+				}
+			});
+		},
+		delay:300,
+		select: function (event, ui) {
+			searchForClass();
+		},
+		minLength: 2
+	});
+	$( document ).tooltip({
+		track: true
+	});
 });
 
 function setFieldValues(){
