@@ -54,7 +54,7 @@ function gs($string){
 function getExcelDoc($filepath){
 	set_time_limit(0);
 	
-	$response = exec('..\phantomjs.exe test.js'); //for windows
+	$response = exec('..\phantomjs.exe loadCookie.js'); //for windows
 	echo $response;
 	$dataURL = "https://coursebook.utdallas.edu/reportmonkey/coursebook";
 	$fp = fopen ($filepath, 'w+');
