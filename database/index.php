@@ -8,7 +8,7 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=courselist", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
+	debugLog("Connected successfully");
     $filepath = "temp.xlsx";
 	getExcelDoc($filepath);
 
@@ -16,7 +16,10 @@ try {
 
     $conn->exec("DROP TABLE IF EXISTS courses_bak");
     $conn->exec("RENAME TABLE courses TO courses_bak");
-    $conn->exec("CREATE TABLE courses LIKE courses_bak");
+	$conn->exec("CREATE TABLE courses LIKE courses_bak");
+	$conn->exec("TRUNCATE TABLE autocomplete"); //get rid of all entries
+	$autocompleteEntries = array();
+	$finalQuery = "";
 	for($x = 4; $x < count($content); $x++){
 		$classLoc = $content[$x]['K'];
 		$days = "";
@@ -32,17 +35,28 @@ try {
 		else
 			$classOnline = "1";
 		
-		$query = "INSERT INTO courses (classID, prefix, course, classSection, classTerm, classNumber, classTitle, classOpen, classInstructor, classDays, classTime, classRoom, classOnline)
-		VALUES (". gs($content[$x]['A']) . gs($content[$x]['B']) . gs($content[$x]['C']) . gs($content[$x]['D']) . gs($content[$x]['E']) . gs($content[$x]['F']) . gs($content[$x]['G']) . gs( ($content[$x]['I']=="Open")?"1":"0" ) . gs($content[$x]['J']) . gs($days) . gs($time) . gs($room) . "'$classOnline')";
+		$finalQuery .= "INSERT INTO courses (classID, prefix, course, classSection, classTerm, classNumber, classTitle, classOpen, classInstructor, classDays, classTime, classRoom, classOnline)
+			VALUES (". gs($content[$x]['A']) . gs($content[$x]['B']) . gs($content[$x]['C']) . gs($content[$x]['D']) . gs($content[$x]['E']) . gs($content[$x]['F']) . gs($content[$x]['G']) . gs( ($content[$x]['I']=="Open")?"1":"0" ) . gs($content[$x]['J']) . gs($days) . gs($time) . gs($room) . "'$classOnline'); ";
 		//iterate through each row
-		$conn->exec($query);
+		//
+		//now add the autocomplete row
+		$string = explode(".", $content[$x]['A'])[0];
+		if (!in_array($string, $autocompleteEntries)) {
+			array_push($autocompleteEntries, $string);
+		}
 	}
-		echo "Finished updating database";
-		unlink($filepath);
-    }
+	$conn->exec($finalQuery);
+	$acQuery = "";
+	foreach ($autocompleteEntries as $entry) {
+		$acQuery .= "INSERT INTO autocomplete VALUES ('".$entry."'); ";
+	}
+	debugLog($conn->exec($acQuery));
+	debugLog("Finished updating database");
+	unlink($filepath);
+}
 catch(PDOException $e)
     {
-    echo "Connection failed: " . $e->getMessage();
+    debugLog("Connection failed: " . $e->getMessage());
     }
 
 //unlink($filepath);
@@ -54,8 +68,8 @@ function gs($string){
 function getExcelDoc($filepath){
 	set_time_limit(0);
 	
-	$response = exec('..\phantomjs.exe test.js'); //for windows
-	echo $response;
+	$response = exec('..\phantomjs.exe loadCookie.js'); //for windows
+	debugLog($response);
 	$dataURL = "https://coursebook.utdallas.edu/reportmonkey/coursebook";
 	$fp = fopen ($filepath, 'w+');
 	//$fpp = fopen ("error.txt", 'w+');
@@ -74,7 +88,7 @@ function getExcelDoc($filepath){
 	curl_close($curl_handle);
 	fclose($fp);
 	//fclose($fpp);
-	echo $data;
+	debugLog($data);
 }
 
 function loadExcelFile($file){
@@ -90,6 +104,10 @@ function loadExcelFile($file){
 	$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 	unset($objPHPExcel);
 	return $sheetData;
+}
+
+function debugLog($string) {
+	echo $string."<br /><br />";
 }
 
 ?>
