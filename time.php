@@ -18,6 +18,10 @@ class time {
 		return intval($this->hour . (($m==0)?"0":'') . $m);
 	}
 
+	function toUnscaledInteger(){
+		return intval($this->hour . (($this->min==0)?"0":'') . $this->min);
+	}
+
 	function getString(){
 		return $this->hour.":". (($this->min==0)?"0":"") . $this->min;
 	}

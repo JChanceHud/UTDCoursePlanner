@@ -18,11 +18,12 @@ class scheduler {
 	function __construct($array, $timeslots=array()){
 		//array of courses array - each index contains an array
 		$this->courses = $array;
+		usort($this->courses, "compareCourses");
 		$this->courseCount = count($array);
 		$this->reservedTimeslots = $timeslots;
 		$this->sortingSchedule = new schedule(array());
 	}
-	
+
 	function setCourses($c){
 		$this->courses = $c;
 		unset($this->allCombos);
@@ -38,8 +39,8 @@ class scheduler {
 	
 	//used as to generate unique ID based on list of classes
 	private function sumClasses($classes){
-		$total = 0;
-		foreach($classes as $c) $total += $c->classNumber;
+		$total = "";
+		foreach($classes as $c) $total = $total . $c->classNumber;
 		return $total;
 	}
 
@@ -57,6 +58,15 @@ class scheduler {
 	//functions to find all combinations
 	//
 	//
+
+	private function compareScheduleArr($course, $schedule) {
+		foreach ($schedule as $c) {
+			if($c->doesCourseConflict($course))
+				return false;
+		}
+		return true;
+	}
+
 	function getAllCombinations($force=false){
 		//if 0 or 1 classes return
 		if(count($this->courses) == 0)
@@ -72,35 +82,35 @@ class scheduler {
 		if(isset($this->allCombos) && !$force){
 			return $this->allCombos;
 		}
-		$schedules = array(); //all the schedules
-		$currentCourses = array();
-		$sums = array(); //array of sums to check for uniqueness
-		$classCount = count($this->courses);
-		for($x = 0; $x < $classCount; $x++) array_push($currentCourses, 0); //currentCourses represents which index for which course will currently be used - start all at 0
-		for(;;){
-			$courseArr = $this->getCourseArrFromCourseIndexArr($currentCourses);
-			$sum = $this->sumClasses($courseArr);
-			if($this->comboIsValid($courseArr) && !in_array($sum, $sums)){
-				$s = new schedule($courseArr);
-				//update sorting values to get max values
-				$this->updateSortingValues($s);
-				array_push($schedules, $s);
-				array_push($sums, $sum);
-			}
 
-			$x = $classCount-1;
-			$currentCourses[$x]++;
-			while($currentCourses[$x] >= count($this->courses[$x])){
-				if($x == 0){
-					$this->allCombos = $schedules;
-					return $this->allCombos;
-				}
-				$currentCourses[$x] = 0;
-				$currentCourses[$x-1]++;
-				$x -= 1;
-			}
+		//new sorting
+		$schedules = array();
+		for ($x = 0; $x < count($this->courses[0]); $x++){
+			$schedules[$x] = array($this->courses[0][$x]);
 		}
-		return false;
+		for ($x = 1; $x < $this->courseCount; $x++) {
+			unset($schedules_temp);
+			$schedules_temp = array();
+			$courseList = $this->courses[$x];
+			foreach ($schedules as $schedule) {
+				foreach ($courseList as $course) {
+					if ($this->compareScheduleArr($course, $schedule)) {
+						$newSchedule = $schedule;
+						array_push($newSchedule, $course);
+						array_push($schedules_temp, $newSchedule);
+					}
+				}
+			}
+			$schedules = $schedules_temp;
+		}
+		$this->allCombos = array();
+		foreach ($schedules as $schedule) {
+			$s = new schedule($schedule);
+			$this->updateSortingValues($s);
+			array_push($this->allCombos, $s);
+		}
+
+		return $this->allCombos;
 	}
 
 	private function updateSortingValues($schedule){
@@ -119,12 +129,13 @@ class scheduler {
 	}
 
 	private function comboIsValid($courses){
-		for($x = 0; $x < count($courses); $x++){
-			for($y = $x+1; $y < count($courses); $y++){
+		for($x = count($courses)-1; $x >= 0; $x--){
+			for($y = $x-1; $y >= 0; $y--){
 				$c1 = $courses[$x];
 				$c2 = $courses[$y];
-				if($c1->doesCourseConflict($c2))
+				if($c1->doesCourseConflict($c2)) {
 					return FALSE;
+				}
 			}
 		}
 		return TRUE;
@@ -140,6 +151,7 @@ class schedule{
 	public $maxDayClasstime = 0;
 	public $averageDayClasstime = 0;
 	public $minDayClasstime = 0;
+	private $orderedTimeslots;
 
 	public $weightedValue = 0; //smaller values are better
 
@@ -162,38 +174,32 @@ class schedule{
 	}
 
 	function calculateValues(){
-		$this->totalClassdays = $this->getTotalClassdays();
-		$this->calculateTimeBetweenClasses();
-		$this->calculateClasstime();
-	}
+		// $this->totalClassdays = $this->getTotalClassdays();
+		// $this->calculateTimeBetweenClasses();
+		// $this->calculateClasstime();
+		$this->totalClassdays = 0;
+		for($day = 0; $day < 5; $day++)
+			$this->totalClassdays += (count($this->getOrderedTimeslotsForDay($day))==0)?0:1;
 
-	private function calculateTimeBetweenClasses(){
+		//for time between classes
 		$totalTimeBetween = 0;
 		$days = 0;
-		for($day = 0; $day < 5; $day++){
-			$timeslots = $this->getOrderedTimeslotsForDay($day);
-			if(count($timeslots) <= 1) continue;
-			$days++;
-			$timeBetweenForDay = 0;
-			for($x = 0; $x < count($timeslots)-1; $x++){
-				$timeBetweenForDay += $timeslots[$x+1]->startTime->toInteger() - $timeslots[$x]->endTime->toInteger();
-			}
-			$totalTimeBetween += $timeBetweenForDay;
-		}
-		$this->totalTimeBetweenClasses = $totalTimeBetween;
-		if($days == 0)
-			$this->averageTimeBetweenClasses = $totalTimeBetween;
-		else
-			$this->averageTimeBetweenClasses = $totalTimeBetween / $days;
-	}
-
-	private function calculateClasstime(){
+		//for total classtime
 		$max = 1000000;
 		$finalTotal = 0;
 		$min = 0;
 		for($day = 0; $day < 5; $day++){
 			$timeslots = $this->getOrderedTimeslotsForDay($day);
 			if(count($timeslots) == 0) continue;
+			//handle time between classes
+			if(count($timeslots) > 1) $days++; //keep track for calculating total time between classes
+			$timeBetweenForDay = 0;
+			for($x = 0; $x < count($timeslots)-1; $x++){
+				$timeBetweenForDay += $timeslots[$x+1]->startTime->toInteger() - $timeslots[$x]->endTime->toInteger();
+			}
+			$totalTimeBetween += $timeBetweenForDay;
+
+			//handle classtime for day
 			$total = 0;
 			for($x = 0; $x < count($timeslots); $x++){
 				$total += $timeslots[$x]->endTime->toInteger() - $timeslots[$x]->startTime->toInteger();
@@ -202,28 +208,34 @@ class schedule{
 			if($total < $min) $min = $total;
 			$finalTotal += $total;
 		}
+		//time between classes
+		$this->totalTimeBetweenClasses = $totalTimeBetween;
+		if($days == 0)
+			$this->averageTimeBetweenClasses = $totalTimeBetween;
+		else
+			$this->averageTimeBetweenClasses = $totalTimeBetween / $days;
+		
+		//total classtime
 		$this->maxDayClasstime = $max;
 		$this->minDayClasstime = $min;
-		$this->averageDayClasstime = $finalTotal / $this->getTotalClassdays();
-	}
-
-	private function getTotalClassdays(){
-		$days = 0;
-		for($day = 0; $day < 5; $day++)
-			$days += (count($this->getOrderedTimeslotsForDay($day))==0)?0:1;
-		return $days;
+		$this->averageDayClasstime = $finalTotal / $this->totalClassdays;
 	}
 
 	private function getOrderedTimeslotsForDay($day){
 		//we can assume that the timeslots don't overlap
 		//return timeslots in chronological order
-		$timeslots = array();
-		foreach($this->courses as $c){
-			if($c->getTimeslotForDay($day))
-				array_push($timeslots, $c->getTimeslotForDay($day));
+		if (count($this->orderedTimeslots) != 0)
+			return $this->orderedTimeslots[$day];
+		$this->orderedTimeslots = array();
+		for($x = 0; $x < 5; $x++) {
+			$this->orderedTimeslots[$x] = array();
+			foreach($this->courses as $c){
+				if($c->getTimeslotForDay($x))
+					array_push($this->orderedTimeslots[$x], $c->getTimeslotForDay($x));
+			}
+			usort($this->orderedTimeslots[$x], "compareTimeslots");
 		}
-		usort($timeslots, "compareTimeslots");
-		return $timeslots;
+		return $this->orderedTimeslots[$day];
 	}
 
 	function moveElement(&$array, $a, $b) {
@@ -235,7 +247,6 @@ class schedule{
 function get_max(&$var, $val1, $val2){
 	$var = ($val1 > $val2) ? $val1 : $val2;
 }
-
 
 //Comparison functions for sorting
 //
@@ -249,6 +260,10 @@ function compareSchedules($a, $b){
 
 function compareTimeslots($a, $b){
 	return $a->isTimeslotAfter($b) ? -1 : 1;
+}
+
+function compareCourses($a, $b){
+	return count($a)>count($b)?1:-1; //sort from largest to smalled
 }
 
 ?>

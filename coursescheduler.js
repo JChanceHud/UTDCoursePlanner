@@ -1,6 +1,6 @@
 var $_GET = {};
 var classes = [];
-var baseURL = "76.185.199.59";
+var baseURL = "utdcourseplanner.ddns.net";
 var currentSchedules;
 
 function getClassesString(){
@@ -172,6 +172,7 @@ function searchForClass(searchTerm, getNew){
 			j = JSON.parse(data);
 		} catch (e) {
 			alert(e);
+			console.log(j);
 			return;
 		}
 		if(j[1] > 0) {//class was found
