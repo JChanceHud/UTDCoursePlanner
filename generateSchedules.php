@@ -102,7 +102,7 @@ function database_search($searchStr, $connection){
     $arr = $result->fetchAll();
     //$arr is an array of rows
     $returnArr = array();
-    foreach($arr as $r){
+	foreach($arr as $r){
     	$course = new course($r);
     	array_push($returnArr, $course);
     }

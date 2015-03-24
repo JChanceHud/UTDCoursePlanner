@@ -190,7 +190,7 @@ function searchForClass(searchTerm, getNew){
 		try {
 			j = JSON.parse(data);
 		} catch (e) {
-			alert(e);
+			alert(e + data);
 			console.log(j);
 			return;
 		}
@@ -274,12 +274,13 @@ function displaySchedule(scheduleNum) {
 			classTD.append(bottomLine);
 
 			var t = {hour:courses[x].classTimes[y].startTime.hour, min:courses[x].classTimes[y].startTime.min, day:courses[x].classTimes[y].day};
-			$("#" + getTimeString(t)).children().eq(t.day+1).replaceWith(classTD);
+			var roundedStartTime = roundTime(t);
+			$("#" + getTimeString(roundedStartTime)).children().eq(t.day+1).replaceWith(classTD);
 
 			//adjust following rows
 			for(var z = 0; z < getClassLength(courses[x].classTimes[y]) - 1; z++){
-				t = addMinsToTime(t, 30);
-				$("#" + getTimeString(t)).children().eq(t.day+1).replaceWith('<div class="dummy"></div>');
+				roundedStartTime = addMinsToTime(roundedStartTime, 30);
+				$("#" + getTimeString(roundedStartTime)).children().eq(t.day+1).replaceWith('<div class="dummy"></div>');
 			}
 		}
 	}
@@ -300,6 +301,13 @@ function displaySchedule(scheduleNum) {
 			return;
 		$(".popup").hide();
 	});
+}
+
+function roundTime(time) {
+	var min = (time.min > 45 || time.min < 15)?0:30;
+	var modifier = (time.min>45)?1:0;
+	var hour = time.hour + modifier;
+	return {hour:hour, min:min};
 }
 
 function createPopup(event, html){
@@ -355,6 +363,6 @@ function resetCalendar() {
 	$("#mainTableBody").find("td").not('#time').remove();
 	$("#mainTableBody").find(".dummy").remove();
 
-	for(var x = 0; x < 5; x++)
+	for(var x = 0; x < 6; x++)
 		$("#mainTableBody").children().append('<td class="no-events" rowspan="1"><span style="width:0px;"></span></td>');
 }

@@ -24,8 +24,8 @@ class course {
 		$this->classTitle = $classArray[6];
 		$this->classIsOpen = $classArray[7];
 		$this->classInstructor = $classArray[8];
-		$this->classTimes = $this->getTimeslots($classArray[9], $classArray[10]);
-		$this->classRoom = $classArray[11];
+		$this->classTimes = $this->getTimeslots($classArray[9], $classArray[10], $classArray[11]);
+		$this->classRoom = explode("|", $classArray[11])[0];
 		$this->classDoesNotHaveTime = $classArray[12];
 	}
 	
@@ -50,9 +50,11 @@ class course {
 	//returns the first timeslot that falls on a given day - or false if no timeslot on that day
 	//$day is an integer value as per the timeslot class
 	function getTimeslotForDay($day){
-		foreach($this->classTimes as $t)
-			if($t->day === $day) return $t;
-		return false;
+		$return = array();
+		foreach($this->classTimes as $t) {
+			if($t->day === $day) array_push($return, $t);
+		}
+		return $return;
 	}
 	
 	function getClasstime(){
@@ -60,28 +62,31 @@ class course {
 		return $timeslot->startTime->getString() . " - " . $timeslot->endTime->getString(); 
 	}
 
-	function getTimeslots($daystring, $timestring){
+	function getTimeslots($daystring, $timestring, $roomstring){
 		if(strlen($daystring) < 1 || strlen($timestring) < 1)
 			return array();
-		$timestring = str_replace(" ", "", $timestring);
-		$base = strlen($timestring)-1;
-		while(substr($timestring, $base, 1) !== "-"){
-			$base--;
-			if($base < 0){
-				return array();
-			}
-		}
-		++$base; //add 1 more to get rid of the dash
-		$endTime = $this->parseTime(substr($timestring, $base, strlen($timestring)-$base)); //get the ending time
-
-		$oldBase = $base-1;
-		$startTime = $this->parseTime(substr($timestring, 0, $oldBase)); //get the ending time
 		$timeslots = array();
-		if(strpos($daystring, "Mon") !== false) array_push($timeslots, new timeslot(0, $startTime, $endTime));
-		if(strpos($daystring, "Tues") !== false) array_push($timeslots, new timeslot(1, $startTime, $endTime));
-		if(strpos($daystring, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime));
-		if(strpos($daystring, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime));
-		if(strpos($daystring, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime));
+		$delimiter = "|";
+		$explodedTimes = explode($delimiter, $timestring);
+		$explodedDays = explode($delimiter, $daystring);
+		$explodedRooms = explode($delimiter, $roomstring);
+
+		for ($x = 0; $x < count($explodedTimes); $x++) {
+			$currentTimestring = $explodedTimes[$x];
+			$currentDaystring = $explodedDays[$x];
+			$currentRoomstring = $explodedRooms[$x];
+			
+			$currentTimestring = str_replace(" ", "", $currentTimestring);
+			$times = explode("-", $currentTimestring);
+			$startTime = $this->parseTime($times[0]); //get the starting time
+			$endTime = $this->parseTime($times[1]); //get the ending time
+			if(strpos($currentDaystring, "Mon") !== false) array_push($timeslots, new timeslot(0, $startTime, $endTime, $currentRoomstring));
+			if(strpos($currentDaystring, "Tues") !== false) array_push($timeslots, new timeslot(1, $startTime, $endTime, $currentRoomstring));
+			if(strpos($currentDaystring, "Wed") !== false) array_push($timeslots, new timeslot(2, $startTime, $endTime, $currentRoomstring));
+			if(strpos($currentDaystring, "Thurs") !== false) array_push($timeslots, new timeslot(3, $startTime, $endTime, $currentRoomstring));
+			if(strpos($currentDaystring, "Fri") !== false) array_push($timeslots, new timeslot(4, $startTime, $endTime, $currentRoomstring));
+			if(strpos($currentDaystring, "Sat") !== false) array_push($timeslots, new timeslot(5, $startTime, $endTime, $currentRoomstring));
+		}
 		return $timeslots;
 	}
 

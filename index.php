@@ -120,14 +120,21 @@ Class distribution<br />
     <thead>
         <tr id="">
             <th>&nbsp;</th>
-            <th width="20%">Monday</th>
-            <th width="20%">Tuesday</th>
-            <th width="20%">Wednesday</th>
-            <th width="20%">Thursday</th>
-            <th width="20%">Friday</th>
+            <th width="16.6%">Monday</th>
+            <th width="16.6%">Tuesday</th>
+            <th width="16.6%">Wednesday</th>
+            <th width="16.6%">Thursday</th>
+			<th width="16.6%">Friday</th>
+			<th width="16.6%">Saturday</th>
         </tr>
     </thead>
     <tbody id="mainTableBody">
+    		<tr id="0700">
+    			<td id="time">07:00</td>
+            </tr>
+    		<tr id="0730">
+    			<td id="time">07:30</td>
+            </tr>
     		<tr id="0800">
     			<td id="time">08:00</td>
             </tr>

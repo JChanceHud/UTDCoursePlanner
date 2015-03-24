@@ -178,9 +178,8 @@ class schedule{
 		// $this->calculateTimeBetweenClasses();
 		// $this->calculateClasstime();
 		$this->totalClassdays = 0;
-		for($day = 0; $day < 5; $day++)
+		for($day = 0; $day < 6; $day++)
 			$this->totalClassdays += (count($this->getOrderedTimeslotsForDay($day))==0)?0:1;
-
 		//for time between classes
 		$totalTimeBetween = 0;
 		$days = 0;
@@ -188,7 +187,7 @@ class schedule{
 		$max = 1000000;
 		$finalTotal = 0;
 		$min = 0;
-		for($day = 0; $day < 5; $day++){
+		for($day = 0; $day < 6; $day++){
 			$timeslots = $this->getOrderedTimeslotsForDay($day);
 			if(count($timeslots) == 0) continue;
 			//handle time between classes
@@ -224,14 +223,16 @@ class schedule{
 	private function getOrderedTimeslotsForDay($day){
 		//we can assume that the timeslots don't overlap
 		//return timeslots in chronological order
-		if (count($this->orderedTimeslots) != 0)
+		if (count($this->orderedTimeslots) != 0) {
 			return $this->orderedTimeslots[$day];
+		}
 		$this->orderedTimeslots = array();
-		for($x = 0; $x < 5; $x++) {
+		for($x = 0; $x < 6; $x++) {
 			$this->orderedTimeslots[$x] = array();
 			foreach($this->courses as $c){
-				if($c->getTimeslotForDay($x))
-					array_push($this->orderedTimeslots[$x], $c->getTimeslotForDay($x));
+				if(count($c->getTimeslotForDay($x)) > 0) {
+					$this->orderedTimeslots[$x] = array_merge($this->orderedTimeslots[$x], $c->getTimeslotForDay($x));
+				}
 			}
 			usort($this->orderedTimeslots[$x], "compareTimeslots");
 		}
