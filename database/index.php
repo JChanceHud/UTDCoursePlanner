@@ -27,10 +27,14 @@ try {
 		$room = "";
 		$classOnline = "0";
 		if($classLoc != "-schedule is not posted or not applicable-"){
-			$strs = explode(" : ", $classLoc, 3);
-			$days = $strs[0];
-			$time = $strs[1];
-			$room = str_replace("_", " ", $strs[2]);
+			//adding support for labs with semicolons
+			$diffRooms = $explode(";", $classLoc);
+			foreach ($diffRooms as $string) {
+				$strs = explode(" : ", $classLoc, 3);
+				$days .= $strs[0]."|";
+				$time .= $strs[1]."|";
+				$room .= str_replace("_", " ", $strs[2])."|";
+			}
 		}
 		else
 			$classOnline = "1";

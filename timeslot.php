@@ -8,11 +8,13 @@ class timeslot {
 	public $day = 0; // day is an int that represents the weekday - 0 is monday, 1 is tuesday, 2 is wednesday etc
 	public $startTime; //a time object
 	public $endTime; //time object
+	public $room;
 
-	function __construct($d, $s, $e){
+	function __construct($d, $s, $e, $r){
 		$this->day = $d;
 		$this->startTime = $s;
 		$this->endTime = $e;
+		$this->room = $r;
 	}
 
 	//checks if this timeslot conflicts with another timeslot
