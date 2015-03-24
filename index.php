@@ -276,7 +276,7 @@ End time: <select name="endTime" id="dialogEndTime">
 
 <div class="footer">
 <div class="footertext">
-Current version: 1.2.3 | Copyright © 2015 Chance Hudson <br /> <a href="https://github.com/JChanceHud/UTDCoursePlanner">This site is open source!</a>
+Current version: 1.2.4 | Copyright © 2015 Chance Hudson <br /> <a href="https://github.com/JChanceHud/UTDCoursePlanner">This site is open source!</a>
 </div>
 </div>
 

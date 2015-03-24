@@ -342,7 +342,7 @@ function displaySchedule(scheduleNum) {
 			var classTD = $(document.createElement('td'));
 			classTD.attr("class", "has-events");
 			classTD.attr("rowspan", getClassLength(courses[x].classTimes[y]));
-			classTD.attr("onclick", "openNewTab('http://coursebook.utdallas.edu/" + courses[x].classID + "')");
+			classTD.attr("onclick", "openNewTab('http://coursebook.utdallas.edu/" + courses[x].classSection + "')");
 			if (courses[x].classIsOpen != 1)
 				classTD.attr("style", "background-color:red;");
 			classTD.attr("classIndex", x);

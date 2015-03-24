@@ -1,20 +1,42 @@
-UTDCoursePlanner 1.2.3
+UTDCoursePlanner 1.2.4
 
 Go to http://utdcourseplanner.ddns.net to see the latest working version. (site is autoupdated)
 
-Permalink to sample schedule: 
-http://utdcourseplanner.ddns.net/index.php?classes=ECS3390:SE3345:CS4337:CS4348:CS3305&allowClosed=true&timeBetweenClasses=true&dayClasstime=1&late=18&early=7
+Permalink to sample schedule (should probably make this look a bit better): 
+http://utdcourseplanner.ddns.net/index.php?classes=CS2336:CS1337:CS4337:ECS3390:CS1325&allowClosed=true&timeBetweenClasses=true&dayClasstime=1&late=23&early=0&timeslots=%5B%7B%22day%22%3A0%2C%22startTime%22%3A%7B%22hour%22%3A9%2C%22min%22%3A0%7D%2C%22endTime%22%3A%7B%22hour%22%3A15%2C%22min%22%3A0%7D%2C%22title%22%3A%22%22%7D%2C%7B%22day%22%3A4%2C%22startTime%22%3A%7B%22hour%22%3A7%2C%22min%22%3A0%7D%2C%22endTime%22%3A%7B%22hour%22%3A11%2C%22min%22%3A0%7D%2C%22title%22%3A%22Training%20ride%22%7D%2C%7B%22day%22%3A3%2C%22startTime%22%3A%7B%22hour%22%3A11%2C%22min%22%3A0%7D%2C%22endTime%22%3A%7B%22hour%22%3A15%2C%22min%22%3A0%7D%2C%22title%22%3A%22Meetings%22%7D%2C%7B%22day%22%3A2%2C%22startTime%22%3A%7B%22hour%22%3A16%2C%22min%22%3A0%7D%2C%22endTime%22%3A%7B%22hour%22%3A17%2C%22min%22%3A0%7D%2C%22title%22%3A%22Gym%22%7D%2C%7B%22day%22%3A0%2C%22startTime%22%3A%7B%22hour%22%3A16%2C%22min%22%3A0%7D%2C%22endTime%22%3A%7B%22hour%22%3A17%2C%22min%22%3A0%7D%2C%22title%22%3A%22Gym%22%7D%5D
 
-UTDCoursePlanner 1.2.3 completed
+UTDCoursePlanner 1.2.4 completed
 
-Major additions include:
-Offloaded calendar generation to client side and use JSON to transmit minimal class information
+Changes
+
+1.2.4 (current)
+	Custom timeblock support
+	Autocompletion for text entry
+	Improved UI
+	Mouseover popups for calendar
+
+1.2.3
+	Offloaded calendar generation to client side and use JSON to transmit minimal class information
 	Greatly improves schedule loadtimes
+
+1.2.2
+	Full AJAX - no more page reloads
+	Revised display for adding courses
+	Restored permalink support
+
+1.2.1
+	Weighting system in schedule creation algorithm - designs best kind of schedule
+	Rewrote index.php to get rid of most of the PHP in the HTML and move to JS
+
+1.2
+	An actually somewhat good looking UI
+	Robust schedule creation algorithm
+	Ability to view all possible schedules without reloading the page
 
 TODO:
 
-Add support for more custom time limitations
 RateMyProf integration
+Image generator
 
 
 Copyright 2015 Chance Hudson
