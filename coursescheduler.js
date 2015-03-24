@@ -50,7 +50,7 @@ $(document).ready(function(){
 		},
 		delay:300,
 		select: function (event, ui) {
-			searchForClass();
+			searchForClass(ui.item.value);
 		},
 		minLength: 2
 	});
