@@ -3,7 +3,8 @@
 //code to auto pull from the repo and install the latest version of the server
 //
 
-$zipURL = "https://github.com/JChanceHud/UTDCoursePlanner/archive/master.zip";
+//$zipURL = "https://github.com/JChanceHud/UTDCoursePlanner/archive/master.zip";
+$zipURL = "https://github.com/JChanceHud/UTDCoursePlanner/archive/SQLUpdate.zip";
 $dirName = "UTDCoursePlanner-master";
 
 file_put_contents("tmp.zip", fopen($zipURL, 'r'));
