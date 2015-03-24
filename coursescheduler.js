@@ -288,7 +288,7 @@ function displaySchedule(scheduleNum) {
 		var c = courses[$(this).attr("classindex")];
 		var content = "";
 		content += c.classTitle+"<br />";
-		content += c.classIsOpen==1?"":"[Class is full!]<br />";
+		content += c.classIsOpen==1?"":'<span style="font-weight:bold;">Class is full!</span><br />';
 		content += "Click to show coursebook listing";
 		createPopup(event, content);
 	}).on("mousemove", function(event){
