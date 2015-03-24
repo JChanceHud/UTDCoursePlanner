@@ -180,6 +180,7 @@ function setupClassInput(){
 }
 
 function searchForClass(searchTerm, getNew){
+	$("#classInput").autocomplete("close");
 	if(searchTerm === undefined)
 		searchTerm = $("#classInput").val();
 	var search = $.get("getClassInfo.php?class=" + searchTerm);
