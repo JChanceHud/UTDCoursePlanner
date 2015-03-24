@@ -1,7 +1,6 @@
 var $_GET = {};
 var classes = [];
 var baseURL = "utdcourseplanner.ddns.net";
-var popupCache;
 var currentSchedules;
 
 function getClassesString(){
@@ -302,16 +301,17 @@ function displaySchedule(scheduleNum) {
 }
 
 function createPopup(event, html){
-	if (popupCache === undefined) {
-		popupCache = $(document.createElement('div'));
-		popupCache.attr("class", "popup");
+	if ($(".popup").length === 0) {
+		var popup = $(document.createElement('div'));
+		popup.attr("class", "popup");
 		var popupInternal = $(document.createElement('div'));
 		popupInternal.attr("class", "popupInternal");
-		popupCache.append(popupInternal);
-		popupCache.appendTo('body');
+		popup.append(popupInternal);
+		popup.appendTo('body');
 	}
-	popupCache.show();
-	var internal = popupCache.children().eq(0);
+	var p = $(".popup");
+	p.show();
+	var internal = p.children().eq(0);
 	internal.html(html);
 	positionPopup(event);
 }
