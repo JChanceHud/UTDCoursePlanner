@@ -261,7 +261,10 @@ function displaySchedule(scheduleNum) {
 			classTD.attr("class", "has-events");
 			classTD.attr("rowspan", getClassLength(courses[x].classTimes[y]));
 			classTD.attr("onclick", "openNewTab('http://coursebook.utdallas.edu/" + courses[x].classID + "')");
-			classTD.attr("style", (courses[x].classIsOpen == 1)?"":"background-color:red;");
+			if (courses[x].classIsOpen != 1)
+				classTD.attr("style", "background-color:red;");
+			classTD.attr("classIndex", x);
+			//classTD.attr("title", courses[x].classTitle+"<br /><br />Click to show coursebook listing");
 			
 			var topLine = '<span class="title">' + courses[x].classSection + " | " + courses[x].classRoom + '</span>';
 			var middleLine = '<span class="lecturer"><a href="http://coursebook.utdallas.edu/' + courses[x].classID + '" target="_blank" data-ytta-id="-">' + courses[x].classInstructor + "</a></span>"; 
@@ -282,6 +285,39 @@ function displaySchedule(scheduleNum) {
 		}
 	}
 	$("#mainTableBody").find(".dummy").remove();
+	$(".has-events").mouseenter(function(event){
+		if (!$(this).hasClass("has-events"))
+			return;
+		var c = courses[$(this).attr("classindex")];
+		var content = "";
+		content += c.classTitle+"<br />";
+		content += c.classIsOpen==1?"":"[Class is full!]<br />";
+		content += "Click to show coursebook listing";
+		createPopup(event, content);
+	}).on("mousemove", function(event){
+		positionPopup(event);	
+	}).mouseleave(function(event){
+		if (!$(this).hasClass("has-events"))
+			return;
+		$(".popup").remove();
+	});
+}
+
+function createPopup(event, html){
+	var popup = $(document.createElement('div'));
+	popup.attr("class", "popup");
+	var popupInternal = $(document.createElement('div'));
+	popupInternal.attr("class", "popupInternal");
+	popupInternal.append(html);
+	popup.append(popupInternal);
+	popup.appendTo('body');
+	positionPopup(event);
+}
+
+function positionPopup(event){
+	var xPos = event.pageX + 10;
+    var yPos = event.pageY + 10;
+    $('div.popup').css({'position': 'absolute', 'top': yPos, 'left': xPos});
 }
 
 function addMinsToTime(time, mins) {
