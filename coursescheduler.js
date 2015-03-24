@@ -85,6 +85,26 @@ $(document).ready(function(){
 		$("#customTimeslotDialog").dialog("open");
 		$('.ui-widget-overlay').css('background', 'black');
 	});
+	$(document).keydown(function(e) {
+    switch(e.which) {
+        case 37: // left
+        changeSchedule(-1);
+        break;
+
+        case 38: // up
+        break;
+
+        case 39: // right
+        changeSchedule(1);
+        break;
+
+        case 40: // down
+        break;
+
+        default: return; // exit this handler for other keys
+    }
+    e.preventDefault(); // prevent the default action (scroll / move caret)
+});
 });
 
 function setFieldValues(){
@@ -117,6 +137,9 @@ function setFieldValues(){
 		$('#early').val($_GET.early);
 	if(typeof $_GET.late !== 'undefined')
 		$('#late').val($_GET.late);
+	if(typeof $_GET.timeslots !== 'undefined'){
+		customTimeslots = JSON.parse($_GET.timeslots);
+	}
 	
 	checkLoaded(c.length, 0); //wait until we load the class info to generate schedules
 	$("#currentSchedule").val(0);
@@ -137,7 +160,8 @@ function getPermalink(){
 	var dayClasstime = "&dayClasstime=" + $('input[name=dayClasstime]:checked').val();
 	var late = "&late=" + $('#late').val();
 	var early = "&early=" + $('#early').val();
-	var permalink = "http://"+baseURL+"/index.php?" + courseString + allowClosed + timeBetweenClasses + dayClasstime + late + early;
+	var timeslots = "&timeslots=" + encodeURIComponent(JSON.stringify(customTimeslots));
+	var permalink = "http://"+baseURL+"/index.php?" + courseString + allowClosed + timeBetweenClasses + dayClasstime + late + early + timeslots;
 	return permalink;
 }
 
@@ -160,7 +184,7 @@ function changeSchedule(val){
 }
 
 function updateSchedules(data){
-	//$("#calendar").html(data);
+//	$("#calendar").html(data);
 	currentSchedules = JSON.parse(data);
 	var scheduleCount = currentSchedules.combos.length;
 	$("#scheduleLoadTime").html("Generated " + scheduleCount + " schedule" + (scheduleCount==1?"":"s") + " in " + currentSchedules.generationTime + " seconds.");
