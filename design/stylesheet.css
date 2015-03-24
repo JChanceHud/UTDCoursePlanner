@@ -140,6 +140,9 @@ body {
 	padding:0;
 }
 
+.calendar_header {
+	padding: 5px;
+}
 .colinternal {
 	padding: 20px;
 	font-family:DINPro, Verdana, Geneva, sans-serif;
@@ -174,3 +177,4 @@ body {
 	text-align:center;
 	padding: 40px;
 }
+

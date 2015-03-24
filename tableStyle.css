@@ -23,6 +23,7 @@ table.calendar > tbody > tr > td > div {
     float: left;
 }
 
+
 table.calendar > tbody > tr > td.has-events {
     color: white;
     cursor: pointer;
@@ -65,7 +66,6 @@ table.calendar > tbody > tr > td.has-events > div > span.title {
 }
 
 
-
 table.calendar > tbody > tr > td.has-events > span {
     display: block;
     text-align: center;
@@ -77,7 +77,6 @@ table.calendar > tbody > tr > td.has-events > span a {
 table.calendar > tbody > tr > td.has-events > span.title {
     font-weight: bold;
 }
-
 
 table.table-borderless > thead > tr > th, table.table-borderless > tbody > tr > td {
     border: 0;

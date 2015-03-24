@@ -6,6 +6,8 @@
 include_once('settings.php');
 include_once('courseScheduler.php');
 include_once('databaseConnection.php');
+include_once('timeslot.php');
+include_once('time.php');
 
 $connection = new databaseConnection();
 
@@ -13,6 +15,22 @@ beginTimeMeasurement();
 
 if(!isset($_GET['classes']))
 	exit();
+$customCourse = new course(array());
+if(isset($_GET['timeslots'])) {
+	//custom busy timeslots
+	//read the json
+	
+	$times = json_decode($_GET['timeslots'], true);
+	$timeslots = array();
+	foreach ($times as $arr) {
+		$startTime = new time($arr['startTime']['hour'], $arr['startTime']['min']);
+		$endTime = new time($arr['endTime']['hour'], $arr['endTime']['min']);
+		array_push($timeslots, new timeslot($arr["day"], $startTime, $endTime));
+	}
+	$customCourse->setCustomTimeslots($timeslots);
+} else {
+	unset($customCourse);
+}
 $enteredClasses = explode(":", $_GET['classes']);
 
 $courses = array(); //this will be an array of arrays
@@ -38,6 +56,10 @@ for($x = 0; $x < count($enteredClasses); $x++){
 	}
 }
 
+if (isset($customCourse) && count($customCourse->classTimes) > 0){
+	array_push($courses, array($customCourse));
+}
+
 $scheduler = new scheduler($courses);
 $w = array(0, 0, 0, 0);
 if(isset($_POST['timeBetweenClasses'])){
@@ -56,7 +78,8 @@ $finalArr = array();
 $allCourses = array();
 foreach ($courses as $classArr) {
 	foreach($classArr as $class) {
-		array_push($allCourses, $class);
+		if ($class->classID != "custom")
+			array_push($allCourses, $class);
 	}
 }
 $finalArr["courses"] = $allCourses;
@@ -67,7 +90,8 @@ foreach ($combos as $obj) {
 	//strip unnecessary data
 	$courseNumArr = array();
 	foreach($obj->courses as $c) {
-		array_push($courseNumArr, getIndexFromClassNumber($c->classNumber, $allCourses));
+		if ($c->classID != "custom")
+			array_push($courseNumArr, getIndexFromClassNumber($c->classNumber, $allCourses));
 	}
 	array_push($courseNums, $courseNumArr);
 }

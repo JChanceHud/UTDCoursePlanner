@@ -17,6 +17,7 @@ class course {
 	public $classDoesNotHaveTime = FALSE;
 	
 	function __construct($classArray){
+		if (count($classArray) == 0) return;
 		$this->classID = $classArray[0];
 		$this->classSection = $classArray[1].$classArray[2].'.'.$classArray[3];
 		$this->classTerm = $classArray[4];
@@ -28,7 +29,12 @@ class course {
 		$this->classRoom = explode("|", $classArray[11])[0];
 		$this->classDoesNotHaveTime = $classArray[12];
 	}
-	
+
+	function setCustomTimeslots($timeslots) {
+		$this->classTimes = $timeslots;
+		$this->classID = "custom";
+	}
+
 	function getClassURL(){
 		$url = "http://coursebook.utdallas.edu/";
 		$s = $this->classSection;

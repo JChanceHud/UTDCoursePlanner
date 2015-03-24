@@ -7,12 +7,12 @@
 <head>
 <title>Course Planner</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="tableStyle.css">
-<link rel="stylesheet" type="text/css" href="design/stylesheet.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="tableStyle.css" />
+<link rel="stylesheet" type="text/css" href="design/stylesheet.css" />
 <script src="coursescheduler.js"></script>
 </head>
 <body>
@@ -102,7 +102,8 @@ Class ends before:
 Class distribution<br />
 <input type="radio" id="days" name="dayClasstime" value="0" onChange="getNewSchedules()"> Do not weight  <br />
 <input type="radio" id="days" name="dayClasstime" value="1" onChange="getNewSchedules()"> Minimize class per day (more days of class)  <br />
-<input type="radio" id="days" name="dayClasstime" value="-1" onChange="getNewSchedules()"> Maximize class per day (fewer days of class)  <br />
+<input type="radio" id="days" name="dayClasstime" value="-1" onChange="getNewSchedules()"> Maximize class per day (fewer days of class)  <br /><br />
+<input id="customTimeslot" type="button" value="Add custom busy time" title="Specifies a time period where classes will not be scheduled. Good if you have work or other commitments." />
 </form>
 <div id="loading" style="font-weight:bold; position:absolute; bottom:0;">
 <p>Loading....</p>
@@ -113,9 +114,56 @@ Class distribution<br />
 </div> <!--ending center div-->
 
 <div id="calendar" class="center">
-
 <!--output the calendar-->
 <!--<input id="clickMe" type="button" value="clickme" onclick="calendarDownload();" />-->
+<div id="customTimeslotDialog" style="background: #FFF">
+Day: <select name="dialogDay" id="dialogDay">
+	<option value="0">Monday</option>
+	<option value="1">Tuesday</option>
+	<option value="2">Wednesday</option>
+	<option value="3">Thursday</option>
+	<option value="4">Friday</option>
+	<option value="5">Saturday</option>
+</select><br /><br />
+Start time: <select name="startTime" id="dialogStartTime">
+	<option value="7">7 AM</option>
+	<option value="8">8 AM</option>
+	<option value="9" selected="selected">9 AM</option>
+	<option value="10">10 AM</option>
+	<option value="11">11 AM</option>
+	<option value="12">12 PM</option>
+	<option value="13">1 PM</option>
+	<option value="14">2 PM</option>
+	<option value="15">3 PM</option>
+	<option value="16">4 PM</option>
+	<option value="17">5 PM</option>
+	<option value="18">6 PM</option>
+	<option value="19">7 PM</option>
+	<option value="20">8 PM</option>
+	<option value="21">9 PM</option>
+	<option value="22">10 PM</option>
+</select><br /><br />
+End time: <select name="endTime" id="dialogEndTime">
+	<option value="7">7 AM</option>
+	<option value="8">8 AM</option>
+	<option value="9">9 AM</option>
+	<option value="10">10 AM</option>
+	<option value="11">11 AM</option>
+	<option value="12">12 PM</option>
+	<option value="13">1 PM</option>
+	<option value="14">2 PM</option>
+	<option value="15" selected="selected">3 PM</option>
+	<option value="16">4 PM</option>
+	<option value="17">5 PM</option>
+	<option value="18">6 PM</option>
+	<option value="19">7 PM</option>
+	<option value="20">8 PM</option>
+	<option value="21">9 PM</option>
+	<option value="22">10 PM</option>
+</select><br /><br />
+</div>
+
+
 <table id="calendar" class="calendar" style="display: table;">
     <thead>
         <tr id="">

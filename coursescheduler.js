@@ -2,6 +2,7 @@ var $_GET = {};
 var classes = [];
 var baseURL = "utdcourseplanner.ddns.net";
 var currentSchedules;
+var customTimeslots;
 
 function getClassesString(){
 	var r = "";
@@ -19,6 +20,7 @@ function getNewSchedules(){
 }
 
 $(document).ready(function(){
+	customTimeslots = [];
 	resetCalendar();
 	loadGetParameters();
 	$("#currentSchedule").change(function(){
@@ -28,7 +30,7 @@ $(document).ready(function(){
 	//handle form being submitted
 	jQuery('#courseForm').submit( function(event) {
 		event.preventDefault();
-		var post = $.post("generateSchedules.php?classes=" + getClassesString(), $("#courseForm").serialize());
+		var post = $.post("generateSchedules.php?classes=" + getClassesString() + "&timeslots=" + encodeURIComponent(JSON.stringify(customTimeslots)), $("#courseForm").serialize());
 		post.done(function(data){
 			updateSchedules(data);
 		});
@@ -55,6 +57,32 @@ $(document).ready(function(){
 
 	setupClassInput();
 	setFieldValues();
+	$("#customTimeslotDialog").dialog({
+		autoOpen: false,
+		show: {
+			effect: "fade",
+			duration: 300 
+		},
+		hide: {
+			effect: "fade",
+			duration: 300 
+		},
+		modal: true,
+		buttons: {
+			"Add timeslot": function() {
+				addCustomTimeslot();
+				getNewSchedules();
+				$(this).dialog( "close" );
+			},
+			Cancel: function() {
+				$(this).dialog( "close" );
+			}
+		}
+	});
+	$("#customTimeslot").click(function() {
+		$("#customTimeslotDialog").dialog("open");
+		$('.ui-widget-overlay').css('background', 'black');
+	});
 });
 
 function setFieldValues(){
@@ -130,10 +158,10 @@ function changeSchedule(val){
 }
 
 function updateSchedules(data){
-//	$("#calendar").html(data);
+	//$("#calendar").html(data);
 	currentSchedules = JSON.parse(data);
 	var scheduleCount = currentSchedules.combos.length;
-	$("#scheduleLoadTime").html("Generated " + scheduleCount + " schedule" + (scheduleCount>1?"s":"") + " in " + currentSchedules.generationTime + " seconds.");
+	$("#scheduleLoadTime").html("Generated " + scheduleCount + " schedule" + (scheduleCount==1?"":"s") + " in " + currentSchedules.generationTime + " seconds.");
 
 	//update schedule selector
 	str = "Found a total of " + scheduleCount + " possible schedules. " + " Currently displaying combination";
@@ -149,7 +177,6 @@ function updateSchedules(data){
 	//update permalink
 	$("#permalink").html("PERMALINK");
 	$("#permalink").attr("href", getPermalink());
-	//window.history.pushState("","",getPermalink());
 	$("#loading").hide();
 }
 
@@ -245,14 +272,42 @@ function removeClass(className){
 
 
 function displaySchedule(scheduleNum) {
-	if (currentSchedules === undefined || scheduleNum >= currentSchedules.combos.length) {
-		return false;
-	}
 	resetCalendar();
-	var courseNumbers = currentSchedules.combos[scheduleNum];
+	var courseNumbers = [];
+	if (currentSchedules !== undefined && currentSchedules.combos.length > 0) {
+		courseNumbers = currentSchedules.combos[scheduleNum];
+	}
 	var courses = [];
 	for(var x = 0; x < courseNumbers.length; x++) {
 		courses[x] = currentSchedules.courses[courseNumbers[x]];
+	}
+	//display the custom timeblocks
+	for (x = 0; x < customTimeslots.length; x++) {
+		var classTD = $(document.createElement('td'));
+		classTD.attr("class", "has-events timeblock");
+		classTD.attr("rowspan", getClassLength(customTimeslots[x]));
+		// classTD.attr("onclick", "openNewTab('http://coursebook.utdallas.edu/" + courses[x].classID + "')");
+		// if (courses[x].classIsOpen != 1)
+			classTD.attr("style", "background-color:purple;");
+		classTD.attr("classIndex", x);
+		
+		var topLine = '<span class="title">Busy time</span>';
+		//var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
+		var bottomLine = '<span class="time">' + getTimeString(customTimeslots[x].startTime, ":") + " - " + getTimeString(customTimeslots[x].endTime, ":") + '</span>';
+
+		classTD.append(topLine);
+		// classTD.append(middleLine);
+		classTD.append(bottomLine);
+
+		var t = {hour:customTimeslots[x].startTime.hour, min:customTimeslots[x].startTime.min, day:customTimeslots[x].day};
+		var roundedStartTime = roundTime(t);
+		$("#" + getTimeString(roundedStartTime)).children().eq(t.day+1).replaceWith(classTD);
+
+		//adjust following rows
+		for(var z = 0; z < getClassLength(customTimeslots[x]) - 1; z++){
+			roundedStartTime = addMinsToTime(roundedStartTime, 30);
+			$("#" + getTimeString(roundedStartTime)).children().eq(t.day+1).replaceWith('<div class="dummy"></div>');
+		}
 	}
 	for (x = 0; x < courses.length; x++) { //iterate through each class in schedule
 		for (var y = 0; y < courses[x].classTimes.length; y++) { //iterate through the classtimes for given class
@@ -285,8 +340,9 @@ function displaySchedule(scheduleNum) {
 		}
 	}
 	$("#mainTableBody").find(".dummy").remove();
+	//mouseover for class blocks
 	$(".has-events").mouseenter(function(event){
-		if (!$(this).hasClass("has-events"))
+		if ($(this).attr("class") !== "has-events")
 			return;
 		var c = courses[$(this).attr("classindex")];
 		var content = "";
@@ -300,6 +356,25 @@ function displaySchedule(scheduleNum) {
 		if (!$(this).hasClass("has-events"))
 			return;
 		$(".popup").hide();
+	});
+	//mouseover for custom busy periods
+	$(".has-events").mouseenter(function(event){
+		if (!$(this).hasClass("timeblock"))
+			return;
+		var content = "";
+		content += "Busy time: no classes will be scheduled here<br />Click to remove";
+		createPopup(event, content);
+	}).on("mousemove", function(event){
+		positionPopup(event);	
+	}).mouseleave(function(event){
+		if (!$(this).hasClass("has-events"))
+			return;
+		$(".popup").hide();
+	}).click(function(){
+		$(".popup").hide();
+		$(this).remove();
+		customTimeslots.splice($(this).attr("classIndex"), 1);
+		getNewSchedules();
 	});
 }
 
@@ -365,4 +440,41 @@ function resetCalendar() {
 
 	for(var x = 0; x < 6; x++)
 		$("#mainTableBody").children().append('<td class="no-events" rowspan="1"><span style="width:0px;"></span></td>');
+}
+
+//custom timeslots
+//-------------------------------------------------------------------------
+//
+
+function addCustomTimeslot() {
+	if ($("#customTimeslotDialog") === undefined)
+		return;
+	var day = parseInt($("#dialogDay").val());
+	var startTime = parseInt($("#dialogStartTime").val());
+	var endTime = parseInt($("#dialogEndTime").val());
+	if (endTime <= startTime){
+		return;
+	}
+	var start = {hour:startTime, min:0};
+	var end = {hour:endTime, min:0};
+	var timeslot = {day:day, startTime:start, endTime:end};
+	for (var x = 0; x < customTimeslots.length; x++) {
+		if (doTimeslotsConflict(timeslot, customTimeslots[x]))
+			return false;
+	}
+	customTimeslots.push(timeslot);
+	return true;
+}
+
+function doTimeslotsConflict(t1, t2) {
+	if(t1.day != t2.day) return false;
+	s1 = getTimeInt(t1.startTime);
+	e1 = getTimeInt(t1.endTime);
+	s2 = getTimeInt(t2.startTime);
+	e2 = getTimeInt(t2.endTime);
+	if(s1 < e2 && e1 > e2) return true;
+	if(s1 < s2 && e1 > s2) return true;
+	if(s2 < e1 && e2 > e1) return true;
+	if(s2 < s1 && e2 > s1) return true;
+	return false;
 }
