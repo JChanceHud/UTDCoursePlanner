@@ -57,6 +57,7 @@ for($x = 0; $x < count($enteredClasses); $x++){
 }
 
 if (isset($customCourse) && count($customCourse->classTimes) > 0){
+	//var_error_log($customCourse);
 	array_push($courses, array($customCourse));
 }
 
@@ -105,6 +106,14 @@ $connection->close();
 
 //helper functions
 //
+
+function var_error_log( $object=null ){
+    ob_start();                    // start buffer capture
+    var_dump( $object );           // dump the values
+    $contents = ob_get_contents(); // put the buffer into a variable
+    ob_end_clean();                // end capture
+    error_log( $contents );        // log contents of the result of var_dump( $object )
+}
 
 function getIndexFromClassNumber ($classNumber, $courseArr) {
 	for ($x = 0; $x < count($courseArr); $x++) {

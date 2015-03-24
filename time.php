@@ -15,15 +15,15 @@ class time {
 	//the integer value returned is lossy - it cannot be converted back into an exact time
 	function toInteger(){
 		$m = ($this->min*100)/60;
-		return intval($this->hour . (($m==0)?"0":'') . $m);
+		return intval($this->hour . (($m<10)?"0":'') . $m);
 	}
 
 	function toUnscaledInteger(){
-		return intval($this->hour . (($this->min==0)?"0":'') . $this->min);
+		return intval($this->hour . (($this->min<10)?"0":'') . $this->min);
 	}
 
 	function getString(){
-		return $this->hour.":". (($this->min==0)?"0":"") . $this->min;
+		return $this->hour.":". (($this->min<10)?"0":"") . $this->min;
 	}
 }
 
