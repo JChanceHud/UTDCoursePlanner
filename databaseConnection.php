@@ -4,13 +4,16 @@
 //
 
 include_once('course.php');
+include_once('settings.php');
 
 class databaseConnection {
 	public $connection = null;
 	//private $servername = "utdcourseplanner.ddns.net";
-	private $servername = "76.185.199.59";
+	private $servername;
 
 	function __construct(){
+		global $databaseURL;
+		$this->servername = $databaseURL;
 		$username = "chance";
 		include_once("password.php");
 		try {
@@ -40,5 +43,6 @@ class databaseConnection {
 		return $this->connection !== null;
 	}
 }
+
 
 ?>
