@@ -1,6 +1,7 @@
 var $_GET = {};
 var classes = [];
 var baseURL = "utdcourseplanner.ddns.net";
+var popupCache;
 var currentSchedules;
 
 function getClassesString(){
@@ -53,9 +54,6 @@ $(document).ready(function(){
 			searchForClass(ui.item.value);
 		},
 		minLength: 2
-	});
-	$( document ).tooltip({
-		track: true
 	});
 });
 
@@ -299,18 +297,22 @@ function displaySchedule(scheduleNum) {
 	}).mouseleave(function(event){
 		if (!$(this).hasClass("has-events"))
 			return;
-		$(".popup").remove();
+		$(".popup").hide();
 	});
 }
 
 function createPopup(event, html){
-	var popup = $(document.createElement('div'));
-	popup.attr("class", "popup");
-	var popupInternal = $(document.createElement('div'));
-	popupInternal.attr("class", "popupInternal");
-	popupInternal.append(html);
-	popup.append(popupInternal);
-	popup.appendTo('body');
+	if (popupCache === undefined) {
+		popupCache = $(document.createElement('div'));
+		popupCache.attr("class", "popup");
+		var popupInternal = $(document.createElement('div'));
+		popupInternal.attr("class", "popupInternal");
+		popupCache.append(popupInternal);
+		popupCache.appendTo('body');
+	}
+	popupCache.show();
+	var internal = popupCache.children().eq(0);
+	internal.html(html);
 	positionPopup(event);
 }
 
