@@ -23,8 +23,8 @@ if(isset($_GET['timeslots'])) {
 	$times = json_decode($_GET['timeslots'], true);
 	$timeslots = array();
 	foreach ($times as $arr) {
-		$startTime = new time($arr['startTime']['hour'], $arr['startTime']['min']);
-		$endTime = new time($arr['endTime']['hour'], $arr['endTime']['min']);
+		$startTime = new time($arr['startTime']['hour'], $arr['startTime']['min']+1);
+		$endTime = new time($arr['endTime']['hour']-1, $arr['endTime']['min']+59);
 		array_push($timeslots, new timeslot($arr["day"], $startTime, $endTime));
 	}
 	$customCourse->setCustomTimeslots($timeslots);

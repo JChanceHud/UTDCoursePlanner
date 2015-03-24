@@ -53,20 +53,8 @@ table.calendar > tbody > tr > td.max-conflicts > div {
     color: white;
 }
 
-table.calendar > tbody > tr > td.has-events > div > span {
-    display: block;
-    text-align: center;
-}
-table.calendar > tbody > tr > td.has-events > div > span a {
-    color: white;
-}
-
-table.calendar > tbody > tr > td.has-events > div > span.title {
-    font-weight: bold;
-}
-
-
 table.calendar > tbody > tr > td.has-events > span {
+	padding: 2px;
     display: block;
     text-align: center;
 }

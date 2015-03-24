@@ -116,7 +116,9 @@ Class distribution<br />
 <div id="calendar" class="center">
 <!--output the calendar-->
 <!--<input id="clickMe" type="button" value="clickme" onclick="calendarDownload();" />-->
-<div id="customTimeslotDialog" style="background: #FFF">
+<div id="customTimeslotDialog" class="dialog" style="background: #FFF" title="Custom Timeslot">
+Timeslot title (used on calendar):<br />
+ <input type="text" id="dialogText" class="classInput" /><br /><br />
 Day: <select name="dialogDay" id="dialogDay">
 	<option value="0">Monday</option>
 	<option value="1">Tuesday</option>

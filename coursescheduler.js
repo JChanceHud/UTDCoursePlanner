@@ -77,9 +77,11 @@ $(document).ready(function(){
 			Cancel: function() {
 				$(this).dialog( "close" );
 			}
-		}
+		}, 
+		dialogClass: 'dialogTitle'
 	});
 	$("#customTimeslot").click(function() {
+		$("#dialogText").val("");
 		$("#customTimeslotDialog").dialog("open");
 		$('.ui-widget-overlay').css('background', 'black');
 	});
@@ -290,8 +292,10 @@ function displaySchedule(scheduleNum) {
 		// if (courses[x].classIsOpen != 1)
 			classTD.attr("style", "background-color:purple;");
 		classTD.attr("classIndex", x);
-		
-		var topLine = '<span class="title">Busy time</span>';
+		var title = customTimeslots[x].title;
+		if (title.length === 0)
+			title = "Busy time";
+		var topLine = '<span class="title">' + title + '</span>';
 		//var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
 		var bottomLine = '<span class="time">' + getTimeString(customTimeslots[x].startTime, ":") + " - " + getTimeString(customTimeslots[x].endTime, ":") + '</span>';
 
@@ -320,7 +324,7 @@ function displaySchedule(scheduleNum) {
 			classTD.attr("classIndex", x);
 			//classTD.attr("title", courses[x].classTitle+"<br /><br />Click to show coursebook listing");
 			
-			var topLine = '<span class="title">' + courses[x].classSection + " | " + courses[x].classRoom + '</span>';
+			var topLine = '<span class="title">' + courses[x].classSection.toUpperCase() + " | " + courses[x].classRoom + '</span>';
 			var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
 			var bottomLine = '<span class="time">' + getTimeString(courses[x].classTimes[y].startTime, ":") + " - " + getTimeString(courses[x].classTimes[y].endTime, ":") + '</span>';
 
@@ -372,7 +376,6 @@ function displaySchedule(scheduleNum) {
 		$(".popup").hide();
 	}).click(function(){
 		$(".popup").hide();
-		$(this).remove();
 		customTimeslots.splice($(this).attr("classIndex"), 1);
 		getNewSchedules();
 	});
@@ -457,7 +460,7 @@ function addCustomTimeslot() {
 	}
 	var start = {hour:startTime, min:0};
 	var end = {hour:endTime, min:0};
-	var timeslot = {day:day, startTime:start, endTime:end};
+	var timeslot = {day:day, startTime:start, endTime:end, title:$("#dialogText").val()};
 	for (var x = 0; x < customTimeslots.length; x++) {
 		if (doTimeslotsConflict(timeslot, customTimeslots[x]))
 			return false;

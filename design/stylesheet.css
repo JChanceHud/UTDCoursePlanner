@@ -86,6 +86,42 @@ body {
 	padding:5px;
 }
 
+.dialog {
+	font-family:dinpro, verdana, geneva, sans-serif;
+	font-size: 14px;
+}
+
+.dialogTitle .ui-dialog-titlebar {
+	text-align:center;
+	font-family:dinpro, verdana, geneva, sans-serif;
+	font-weight: normal;
+	color: white;
+	background: rgb(105,190,40);
+	border-radius: 0px;
+}
+
+.ui-menu-item .ui-state-focus {
+	background: #08C;
+	color: white;
+}
+
+.ui-button-text {
+	font-family:dinpro, verdana, geneva, sans-serif;
+	//font-size: 12px;
+	background: white;
+}
+
+.ui-autocomplete {
+	border-radius: 0;
+	font-family:dinpro, verdana, geneva, sans-serif;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.ui-dialog-titlebar-close {
+	visibility: hidden;
+}
+
 .header-content {
 	width:960px;
 	margin: 0px auto;
