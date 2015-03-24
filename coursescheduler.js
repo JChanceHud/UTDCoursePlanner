@@ -35,8 +35,6 @@ $(document).ready(function(){
 		return false;
 	});
 
-	setupClassInput();
-	setFieldValues();
 	$( "#classInput" ).autocomplete({
 		source:function( request, response ) {
 			//request.term //current search value
@@ -54,6 +52,9 @@ $(document).ready(function(){
 		},
 		minLength: 2
 	});
+
+	setupClassInput();
+	setFieldValues();
 });
 
 function setFieldValues(){
