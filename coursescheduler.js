@@ -264,7 +264,7 @@ function displaySchedule(scheduleNum) {
 			//classTD.attr("title", courses[x].classTitle+"<br /><br />Click to show coursebook listing");
 			
 			var topLine = '<span class="title">' + courses[x].classSection + " | " + courses[x].classRoom + '</span>';
-			var middleLine = '<span class="lecturer"><a href="http://coursebook.utdallas.edu/' + courses[x].classID + '" target="_blank" data-ytta-id="-">' + courses[x].classInstructor + "</a></span>"; 
+			var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
 			var bottomLine = '<span class="time">' + getTimeString(courses[x].classTimes[y].startTime, ":") + " - " + getTimeString(courses[x].classTimes[y].endTime, ":") + '</span>';
 
 			classTD.append(topLine);
