@@ -12,6 +12,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="html2canvas.js"></script>
 
 <script src="coursescheduler.js"></script>
 </head>
@@ -115,7 +116,7 @@ Class distribution<br />
 <div id="calendar" class="center">
 
 <!--output the calendar-->
-
+<!--<input id="clickMe" type="button" value="clickme" onclick="calendarDownload();" />-->
 <table id="calendar" class="calendar" style="display: table;">
     <thead>
         <tr id="">
