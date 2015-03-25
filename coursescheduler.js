@@ -348,7 +348,7 @@ function displaySchedule(scheduleNum) {
 			classTD.attr("classIndex", x);
 			//classTD.attr("title", courses[x].classTitle+"<br /><br />Click to show coursebook listing");
 			
-			var topLine = '<span class="title">' + courses[x].classSection.toUpperCase() + " | " + courses[x].classRoom + '</span>';
+			var topLine = '<span class="title">' + courses[x].classSection.toUpperCase() + " | " + courses[x].classTimes[y].room + '</span>';
 			var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
 			var bottomLine = '<span class="time">' + getTimeString(courses[x].classTimes[y].startTime, ":") + " - " + getTimeString(courses[x].classTimes[y].endTime, ":") + '</span>';
 
