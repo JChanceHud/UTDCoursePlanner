@@ -1,5 +1,7 @@
 <?php
 
+include_once("../debug.php");
+
 $servername = "utdcourseplanner.ddns.net";
 $username = "chance";
 $password = $_GET['password'];
@@ -8,7 +10,7 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=courselist", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	debugLog("Connected successfully");
+	dlog("Connected successfully");
     $filepath = "temp.xlsx";
 	getExcelDoc($filepath);
 
@@ -60,13 +62,13 @@ try {
 	foreach ($autocompleteEntries as $entry) {
 		$acQuery .= "INSERT INTO autocomplete VALUES ('".$entry."'); ";
 	}
-	debugLog($conn->exec($acQuery));
-	debugLog("Finished updating database");
+	dlog($conn->exec($acQuery));
+	dlog("Finished updating database");
 	unlink($filepath);
 }
 catch(PDOException $e)
     {
-    debugLog("Connection failed: " . $e->getMessage());
+    dlog("Connection failed: " . $e->getMessage());
     }
 
 //unlink($filepath);
@@ -79,7 +81,7 @@ function getExcelDoc($filepath){
 	set_time_limit(0);
 	
 	$response = exec('..\phantomjs.exe loadCookie.js'); //for windows
-	debugLog($response);
+	dlog($response);
 	$dataURL = "https://coursebook.utdallas.edu/reportmonkey/coursebook";
 	$fp = fopen ($filepath, 'w+');
 	//$fpp = fopen ("error.txt", 'w+');
@@ -98,7 +100,7 @@ function getExcelDoc($filepath){
 	curl_close($curl_handle);
 	fclose($fp);
 	//fclose($fpp);
-	debugLog($data);
+	dlog($data);
 }
 
 function loadExcelFile($file){
@@ -114,10 +116,6 @@ function loadExcelFile($file){
 	$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 	unset($objPHPExcel);
 	return $sheetData;
-}
-
-function debugLog($string) {
-	echo $string."<br /><br />";
 }
 
 ?>

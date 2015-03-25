@@ -3,6 +3,8 @@
 //code to auto pull from the repo and install the latest version of the server
 //
 
+include_once("../debug.php");
+
 $zipURL = "https://github.com/JChanceHud/UTDCoursePlanner/archive/master.zip";
 $dirName = "UTDCoursePlanner-master";
 
@@ -12,16 +14,21 @@ $file = new ZipArchive;
 if($file->open("tmp.zip") === TRUE){
 	$file->extractTo('.');
 	$file->close();
-	echo "Successfully received and extracted new data....\n\n";
+	dlog("Successfully received and extracted new data....");
 }
-else
-	echo "Failed to open zip\n\n";
+else {
+	dlog("Failed to open zip");
+	exit();
+}
 
 $files = scandir($dirName);
 $source = $dirName."/";
 $destination = "../";
 // Cycle through all source files
-recurse_copy($source, $destination);
+if (recurse_copy($source, $destination) === false) {
+	unlink("tmp.zip");
+	exit();
+}
 /*
 foreach ($files as $file) {
 	if (in_array($file, array(".",".."))) continue;
@@ -29,14 +36,18 @@ foreach ($files as $file) {
 	// If we copied this successfully, mark it for deletion
 	copy($source.$file, $destination.$file);
 }*/
-echo "Files successfully copied\n\n";
+dlog("Files successfully copied");
 unlink("tmp.zip");
 rrmdir($dirName);
 
-echo "Finished cleaning up. Update successful";
+dlog("Finished cleaning up. Update successful");
 
 function recurse_copy($src,$dst) { 
 	$dir = opendir($src); 
+	if ($dir === FALSE) {
+		dlog("Failed to open zip directory");
+		return false;
+	}
 	if($dst != "./" && $dst != "../" && !is_dir($dst))
 		@mkdir($dst); 
 	while(false !== ( $file = readdir($dir)) ) { 
@@ -64,6 +75,5 @@ function rrmdir($dir) {
 		rmdir($dir);
 	}
 }
-
 
 ?>
