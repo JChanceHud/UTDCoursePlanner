@@ -317,8 +317,6 @@ function displaySchedule(scheduleNum) {
 			classTD.attr("style", "background-color:purple;");
 		classTD.attr("classIndex", x);
 		var title = customTimeslots[x].title;
-		if (title.length === 0)
-			title = "Busy time";
 		var topLine = '<span class="title">' + title + '</span>';
 		//var middleLine = '<span class="lecturer">' + courses[x].classInstructor + "</span>"; 
 		var bottomLine = '<span class="time">' + getTimeString(customTimeslots[x].startTime, ":") + " - " + getTimeString(customTimeslots[x].endTime, ":") + '</span>';
@@ -484,7 +482,10 @@ function addCustomTimeslot() {
 	}
 	var start = {hour:startTime, min:0};
 	var end = {hour:endTime, min:0};
-	var timeslot = {day:day, startTime:start, endTime:end, title:$("#dialogText").val()};
+	var t = $("#dialogText").val();
+	if (t === undefined || t.length == 0)
+		t = "Busy time";
+	var timeslot = {day:day, startTime:start, endTime:end, title:t};
 	for (var x = 0; x < customTimeslots.length; x++) {
 		if (doTimeslotsConflict(timeslot, customTimeslots[x]))
 			return false;
@@ -504,4 +505,25 @@ function doTimeslotsConflict(t1, t2) {
 	if(s2 < e1 && e2 > e1) return true;
 	if(s2 < s1 && e2 > s1) return true;
 	return false;
+}
+
+
+//Download calendar
+//-------------------------------------------------------------------------------
+//
+
+function calendarDownload() {
+	var courseNumbers = [];
+	var scheduleNum = parseInt($("#currentSchedule").val());
+	if (currentSchedules !== undefined && currentSchedules.combos.length > 0) {
+		courseNumbers = currentSchedules.combos[scheduleNum];
+	}
+	var courses = [];
+	for(var x = 0; x < courseNumbers.length; x++) {
+		courses[x] = currentSchedules.courses[courseNumbers[x]];
+	}
+
+	var scheduleArg = "?schedule=" + encodeURIComponent(JSON.stringify(courses));
+	var timeslotsArg = "&timeslots=" + encodeURIComponent(JSON.stringify(customTimeslots));
+	window.open("getImage.php"+scheduleArg+timeslotsArg, '_blank');
 }

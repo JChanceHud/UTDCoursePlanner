@@ -115,7 +115,11 @@ Class distribution<br />
 
 <div id="calendar" class="center">
 <!--output the calendar-->
-<!--<input id="clickMe" type="button" value="clickme" onclick="calendarDownload();" />-->
+
+<div id="calendarInternal" class="calendar_header">
+<input id="scheduleImage" type="button" value="Save schedule as image" onclick="calendarDownload();" />
+</div>
+
 <div id="customTimeslotDialog" class="dialog" style="background: #FFF" title="Custom Timeslot">
 Timeslot title (used on calendar):<br />
  <input type="text" id="dialogText" class="classInput" /><br /><br />

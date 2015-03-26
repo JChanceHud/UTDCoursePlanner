@@ -1,6 +1,6 @@
 @font-face{
 	font-family: "dinPro Regular";
-	src: url("http://www.utdallas.edu/websvcs/templates/fonts/DINPro-Regular.otf");	//use font from UTD
+	src: url("DINPro-Regular.otf");	//use font from UTD
 }
 
 body {
